@@ -1,12 +1,17 @@
 # beautifulCode
-This repo contains the major project - 2, the semester registration portal
+##### This repo contains the major project-2 code base, the semester registration portal using php's _laravel framework_
 
-# Steps to clone and install framework
+Steps to fork and get this to work along with laravel:
 
-> Before installing, make sure you have your open vpn connected :-D
-
-$ git clone https://github.com/prateekprshr-nith/beautifulCode.git
-
+```bash
+$ git fork https://github.com/prateekprshr-nith/beautifulCode.git
 $ cd beautifulCode/semesterRegistration
-
 $ composer install
+```
+
+To migrate the database tables, do your proper settings in .env file and run
+```bash
+$ php artisan migrate
+```
+
+Happy Programming :)
