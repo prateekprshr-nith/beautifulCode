@@ -18,7 +18,7 @@ class CreateHostelsTable extends Migration
     {
         Schema::create('hostels', function (Blueprint $table)
         {
-            $table->string('id', '10');
+            $table->string('hostelId', '10');
             $table->string('name', '100');
             $table->timestamps();
 
