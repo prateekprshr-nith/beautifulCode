@@ -29,7 +29,7 @@ class CreateTeachersTable extends Migration
             $table->timestamps();
 
             // Key constraints
-            $table->primary('id');
+            $table->primary('facultyId');
             $table->unique('email');
             $table->unique('semester');
             $table->foreign('dCode')

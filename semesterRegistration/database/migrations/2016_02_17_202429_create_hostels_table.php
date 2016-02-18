@@ -23,7 +23,7 @@ class CreateHostelsTable extends Migration
             $table->timestamps();
 
             // Key constraints
-            $table->primary('id');
+            $table->primary('hostelId');
         });
     }
 
