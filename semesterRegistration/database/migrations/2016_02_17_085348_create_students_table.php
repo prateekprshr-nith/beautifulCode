@@ -19,7 +19,7 @@ class CreateStudentsTable extends Migration
         Schema::create('students', function (Blueprint $table)
         {
             $table->string('rollNo', '20');
-            $table->string('registrationNumber', '20');
+            $table->string('registrationNo', '20');
             $table->string('name', '100');
             $table->string('fatherName', '100');
             $table->string('motherName', '100');
