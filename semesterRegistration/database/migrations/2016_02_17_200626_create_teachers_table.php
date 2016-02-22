@@ -23,7 +23,7 @@ class CreateTeachersTable extends Migration
             $table->string('email', '50');
             $table->string('dCode', '10');
             $table->string('office', '50');
-            $table->smallInteger('semester');   // The semester given to teacher
+            $table->smallInteger('semester')->nullable();   // The semester given to teacher
             $table->string('password', '50');
             $table->rememberToken();
             $table->timestamps();
