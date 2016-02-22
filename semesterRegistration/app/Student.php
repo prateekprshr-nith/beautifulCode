@@ -19,7 +19,8 @@ class Student extends Model
     // Fillable and hidden arrtibutes
     protected $fillable = [
         'rollNo', 'dCode', 'semNo', 'registrationNo', 'sectionId',
-        'name', 'fatherName', 'motherName', 'email', 'phoneNo'
+        'name', 'fatherName', 'motherName', 'email', 'phoneNo',
+        'currentAddress', 'permanentAddress', 'password', 'dob',
     ];
 
     protected $hidden = [
