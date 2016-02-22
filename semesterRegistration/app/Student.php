@@ -26,4 +26,24 @@ class Student extends Model
     protected $hidden = [
         'password', 'remember_token'
     ];
+
+
+    /**
+     * Model relationships
+     *
+     * These functions define the relationship of
+     * this model with other models, and takes
+     * care of how related data is retrived
+     */
+
+    /**
+     * Get the department of this teacher
+     * Department 1 : many Student
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function department()
+    {
+        return $this->belongsTo('App\Department', 'dCode', 'dCode');
+    }
 }
