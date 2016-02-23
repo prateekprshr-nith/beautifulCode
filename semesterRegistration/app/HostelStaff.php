@@ -24,4 +24,24 @@ class HostelStaff extends Model
      protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    /**
+     * Model relationships
+     *
+     * These functions define the relationship of
+     * this model with other models, and takes
+     * care of how related data is retrived
+     */
+
+    /**
+     * Get the hostel of this staff member
+     * Hostel 1 : many HostelStaff
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function hostel()
+    {
+        return $this->belongsTo('App\Hostel', 'hostelId', 'hostelId');
+    }
 }
