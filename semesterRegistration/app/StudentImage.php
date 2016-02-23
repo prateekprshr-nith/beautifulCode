@@ -20,4 +20,24 @@ class StudentImage extends Model
     protected $fillable = [
         'rollNo', 'image'
     ];
+
+
+    /**
+     * Model relationships
+     *
+     * These functions define the relationship of
+     * this model with other models, and takes
+     * care of how related data is retrived
+     */
+
+    /**
+     * Get the student related to this image row
+     * Student 1 : 1 StudentImage
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function student()
+    {
+        return $this->belongsTo('App\Student', 'rollNo', 'rollNo');
+    }
 }

@@ -79,4 +79,15 @@ class Student extends Model
     {
         return $this->hasOne('App\Grade', 'rollNo', 'rollNo');
     }
+
+    /**
+     * Get the image of the student
+     * Student 1 : 1 StudentImage
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function image()
+    {
+        return $this->hasOne('App\StudentImage', 'rollNo', 'rollNo');
+    }
 }
