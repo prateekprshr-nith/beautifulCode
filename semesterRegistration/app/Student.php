@@ -57,4 +57,15 @@ class Student extends Model
     {
         return $this->belongsTo('App\Section', 'sectionId', 'sectionId');
     }
+
+    /**
+     * Get the semester of this student
+     * Semester 1 : many Student
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function semester()
+    {
+        return $this->belongsTo('App\Semester', 'semNo', 'semNo');
+    }
 }
