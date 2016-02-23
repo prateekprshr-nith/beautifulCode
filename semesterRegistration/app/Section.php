@@ -20,4 +20,35 @@ class Section extends Model
     protected $fillable = [
         'sectionId', 'dCode',
     ];
+
+
+    /**
+     * Model relationships
+     *
+     * These functions define the relationship of
+     * this model with other models, and takes
+     * care of how related data is retrived
+     */
+
+    /**
+     * Get the department of this section
+     * Department 1 : many Section
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function department()
+    {
+        return $this->belongsTo('App\Department', 'dCode', 'dCode');
+    }
+
+    /**
+     * Get the students of this section
+     * Section 1 : many Student
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function students()
+    {
+        return $this->hasMany('App\Student', 'sectionId', 'sectionId');
+    }
 }

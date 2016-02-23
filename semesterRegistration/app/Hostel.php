@@ -18,4 +18,24 @@ class Hostel extends Model
 
     // Fillable and hidden attributes
     protected $fillable = ['hostelId', 'name'];
+
+
+    /**
+     * Model relationships
+     *
+     * These functions define the relationship of
+     * this model with other models, and takes
+     * care of how related data is retrived
+     */
+
+    /**
+     * Get the staff of this hostel
+     * Hostel 1 : many HostelStaff
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function staffs()
+    {
+        return $this->hasMany('App\HostelStaff', 'hostelId', 'hostelId');
+    }
 }
