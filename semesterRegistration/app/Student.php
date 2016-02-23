@@ -37,7 +37,7 @@ class Student extends Model
      */
 
     /**
-     * Get the department of this teacher
+     * Get the department of this student
      * Department 1 : many Student
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -45,5 +45,16 @@ class Student extends Model
     public function department()
     {
         return $this->belongsTo('App\Department', 'dCode', 'dCode');
+    }
+
+    /**
+     * Get the section of this student
+     * Section 1 : many Student
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function section()
+    {
+        return $this->belongsTo('App\Section', 'sectionId', 'sectionId');
     }
 }
