@@ -68,4 +68,15 @@ class Student extends Model
     {
         return $this->belongsTo('App\Semester', 'semNo', 'semNo');
     }
+
+    /**
+     * Get the grade of the student
+     * Student 1 : 1 Grade
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function grade()
+    {
+        return $this->hasOne('App\Grade', 'rollNo', 'rollNo');
+    }
 }
