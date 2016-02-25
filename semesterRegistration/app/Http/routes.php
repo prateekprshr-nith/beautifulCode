@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -27,6 +23,11 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => 'web'], function () {
+
+    // Landing page
+    Route::get('/', function () {
+        return view('welcome');
+    })->middleware('guest');
 
     //Student auth routes
     Route::get('/students/login', 'Student\Auth\AuthController@showLoginForm');
