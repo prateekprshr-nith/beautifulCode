@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Student;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 /**
  * Class HomeController, this class contains
@@ -13,7 +14,7 @@ use Illuminate\Http\Request;
  *
  * @package App\Http\Controllers\Student
  */
-class HomeController extends \App\Http\Controllers\Controller
+class HomeController extends Controller
 {
     /**
      * Create a new controller instance.
