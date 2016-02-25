@@ -26,6 +26,18 @@ Route::get('/', function () {
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
+Route::group(['middleware' => 'web'], function () {
+
+    //Student auth routes
+    Route::get('/students/login', 'Student\Auth\AuthController@showLoginForm');
+    Route::post('/students/login', 'Student\Auth\AuthController@login');
+    Route::get('/students/logout', 'Student\Auth\AuthController@logout');
+    Route::post('/students/password/email', 'Student\Auth\PasswordController@sendResetLinkEmail');
+    Route::post('/students/password/reset', 'Student\Auth\PasswordController@reset');
+    Route::get('/students/password/reset/{token?}', 'Student\Auth\PasswordController@showResetForm');
+    Route::post('/students/register', 'Student\Auth\AuthController@register');
+    Route::get('/students/register', 'Student\Auth\AuthController@showRegistrationForm');
+
+    // Student view routes
+    Route::get('/students/home', 'HomeController@index');
 });
