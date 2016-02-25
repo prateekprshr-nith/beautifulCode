@@ -30,7 +30,7 @@
             </div>
 
             <div class="collapse navbar-collapse" id="mynavbar-content">
-                <!-- #TODO add code for other users -->
+                <!-- #TODO add code for other users including logout-->
                 @if(Auth::guard('student')->user())
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mynavbar-content">
                         <span class="icon-bar"></span>
@@ -44,7 +44,7 @@
                         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">{{Auth::guard('student')->user()->name}}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#"><span class="glyphicon glyphicon-refresh"></span> Update Pofile</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                                <li><a href="/students/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                             </ul>
                         </li>
                     </ul>
