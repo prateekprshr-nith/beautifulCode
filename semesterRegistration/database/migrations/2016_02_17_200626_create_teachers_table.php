@@ -24,7 +24,7 @@ class CreateTeachersTable extends Migration
             $table->string('dCode', '10');
             $table->string('office', '50');
             $table->smallInteger('semester')->nullable();   // The semester given to teacher
-            $table->string('password', '50');
+            $table->string('password', '100');
             $table->rememberToken();
             $table->timestamps();
 

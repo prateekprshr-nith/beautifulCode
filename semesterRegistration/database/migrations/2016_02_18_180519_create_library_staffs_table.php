@@ -21,7 +21,7 @@ class CreateLibraryStaffsTable extends Migration
             $table->string('id', '20');
             $table->string('name', '100');
             $table->string('email', '50');
-            $table->string('password', '50');
+            $table->string('password', '100');
             $table->rememberToken();
             $table->timestamps();
 

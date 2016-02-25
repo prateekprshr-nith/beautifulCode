@@ -22,7 +22,7 @@ class CreateHostelStaffsTable extends Migration
             $table->string('name', '100');
             $table->string('hostelId', '10');
             $table->string('email', '50');
-            $table->string('password', '50');
+            $table->string('password', '100');
             $table->rememberToken();
             $table->timestamps();
 
