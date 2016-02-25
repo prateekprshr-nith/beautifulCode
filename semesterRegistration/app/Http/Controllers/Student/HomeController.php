@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
  * all the methods for student tasks like
  * semester registration, profile update
  * and all others that are left
- * 
+ *
  * @package App\Http\Controllers\Student
  */
 class HomeController extends \App\Http\Controllers\Controller
