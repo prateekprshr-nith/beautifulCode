@@ -1,63 +1,61 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container col-sm-offset-2 col-sm-8">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Login: Please enter your details correctly
-            </div>
-            <div class="panel-body">
-                <form method="POST" action="/students/login" accept-charset="UTF-8" id="loginForm">
-                    <input required name="_token" type="hidden">
-                    {{ csrf_field() }}
-
-                    <!-- Display Validation Errors -->
-                    @include('common.errors')
-
-                    <!-- First row Roll no-->
-                    <div class="row">
-                        <div class="form-group row col-md-12 center-block">
-                            <div class="col-md-3 text-right">
-                                <label for="rollNo">Roll No</label>
-                            </div>
-                            <div class="col-md-6">
-                                <input required class="form-control" name="rollNo" type="text" id="rollNo">
-                            </div>
-                        </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Login: Please enter your details correctly
                     </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" role="form" method="POST" action="/students/login" accept-charset="UTF-8" id="loginForm">
+                            <input required name="_token" type="hidden">
+                            {{ csrf_field() }}
 
-                    <!-- Second row password-->
-                    <div class="row">
-                        <div class="form-group row col-md-12 center-block">
-                            <div class="col-md-3 text-right ">
-                                <label for="password">Password</label>
-                            </div>
-                            <div class="col-md-6">
-                                <input required class="form-control" name="password" type="password" id="password">
-                            </div>
-                        </div>
-                    </div>
+                            <!-- Display Validation Errors -->
+                            @include('common.errors')
 
-                    <!-- Third row Login-->
-                    <div class="row">
-                        <div class="form-group row col-md-12 center-block">
-                            <div class="col-md-3">
-                            </div>
-                            <div class="form-group col-md-offset-3 col-md-3 center-block">
-                                <button class="btn btn-default" type="submit" id="loginButton">
-                                    <span class="glyphicon glyphicon-log-in"></span> Login
-                                </button>
-                            </div>
-                            <div class="form-group col-md-offset-3 col-md-3 center-block">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember"> Remember Me
-                                    </label>
+                            <!-- First row Roll no-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="rollNo">Roll No</label>
+                                <div class="col-md-6">
+                                    <input required class="form-control" name="rollNo" type="text" id="rollNo">
                                 </div>
                             </div>
-                        </div>
+
+                            <!-- Second row password-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="password">Password</label>
+                                <div class="col-md-6">
+                                    <input required class="form-control" name="password" type="password" id="password">
+                                </div>
+                            </div>
+
+                            <!-- Third row rememberme-->
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="remember"> Remember Me
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Fourth row Login-->
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <button class="btn btn-primary" type="submit" id="loginButton">
+                                        <span class="glyphicon glyphicon-log-in"></span> Login
+                                    </button>
+
+                                    <a class="btn btn-link" href="/students/password/reset">Forgot Your Password?</a>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
