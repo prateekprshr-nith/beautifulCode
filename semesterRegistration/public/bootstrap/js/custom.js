@@ -15,6 +15,7 @@ function checkPassword()
     }
     else
     {
+        document.getElementById('passwordErrorMsg').removeAttribute('class');
         document.getElementById('passwordErrorMsg').innerHTML = '';
         document.getElementById('registerButton').removeAttribute('disabled');
     }
