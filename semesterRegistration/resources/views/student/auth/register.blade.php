@@ -7,7 +7,8 @@
                 Registration: Please enter your details correctly
             </div>
             <div class="panel-body">
-                <form method="POST" action="/students/register" accept-charset="UTF-8" id="registerForm">
+                <form class="form-horizontal" role="form" method="POST" action="/students/register"
+                      accept-charset="UTF-8" id="registerForm">
                     <input required name="_token" type="hidden">
                     {{ csrf_field() }}
 
@@ -17,19 +18,17 @@
                     <!-- First row Name and Email-->
                     <div class="row">
                         <div class="form-group row col-md-6 center-block">
-                            <div class="col-md-4 text-right ">
-                                <label for="name">Name</label>
-                            </div>
+                            <label class="col-md-4 control-label" for="name">Name</label>
                             <div class="col-md-8">
                                 <input required class="form-control" name="name" type="text" id="name">
                             </div>
                         </div>
                         <div class="form-group row col-md-6 center-block">
-                            <div class="col-md-4 text-right">
-                                <label for="email" class="text-right">Email</label>
-                            </div>
+
+                            <label class="col-md-4 control-label" for="email">Email</label>
                             <div class="col-md-8">
                                 <input required class="form-control" name="email" type="email" id="email">
+
                             </div>
                         </div>
                     </div>
@@ -37,17 +36,17 @@
                     <!-- Second row father and mother name -->
                     <div class="row">
                         <div class="form-group row col-md-6 center-block">
-                            <div class="col-md-4 text-right ">
-                                <label for="fatherName">Father's Name</label>
-                            </div>
+
+                            <label class="col-md-4 control-label" for="fatherName">Father's Name</label>
+
                             <div class="col-md-8">
                                 <input required class="form-control" name="fatherName" type="text" id="fatherName">
                             </div>
                         </div>
                         <div class="form-group row col-md-6 center-block">
-                            <div class="col-md-4 text-right ">
-                                <label for="motherName">Mother's Name</label>
-                            </div>
+
+                            <label class="col-md-4 control-label" for="motherName">Mother's Name</label>
+
                             <div class="col-md-8">
                                 <input required class="form-control" name="motherName" type="text" id="motherName">
                             </div>
@@ -57,17 +56,17 @@
                     <!-- Third row Roll no and semester -->
                     <div class="row">
                         <div class="form-group row col-md-6 center-block">
-                            <div class="col-md-4 text-right">
-                                <label for="rollNo">Roll No</label>
-                            </div>
+
+                            <label class="col-md-4 control-label" for="rollNo">Roll No</label>
+
                             <div class="col-md-8">
                                 <input required class="form-control" name="rollNo" type="text" id="rollNo">
                             </div>
                         </div>
                         <div class="form-group row col-md-6 center-block">
-                            <div class="col-md-4 text-right">
-                                <label for="semester" class="text-right">Semester</label>
-                            </div>
+
+                            <label class="col-md-4 control-label" for="semester">Semester</label>
+
                             <div class="col-md-8">
                                 <input required class="form-control" name="semNo" type="text" id="semester">
                             </div>
@@ -77,11 +76,12 @@
                     <!-- Fourth row registration no -->
                     <div class="row">
                         <div class="form-group row col-md-6 center-block">
-                            <div class="col-md-4 text-right">
-                                <label for="registrationNo">Registration No</label>
-                            </div>
+
+                            <label class="col-md-4 control-label" for="registrationNo">Registration No</label>
+
                             <div class="col-md-8">
-                                <input required class="form-control" name="registrationNo" type="text" id="registrationNo">
+                                <input required class="form-control" name="registrationNo" type="text"
+                                       id="registrationNo">
                             </div>
                         </div>
                     </div>
@@ -89,9 +89,9 @@
                     <!-- Fifht row Department and Section-->
                     <div class="row">
                         <div class="form-group row col-md-6 center-block">
-                            <div class="col-md-4 text-right">
-                                <label for="department">Department</label>
-                            </div>
+
+                            <label class="col-md-4 control-label" for="department">Department</label>
+
                             <div class="col-md-8">
                                 <select required id="department" name="dCode" class="form-control">
                                     <option value="">Select a Department...</option>
@@ -106,9 +106,9 @@
                             </div>
                         </div>
                         <div class="form-group row col-md-6 center-block">
-                            <div class="col-md-4 text-right">
-                                <label for="section" class="text-right">Section</label>
-                            </div>
+
+                            <label class="col-md-4 control-label" for="section">Section</label>
+
                             <div class="col-md-8">
                                 <select required class="form-control" name="sectionId" id="section">
                                     <option value="">Select a Section...</option>
@@ -138,17 +138,17 @@
                     <!-- Sixth row DOB no and phone number-->
                     <div class="row">
                         <div class="form-group row col-md-6 center-block">
-                            <div class="col-md-4 text-right">
-                                <label for="dob">Birth Date</label>
-                            </div>
+
+                            <label class="col-md-4 control-label" for="dob">Birth Date</label>
+
                             <div class="col-md-8">
                                 <input required class="form-control" name="dob" type="date" id="dob">
                             </div>
                         </div>
                         <div class="form-group row col-md-6 center-block">
-                            <div class="col-md-4 text-right">
-                                <label for="phoneNo" class="text-right">Phone No</label>
-                            </div>
+
+                            <label class="col-md-4 control-label" for="phoneNo">Phone No</label>
+
                             <div class="col-md-8">
                                 <input required class="form-control" name="phoneNo" type="tel" id="phoneNo">
                             </div>
@@ -158,23 +158,25 @@
                     <!-- Seventh row addresses-->
                     <div class="row">
                         <div class="form-group row col-md-6 center-block">
-                            <div class="col-md-4 text-right">
-                                <label for="currentAddress">Current address</label>
-                            </div>
-                            <div class="col-md-8">
-                                <textarea required class="form-control" rows="2" name="currentAddress" type="text" id="currentAddress">
 
-                                </textarea>
+                            <label class="col-md-4 control-label" for="currentAddress">Current address</label>
+
+                            <div class="col-md-8">
+                            <textarea required class="form-control" rows="2" name="currentAddress" type="text"
+                                      id="currentAddress">
+
+                            </textarea>
                             </div>
                         </div>
                         <div class="form-group row col-md-6 center-block">
-                            <div class="col-md-4 text-right">
-                                <label for="permanentAddress">Permanent address</label>
-                            </div>
-                            <div class="col-md-8">
-                                <textarea required class="form-control" rows="2" name="permanentAddress" type="text" id="permanentAddress">
 
-                                </textarea>
+                            <label class="col-md-4 control-label" for="permanentAddress">Permanent address</label>
+
+                            <div class="col-md-8">
+                            <textarea required class="form-control" rows="2" name="permanentAddress" type="text"
+                                      id="permanentAddress">
+
+                            </textarea>
                             </div>
                         </div>
                     </div>
@@ -182,32 +184,28 @@
                     <!-- Eighth row passwords-->
                     <div class="row">
                         <div class="form-group row col-md-6 center-block">
-                            <div class="col-md-4 text-right ">
-                                <label for="password">Password</label>
-                            </div>
+
+                            <label class="col-md-4 control-label" for="password">Password</label>
+
                             <div class="col-md-8">
-                                <input required class="form-control" name="password" type="password" id="password" onkeyup="checkPassword()">
+                                <input required class="form-control" name="password" type="password" id="password"
+                                       onkeyup="checkPassword()">
                             </div>
                         </div>
                         <div class="form-group row col-md-6 center-block">
-                            <div class="col-md-4 text-right ">
-                                <label for="confirmPassword">Confirm</label>
-                            </div>
+
+                            <label class="col-md-4 control-label" for="confirmPassword">Confirm</label>
+
                             <div class="col-md-8">
-                                <input required class="form-control" name="confirmPassword" type="password" id="confirmPassword" onkeyup="checkPassword()">
+                                <input required class="form-control" name="confirmPassword" type="password"
+                                       id="confirmPassword" onkeyup="checkPassword()">
                             </div>
                         </div>
                     </div>
 
                     <!--Ninth row error msg-->
-                    <div class="row">
-                        <div class="form-group row col-md-6 center-block">
-                            <div class="col-md-4 text-right ">
-                            </div>
-                            <div class="col-md-8">
-                                <p id="passwordErrorMsg"></p>
-                            </div>
-                        </div>
+                    <div class="col-md-12">
+                            <p id="passwordErrorMsg"></p>
                     </div>
 
                     <!-- Tenth row Register-->
@@ -216,7 +214,7 @@
                             <div class="col-md-4 text-right ">
                             </div>
                             <div class="col-md-4 center-block">
-                                <button class="btn btn-default" type="submit" disabled id="registerButton">
+                                <button class="btn btn-primary" type="submit" disabled id="registerButton">
                                     <span class="glyphicon glyphicon-user"></span> Register
                                 </button>
                             </div>
@@ -225,7 +223,7 @@
                             <div class="col-md-4 text-right ">
                             </div>
                             <div class="col-md-4 center-block">
-                                <button class="btn btn-default" onclick="reset()">
+                                <button class="btn btn-danger" onclick="reset()">
                                     <span class="glyphicon glyphicon-refresh"></span> Reset
                                 </button>
                             </div>
