@@ -9,6 +9,7 @@ function checkPassword()
     var cPassword = document.forms["registerForm"]["confirmPassword"].value;
 
     if(password != cPassword) {
+        document.getElementById('passwordErrorMsg').setAttribute('class', 'alert alert-danger text-center');
         document.getElementById('passwordErrorMsg').innerHTML = 'Passwords do not match!!';
         document.getElementById('registerButton').setAttribute('disabled', '');
     }
