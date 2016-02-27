@@ -1,7 +1,7 @@
 # beautifulCode
 ##### This repo contains the major project-2 code base, the semester registration portal using php's _laravel framework_
 
-Steps to fork and get this to work along with laravel:
+Steps to fork and getting this to work along with laravel:
 
 ```bash
 $ git fork https://github.com/prateekprshr-nith/beautifulCode.git
