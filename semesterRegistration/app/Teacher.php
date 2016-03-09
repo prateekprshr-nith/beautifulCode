@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * Class Teacher, this model corresponds
@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App
  */
-class Teacher extends Model
+class Teacher extends Authenticatable
 {
     protected $table = 'teachers';
     protected $primaryKey = 'facultyId';
