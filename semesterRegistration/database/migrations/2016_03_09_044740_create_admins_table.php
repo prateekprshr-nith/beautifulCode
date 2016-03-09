@@ -20,6 +20,7 @@ class CreateAdminsTable extends Migration
         {
             $table->string('adminId');
             $table->string('password', '100');
+            $table->rememberToken();
             $table->timestamps();
 
             // Key constraints
