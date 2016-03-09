@@ -1,31 +1,31 @@
 <?php
 
-namespace App\Http\Controllers\Student\Auth;
+namespace App\Http\Controllers\Teacher\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 /**
  * Class PasswordController, this class handles
- * the resetting of student passwords
+ * the resetting of teacher passwords
  *
- * @package App\Http\Controllers\Student\Auth
+ * @package App\Http\Controllers\Teacher\Auth
  */
 class PasswordController extends Controller
 {
     use ResetsPasswords;
 
     // Authentication guard to be used
-    protected $guard = 'student';
+    protected $guard = 'teacher';
 
     // Link request view to be used
-    protected $linkRequestView = 'student.auth.passwords.email';
+    protected $linkRequestView = 'teacher.auth.passwords.email';
 
     // Reset view to be used
-    protected $resetView = 'student.auth.passwords.reset';
+    protected $resetView = 'teacher.auth.passwords.reset';
 
     // Redirect path after reset
-    protected $redirectPath = '/students/home';
+    protected $redirectPath = '/teachers/home';
 
     /**
      * Create a new password controller instance.
@@ -34,6 +34,6 @@ class PasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:student');
+        $this->middleware('guest:teacher');
     }
 }
