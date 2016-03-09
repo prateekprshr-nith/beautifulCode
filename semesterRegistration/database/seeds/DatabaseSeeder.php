@@ -82,5 +82,17 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
+
+        // Seed the admins table
+        $adminId = 'admin';
+        $password = bcrypt('password');
+
+        if(DB::table('admins')->where('adminId', $adminId)->value('adminId') == null)
+        {
+            DB::table('admins')->insert([
+                'adminId' => $adminId,
+                'password' => $password,
+            ]);
+        }
     }
 }
