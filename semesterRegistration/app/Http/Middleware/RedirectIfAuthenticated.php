@@ -24,10 +24,26 @@ class RedirectIfAuthenticated
             {
                 return redirect('/students/home');
             }
-
-            /*
-             * More conditions here
-             */
+            else if($guard == 'teacher')
+            {
+                return redirect('/teachers/home');
+            }
+            else if($guard == 'libraryStaff')
+            {
+                return redirect('/libraryStaffs/home');
+            }
+            else if($guard == 'hostelStaff')
+            {
+                return redirect('/hostelStaffs/home');
+            }
+            else if($guard == 'adminStaff')
+            {
+                return redirect('/adminStaffs/home');
+            }
+            else if($guard == 'admin')
+            {
+                return redirect('/admins/home');
+            }
         }
 
         return $next($request);
