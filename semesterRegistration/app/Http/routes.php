@@ -41,7 +41,9 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('password/reset', 'Teacher\Auth\PasswordController@reset');
         Route::get('password/reset/{token?}', 'Teacher\Auth\PasswordController@showResetForm');
         Route::post('register', 'Teacher\Auth\AuthController@register');
-        Route::get('register', 'Teacher\Auth\AuthController@showRegistrationForm');
+
+        // Manual registration is disabled
+        // Route::get('register', 'Teacher\Auth\AuthController@showRegistrationForm');
 
         // Teacher view routes
         Route::get('home', 'Teacher\HomeController@index');
@@ -58,7 +60,9 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('password/reset', 'LibraryStaff\Auth\PasswordController@reset');
         Route::get('password/reset/{token?}', 'LibraryStaff\Auth\PasswordController@showResetForm');
         Route::post('register', 'LibraryStaff\Auth\AuthController@register');
-        Route::get('register', 'LibraryStaff\Auth\AuthController@showRegistrationForm');
+
+        // Manual registration is disabled
+        // Route::get('register', 'LibraryStaff\Auth\AuthController@showRegistrationForm');
 
         // LibraryStaff view routes
         Route::get('home', 'LibraryStaff\HomeController@index');
@@ -75,7 +79,9 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('password/reset', 'HostelStaff\Auth\PasswordController@reset');
         Route::get('password/reset/{token?}', 'HostelStaff\Auth\PasswordController@showResetForm');
         Route::post('register', 'HostelStaff\Auth\AuthController@register');
-        Route::get('register', 'HostelStaff\Auth\AuthController@showRegistrationForm');
+
+        // Manual registration is disabled
+        // Route::get('register', 'HostelStaff\Auth\AuthController@showRegistrationForm');
 
         // HostelStaff view routes
         Route::get('home', 'HostelStaff\HomeController@index');
@@ -92,7 +98,9 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('password/reset', 'AdminStaff\Auth\PasswordController@reset');
         Route::get('password/reset/{token?}', 'AdminStaff\Auth\PasswordController@showResetForm');
         Route::post('register', 'AdminStaff\Auth\AuthController@register');
-        Route::get('register', 'AdminStaff\Auth\AuthController@showRegistrationForm');
+
+        // Manual registration is disabled
+        // Route::get('register', 'AdminStaff\Auth\AuthController@showRegistrationForm');
 
         // AdminStaff view routes
         Route::get('home', 'AdminStaff\HomeController@index');
