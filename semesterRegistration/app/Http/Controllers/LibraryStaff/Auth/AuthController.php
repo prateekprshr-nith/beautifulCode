@@ -4,6 +4,7 @@ namespace App\Http\Controllers\LibraryStaff\Auth;
 
 use App\LibraryStaff;
 use Validator;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -21,8 +22,13 @@ class AuthController extends Controller
     // Authentication guard to be used
     protected $guard = 'libraryStaff';
 
-    // Redirect to this url after login/registration
+    // Redirect to this url after login
     protected $redirectTo = '/libraryStaffs/home';
+
+    // Redirect to this url after registration as teacher account
+    // will be created by admin. So we want him to stay on the
+    // same page from where he registered the libraryStaff
+    protected $redirectAfterRegis = '#';
 
     // Registration view
     protected $registerView = 'libraryStaff.auth.register';
@@ -73,5 +79,31 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    /**
+     * Handle a registration request for the application.
+     * This method overrides the original register
+     * method in RegisterUsers trait, because
+     * we don't want the libraryStaff to get
+     * logged in automatically after
+     * registration.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+        $this->create($request->all());
+
+        return redirect($this->redirectAfterRegis);
     }
 }
