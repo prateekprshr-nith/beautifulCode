@@ -108,6 +108,6 @@ class AuthController extends Controller
 
         $this->create($request->all());
 
-        return redirect($this->redirectPath());
+        return redirect($this->redirectAfterRegis);
     }
 }
