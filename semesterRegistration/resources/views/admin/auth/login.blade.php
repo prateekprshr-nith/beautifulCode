@@ -9,18 +9,18 @@
                         Login: Please enter your details correctly
                     </div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="/students/login" accept-charset="UTF-8" id="loginForm">
+                        <form class="form-horizontal" role="form" method="POST" action="/admins/login" accept-charset="UTF-8" id="loginForm">
                             <input required name="_token" type="hidden">
                             {{ csrf_field() }}
 
                             <!-- Display Validation Errors -->
                             @include('common.errors')
 
-                            <!-- First row Roll no-->
+                            <!-- First row Id-->
                             <div class="form-group">
-                                <label class="col-md-4 control-label" for="rollNo">Roll No</label>
+                                <label class="col-md-4 control-label" for="adminId">Id</label>
                                 <div class="col-md-6">
-                                    <input required class="form-control" name="rollNo" type="text" id="rollNo">
+                                    <input required class="form-control" name="adminId" type="text" id="adminId">
                                 </div>
                             </div>
 
@@ -49,8 +49,6 @@
                                     <button class="btn btn-primary" type="submit" id="loginButton">
                                         <span class="glyphicon glyphicon-log-in"></span> Login
                                     </button>
-
-                                    <a class="btn btn-link" href="/students/password/reset">Forgot Your Password?</a>
                                 </div>
                             </div>
                         </form>
