@@ -18,6 +18,9 @@ class PasswordController extends Controller
     // Authentication guard to be used
     protected $guard = 'hostelStaff';
 
+    // Password reset broker to be used
+    protected $broker = 'hostelStaffs';
+
     // Link request view to be used
     protected $linkRequestView = 'hostelStaff.auth.passwords.email';
 

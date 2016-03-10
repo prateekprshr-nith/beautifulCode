@@ -18,6 +18,9 @@ class PasswordController extends Controller
     // Authentication guard to be used
     protected $guard = 'adminStaff';
 
+    // Password reset broker to be used
+    protected $broker = 'adminStaffs';
+
     // Link request view to be used
     protected $linkRequestView = 'adminStaff.auth.passwords.email';
 
