@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Student Infortation System</title>
+    <title>Online Semester Registration</title>
 
     <!-- Bootstrap -->
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -17,7 +17,7 @@
 
 <body>
 
-<div class="container">
+<div class="container-fluid">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -26,12 +26,34 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Semester Registration System</a>
+                <a class="navbar-brand" href="/">Online Semester Registration</a>
             </div>
 
             <div class="collapse navbar-collapse" id="mynavbar-content">
-                <!-- #TODO add code for other users including logout-->
+
+                <!-- Get the user
+                Please note that this code is bit tricky. Do not try
+                to change it. But if you did try that and failed then
+                increment the counter below
+                No. of hours wasted = 0 -->
+
                 @if(Auth::guard('student')->user())
+                    {{-- */$user= 'student';/* --}}
+                @elseif(Auth::guard('teacher')->user())
+                    {{-- */$user = 'teacher';/* --}}
+                @elseif(Auth::guard('libraryStaff')->user())
+                    {{-- */$user = 'libraryStaff';/* --}}
+                @elseif(Auth::guard('hostelStaff')->user())
+                    {{-- */$user = 'hostelStaff';/* --}}
+                @elseif(Auth::guard('adminStaff')->user())
+                    {{-- */$user = 'adminStaff';/* --}}
+                @elseif(Auth::guard('admin')->user())
+                    {{-- */$user = 'admin';/* --}}
+                @elseif(Auth::guest())
+                    {{-- */$user = 'guest';/* --}}
+                @endif
+
+                @if($user != 'guest')
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mynavbar-content">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -41,10 +63,18 @@
                     <!-- #TODO add the other tabs here -->
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">{{Auth::guard('student')->user()->name}}<span class="caret"></span></a>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                @if($user == 'admin')
+                                    Admin
+                                @else
+                                    {{Auth::guard($user)->user()->name}}
+                                @endif
+                                <span class="caret"></span>
+                            </a>
                             <ul class="dropdown-menu">
                                 <li><a href="#"><span class="glyphicon glyphicon-refresh"></span> Update Pofile</a></li>
-                                <li><a href="/students/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                                <li><a href="/{{$user}}s/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -54,6 +84,7 @@
                         <li><a href="/students/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     </ul>
                 @endif
+
             </div>
         </div>
     </nav>
