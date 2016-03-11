@@ -1,8 +1,13 @@
 /*
- * This file contains some custom fucntions
+ * This file contains some custom functions used for
+ * adding some interactivity to the web pages
  */
 
-// Function to check if passords are same
+/*
+ * This function checks if password
+ * is same in password and confirm
+ * password fields of the web page
+ */
 function checkPassword()
 {
     var password = document.forms["registerForm"]["password"].value;
@@ -18,5 +23,20 @@ function checkPassword()
         document.getElementById('passwordErrorMsg').removeAttribute('class');
         document.getElementById('passwordErrorMsg').innerHTML = '';
         document.getElementById('registerButton').removeAttribute('disabled');
+    }
+}
+
+/*
+ * This function toggles the visibility of an element
+ */
+function toggleVisibility(elementId)
+{
+    if(document.getElementById(elementId).hasAttribute('hidden'))
+    {
+        document.getElementById(elementId).removeAttribute('hidden')
+    }
+    else
+    {
+        document.getElementById(elementId).setAttribute('hidden', '');
     }
 }
