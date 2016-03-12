@@ -27,8 +27,8 @@ class AuthController extends Controller
 
     // Redirect to this url after registration as teacher account
     // will be created by admin. So we want him to stay on the
-    // same page from where he registered the teacher
-    protected $redirectAfterRegis = '#';
+    // home page from where he registered the teacher
+    protected $redirectAfterRegis = '/admins/manage/teachers';
 
     // Registration view
     protected $registerView = 'teacher.auth.register';
