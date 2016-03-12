@@ -143,7 +143,7 @@ class HomeController extends Controller
      * @param $id
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
-    public function removeHosteltaff($id)
+    public function removeHostelStaff($id)
     {
         if ($id != null)
         {
