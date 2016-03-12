@@ -121,6 +121,14 @@ Route::group(['middleware' => 'web'], function () {
 
         // Admin view routes
         Route::get('home', 'Admin\HomeController@index');
+        Route::group(['prefix' => 'manage'], function () {
+
+            // User account creation routes
+            Route::get('teachers', 'Admin\HomeController@manageTeachers');
+            Route::get('libraryStaffs', 'Admin\HomeController@manageLibraryStaff');
+            Route::get('adminStaffs', 'Admin\HomeController@manageAdminStaff');
+            Route::get('hostelStaffs', 'Admin\HomeController@manageHostelStaff');
+        });
     });
 
 
