@@ -35,4 +35,44 @@ class HomeController extends Controller
     {
         return view('admin.home');
     }
+
+    /**
+     * Show the teacher registration form
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function manageTeachers()
+    {
+        return view('teacher.auth.register');
+    }
+
+    /**
+     * Show the libraryStaff registration form
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function manageLibraryStaff()
+    {
+        return view('libraryStaff.auth.register');
+    }
+
+    /**
+     * Show the adminStaff registration form
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function manageAdminStaff()
+    {
+        return view('adminStaff.auth.register');
+    }
+
+    /**
+     * Show the hostelStaff registration form
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function manageHostelStaff()
+    {
+        return view('hostelStaff.auth.register');
+    }
 }
