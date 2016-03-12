@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
  * Class RedirectToHome, this class handles
  * the redirection of authenticated users
  * in case they try to visit the landing
- * page of the application.
+ * page of the application and the auth
+ * routes of other users.
  *
  * @package App\Http\Middleware
  */
