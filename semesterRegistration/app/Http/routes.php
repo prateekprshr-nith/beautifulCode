@@ -109,7 +109,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::group(['prefix' => '/admins'], function () {
 
         //Admin auth routes
-        Route::get('login', 'Admin\Auth\AuthController@showLoginForm')->middleware(['home']);
+        Route::get('login', 'Admin\Auth\AuthController@showLoginForm')->middleware(['home', 'adminIp']);
         Route::post('login', 'Admin\Auth\AuthController@login');
         Route::get('logout', 'Admin\Auth\AuthController@logout');
 
