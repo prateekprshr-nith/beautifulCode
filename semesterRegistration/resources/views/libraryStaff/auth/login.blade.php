@@ -13,10 +13,10 @@
                             <input required name="_token" type="hidden">
                             {{ csrf_field() }}
 
-                                    <!-- Display Validation Errors -->
+                            <!-- Display Validation Errors -->
                             @include('common.errors')
 
-                                    <!-- First row facultyId-->
+                            <!-- First row facultyId-->
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="id">Staff Id</label>
                                 <div class="col-md-6">
@@ -49,9 +49,8 @@
                                     <button class="btn btn-primary" type="submit" id="loginButton">
                                         <span class="glyphicon glyphicon-log-in"></span> Login
                                     </button>
-                                    <!--TODO ask this. -->
-                                    <a class="btn btn-link" href="/libraryStaffs/password/reset">Forgot Your Password?</a>
 
+                                    <a class="btn btn-link" href="/libraryStaffs/password/reset">Forgot Your Password?</a>
                                 </div>
                             </div>
                         </form>
