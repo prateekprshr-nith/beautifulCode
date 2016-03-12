@@ -123,11 +123,17 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('home', 'Admin\HomeController@index');
         Route::group(['prefix' => 'manage'], function () {
 
-            // User account creation routes
+            // User account creation and deletion routes
             Route::get('teachers', 'Admin\HomeController@manageTeachers');
-            Route::get('libraryStaffs', 'Admin\HomeController@manageLibraryStaff');
-            Route::get('adminStaffs', 'Admin\HomeController@manageAdminStaff');
-            Route::get('hostelStaffs', 'Admin\HomeController@manageHostelStaff');
+            Route::delete('teachers/{id?}', 'Admin\HomeController@removeTeacher');
+            Route::get('libraryStaffs', 'Admin\HomeController@manageLibraryStaffs');
+            Route::delete('libraryStaffs/{id?}', 'Admin\HomeController@removeLibraryStaff');
+            Route::get('adminStaffs', 'Admin\HomeController@manageAdminStaffs');
+            Route::delete('adminStaffs/{id?}', 'Admin\HomeController@removeAdminStaff');
+            Route::get('hostelStaffs', 'Admin\HomeController@manageHostelStaffs');
+            Route::delete('hostelStaffs/{id?}', 'Admin\HomeController@removeHostelStaff');
+            Route::get('students', 'Admin\HomeController@manageStudents');
+            Route::delete('students/{rollNo?}', 'Admin\HomeController@removeStudent');
         });
     });
 
