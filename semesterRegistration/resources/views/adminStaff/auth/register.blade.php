@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('admin.manage.adminStaffs')
 
-@section('content')
+@section('adminStaffRegPanel')
     <div class="container col-sm-offset-2 col-sm-8">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Registration: Please enter your details correctly
+                <strong>Add a new admin staff member</strong>
             </div>
             <div class="panel-body">
                 <form class="form-horizontal" role="form" method="POST" action="/students/register"
