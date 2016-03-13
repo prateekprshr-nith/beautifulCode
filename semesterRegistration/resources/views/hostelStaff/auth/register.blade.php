@@ -48,12 +48,15 @@
                             <label class="col-md-4 control-label" for="hostelId">Hostel Id</label>
 
                             <div class="col-md-8">
-                                <input required class="form-control" name="hostelId" type="text" id="hostelId">
+                                <select required id="hostelId" name="hostelId" class="form-control">
+                                    <option value="">Select a Hostel...</option>
+                                    @foreach($hostels as $hostel)
+                                        <option value="{{$hostel->hostelId}}">{{$hostel->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
-
-
 
                     <!-- Third row passwords-->
                     <div class="row">
