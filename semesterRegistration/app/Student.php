@@ -21,10 +21,11 @@ class Student extends Authenticatable
         'rollNo', 'dCode', 'semNo', 'registrationNo', 'sectionId',
         'name', 'fatherName', 'motherName', 'email', 'phoneNo',
         'currentAddress', 'permanentAddress', 'password', 'dob',
+        'verificationCode', 'verified',
     ];
 
     protected $hidden = [
-        'password', 'remember_token'
+        'password', 'remember_token', 'verificationCode',
     ];
 
 
