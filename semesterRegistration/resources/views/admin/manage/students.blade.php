@@ -19,6 +19,7 @@
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Deparment Code</th>
+                                            <th>Verified</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -29,7 +30,14 @@
                                             <td>{{ $student->rollNo }}</td>
                                             <td>{{ $student->name }}</td>
                                             <td>{{ $student->email }}</td>
-                                            <td>{{ $student->dCode}}</td>
+                                            <td>{{ $student->dCode }}</td>
+                                            <td>
+                                                @if($student->verified)
+                                                    Yes
+                                                @else
+                                                    No
+                                                @endif
+                                            </td>
                                             <td>
                                                 <form action="/admins/manage/students/{{$student->rollNo}}" method="POST">
                                                     {{ csrf_field() }}
