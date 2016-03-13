@@ -24,6 +24,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('password/reset/{token?}', 'Student\Auth\PasswordController@showResetForm')->middleware('home');
         Route::post('register', 'Student\Auth\AuthController@register');
         Route::get('register', 'Student\Auth\AuthController@showRegistrationForm')->middleware('home');
+        Route::get('verify', 'Student\Auth\VerificationController@showVerificationForm')->middleware('verified:student');
+        Route::post('verify', 'Student\Auth\VerificationController@verifyUserAccount');
 
         // Student view routes
         Route::get('home', 'Student\HomeController@index');
