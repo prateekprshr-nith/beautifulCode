@@ -77,6 +77,10 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        $verificationCode = $this->generateVerificationCode($data['rollNo']);
+
+        // TODO email the code here
+
         return Student::create([
             'rollNo' => $data['rollNo'],
             'dCode' => $data['dCode'],
@@ -92,6 +96,24 @@ class AuthController extends Controller
             'permanentAddress' => $data['permanentAddress'],
             'password' => bcrypt($data['password']),
             'dob' => $data['dob'],
+            'verificationCode' => $verificationCode,
+            'verified' => false,
         ]);
+    }
+
+    /**
+     * This function generates a unique verification
+     * code which has to be sent on students email.
+     *
+     * @param $rollNo
+     * @return string
+     */
+    protected function generateVerificationCode ($rollNo)
+    {
+        $timeStamp = time();
+        $hashString = $rollNo . $timeStamp;
+        $verificationCode = md5($hashString);
+
+        return $verificationCode;
     }
 }
