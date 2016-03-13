@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Teacher;
 use App\Student;
+use App\Section;
 use App\Department;
 use App\AdminStaff;
 use App\HostelStaff;
@@ -210,7 +211,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Remove a department
+     * Remove a deparement
      *
      * @param $dCode
      * @return \Illuminate\Http\RedirectResponse
@@ -220,6 +221,53 @@ class HomeController extends Controller
         if($dCode != null)
         {
             Department::destroy($dCode);
+        }
+
+        return redirect()->back();
+    }
+
+    /**
+     * Show the sections currently present in the database
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function manageSections()
+    {
+        $sectionArr = Section::all();
+        $departmentArr = Department::all();
+
+        return view('admin.manage.sections',
+            ['sections' => $sectionArr, 'count' => 0, 'departments' => $departmentArr]);
+    }
+
+    /**
+     * Add a section
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function addSection (Request $request)
+    {
+        $sectionId = $request['sectionId'];
+        $dCode = $request['dCode'];
+
+        Section::create(['sectionId' => $sectionId, 'dCode' => $dCode]);
+
+        return redirect()->back()
+            ->with('status', 'Success');
+    }
+
+    /**
+     * Remove a section
+     *
+     * @param $sectionId
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function removeSection ($sectionId)
+    {
+        if($sectionId != null)
+        {
+            Section::destroy($sectionId);
         }
 
         return redirect()->back();
