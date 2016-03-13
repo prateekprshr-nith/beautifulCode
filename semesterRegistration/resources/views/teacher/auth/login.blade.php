@@ -6,7 +6,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Login: Please enter your details correctly
+                        <strong>Login: Please enter your details correctly</strong>
                     </div>
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST" action="/teachers/login" accept-charset="UTF-8" id="loginForm">
