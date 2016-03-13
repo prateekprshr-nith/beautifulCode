@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Hostel;
 use App\Teacher;
 use App\Student;
 use App\Section;
@@ -136,7 +137,9 @@ class HomeController extends Controller
     public function manageHostelStaffs()
     {
         $hostelStaffArr = HostelStaff::all();
-        return view('hostelStaff.auth.register', ['hostelStaffs' => $hostelStaffArr, 'count' => 0]);
+        $hostelArr = Hostel::all();
+        return view('hostelStaff.auth.register',
+            ['hostelStaffs' => $hostelStaffArr, 'count' => 0, 'hostels' => $hostelArr]);
     }
 
     /**
