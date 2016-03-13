@@ -23,12 +23,12 @@ class AuthController extends Controller
     protected $guard = 'adminStaff';
 
     // Redirect to this url after login
-    protected $redirectTo = '/adminStaffs/manage/adminStaffs';
+    protected $redirectTo = '/adminStaffs/home';
 
     // Redirect to this url after registration as teacher account
     // will be created by admin. So we want him to stay on the
     // home page from where he registered the adminStaff
-    protected $redirectAfterRegis = '/admins/home';
+    protected $redirectAfterRegis = '/admins/manage/adminStaffs';
 
     // Registration view
     protected $registerView = 'adminStaff.auth.register';
