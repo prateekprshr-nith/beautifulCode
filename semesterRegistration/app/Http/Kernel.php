@@ -50,5 +50,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'home' => \App\Http\Middleware\RedirectToHome::class,
         'adminIp' => \App\Http\Middleware\RedirectIfNotAdminIp::class,
+        'verify' => \App\Http\Middleware\VerifyAccount::class,
+        'verified' => \App\Http\Middleware\RedirectIfVerified::class,
     ];
 }
