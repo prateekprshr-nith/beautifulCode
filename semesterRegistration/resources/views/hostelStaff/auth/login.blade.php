@@ -9,18 +9,18 @@
                         Login: Please enter your details correctly
                     </div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="/students/login" accept-charset="UTF-8" id="loginForm">
+                        <form class="form-horizontal" role="form" method="POST" action="/hostelStaffs/login" accept-charset="UTF-8" id="loginForm">
                             <input required name="_token" type="hidden">
                             {{ csrf_field() }}
 
                             <!-- Display Validation Errors -->
                             @include('common.errors')
 
-                            <!-- First row Roll no-->
+                            <!-- First row id-->
                             <div class="form-group">
-                                <label class="col-md-4 control-label" for="rollNo">Roll No</label>
+                                <label class="col-md-4 control-label" for="rollNo">ID</label>
                                 <div class="col-md-6">
-                                    <input required class="form-control" name="rollNo" type="text" id="rollNo">
+                                    <input required class="form-control" name="id" type="text" id="id">
                                 </div>
                             </div>
 
@@ -32,7 +32,7 @@
                                 </div>
                             </div>
 
-                            <!-- Third row rememberme-->
+                            <!-- Third row remember me-->
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <div class="checkbox">
@@ -50,7 +50,7 @@
                                         <span class="glyphicon glyphicon-log-in"></span> Login
                                     </button>
 
-                                    <a class="btn btn-link" href="/students/password/reset">Forgot Your Password?</a>
+                                    <a class="btn btn-link" href="/hostelStaffs/password/reset">Forgot Your Password?</a>
                                 </div>
                             </div>
                         </form>
