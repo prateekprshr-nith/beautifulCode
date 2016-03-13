@@ -142,6 +142,9 @@ Route::group(['middleware' => 'web'], function () {
             Route::get('departments', 'Admin\HomeController@manageDepartments');
             Route::put('departments', 'Admin\HomeController@addDepartment');
             Route::delete('departments/{dCode?}', 'Admin\HomeController@removeDepartment');
+            Route::get('sections', 'Admin\HomeController@manageSections');
+            Route::put('sections', 'Admin\HomeController@addSection');
+            Route::delete('sections/{sectionId?}', 'Admin\HomeController@removeSection');
         });
     });
 
