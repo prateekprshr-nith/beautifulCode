@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Student\Auth;
 
-use App\Student;
 use Validator;
+use App\Student;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 /**
  * Class AuthController, this class handles
- * the login and registration of a student
+ * the login and registration of a student.
  *
  * @package App\Http\Controllers\Student\Auth
  */
@@ -77,11 +77,8 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        $verificationCode = $this->generateVerificationCode($data['rollNo']);
-
-        // TODO email the code here
-
-        return Student::create([
+        // Create a Student instance
+        $student = Student::create([
             'rollNo' => $data['rollNo'],
             'dCode' => $data['dCode'],
             'semNo' => $data['semNo'],
@@ -96,24 +93,9 @@ class AuthController extends Controller
             'permanentAddress' => $data['permanentAddress'],
             'password' => bcrypt($data['password']),
             'dob' => $data['dob'],
-            'verificationCode' => $verificationCode,
             'verified' => false,
         ]);
-    }
 
-    /**
-     * This function generates a unique verification
-     * code which has to be sent on students email.
-     *
-     * @param $rollNo
-     * @return string
-     */
-    protected function generateVerificationCode ($rollNo)
-    {
-        $timeStamp = time();
-        $hashString = $rollNo . $timeStamp;
-        $verificationCode = md5($hashString);
-
-        return $verificationCode;
+        return $student;
     }
 }
