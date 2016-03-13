@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container col-sm-offset-2 col-sm-8">
+    <div class="container col-md-offset-2 col-md-8">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Registration: Please enter your details correctly
+                <strong>Registration: Please enter your details correctly</strong>
             </div>
             <div class="panel-body">
                 <form class="form-horizontal" role="form" method="POST" action="/students/register"
@@ -139,7 +139,7 @@
                     <div class="row">
                         <div class="form-group row col-md-6 center-block">
 
-                            <label class="col-md-4 control-label" for="dob">Birth Date</label>
+                            <label class="col-md-4 control-label" for="dob">Birth Date (yyyy-mm-dd)</label>
 
                             <div class="col-md-8">
                                 <input required class="form-control" name="dob" type="date" id="dob">
