@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Teacher;
 use App\Student;
+use App\Department;
 use App\AdminStaff;
 use App\HostelStaff;
 use App\LibraryStaff;
@@ -178,6 +179,50 @@ class HomeController extends Controller
         }
 
         return redirect('admins/manage/students');
+    }
+
+    /**
+     * Show the departments currently present in the database
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function manageDepartments()
+    {
+        $departmentArr = Department::all();
+        return view('admin.manage.departments', ['departments' => $departmentArr, 'count' => 0]);
+    }
+
+    /**
+     * Add a department
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function addDepartment (Request $request)
+    {
+        $dCode = $request['dCode'];
+        $dName = $request['dName'];
+
+        Department::create(['dCode' => $dCode, 'dName' => $dName]);
+
+        return redirect()->back()
+            ->with('status', 'Success');
+    }
+
+    /**
+     * Remove a department
+     *
+     * @param $dCode
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function removeDepartment ($dCode)
+    {
+        if($dCode != null)
+        {
+            Department::destroy($dCode);
+        }
+
+        return redirect()->back();
     }
 }
 
