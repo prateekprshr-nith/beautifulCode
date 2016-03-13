@@ -9,6 +9,11 @@
                         <strong>Enter the verification code sent on your email</strong>
                     </div>
                     <div class="panel-body">
+                        @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
                         <form class="form-horizontal" role="form" method="POST" action="/students/verify" accept-charset="UTF-8" id="verificationForm">
                             <input required name="_token" type="hidden">
                             {{ csrf_field() }}
@@ -30,6 +35,8 @@
                                     <button class="btn btn-primary" type="submit" id="loginButton">
                                         <span class="glyphicon glyphicon-check"></span> Verify
                                     </button>
+
+                                    <a class="btn btn-link" href="/students/verify/sendVerificationMail">Send verification Mail</a>
                                 </div>
                             </div>
                         </form>
