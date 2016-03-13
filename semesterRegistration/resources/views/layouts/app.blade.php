@@ -66,9 +66,13 @@
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 @if($user == 'admin')
-                                    Admin
+                                    <strong>
+                                        Admin
+                                    </strong>
                                 @else
-                                    {{Auth::guard($user)->user()->name}}
+                                    <strong>
+                                        {{Auth::guard($user)->user()->name}}
+                                    </strong>
                                 @endif
                                 <span class="caret"></span>
                             </a>
