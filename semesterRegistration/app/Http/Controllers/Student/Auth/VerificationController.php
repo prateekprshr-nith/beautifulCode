@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers\Student\Auth;
 
+use Mail;
 use App\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class VerificationController, this class handles
+ * the tasks of verification of student account.
+ *
+ * @package App\Http\Controllers\Student\Auth
+ */
 class VerificationController extends Controller
 {
     // Account verification view
@@ -57,5 +64,46 @@ class VerificationController extends Controller
             return redirect()->back()
                 ->withErrors('This code in invalid! Please use a correct code');
         }
+    }
+
+    /**
+     * This function sends a verification
+     * mail with code to the students.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function sendVerifiactionMail ()
+    {
+        // Get currently logged in student
+        $student = Student::find(Auth::guard('student')->user()->rollNo);
+
+        $verificationCode = $this->generateVerificationCode($student->rollNo);
+        $student->verificationCode = $verificationCode;
+        $student->save();
+
+        Mail::queue('student.auth.emails.verification', ['student' => $student], function ($msg) use ($student) {
+            $msg->from('noreply@semesterregistration.com', 'Support');
+            $msg->to($student->email, $student->name)->subject('Your Verification code');
+        });
+
+        $statusMsg = 'Verification code successfully sent on ' . $student->email;
+
+        return redirect()->back()->with('status', $statusMsg);
+    }
+
+    /**
+     * This function generates a unique verification
+     * code which has to be sent on students email.
+     *
+     * @param $rollNo
+     * @return string
+     */
+    protected function generateVerificationCode ($rollNo)
+    {
+        $timeStamp = time();
+        $hashString = $rollNo . $timeStamp;
+        $verificationCode = md5($hashString);
+
+        return $verificationCode;
     }
 }
