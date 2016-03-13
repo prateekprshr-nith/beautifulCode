@@ -26,6 +26,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('register', 'Student\Auth\AuthController@showRegistrationForm')->middleware('home');
         Route::get('verify', 'Student\Auth\VerificationController@showVerificationForm')->middleware('verified:student');
         Route::post('verify', 'Student\Auth\VerificationController@verifyUserAccount');
+        Route::get('verify/sendVerificationMail', 'Student\Auth\VerificationController@sendVerifiactionMail')->middleware('verified:student');
 
         // Student view routes
         Route::get('home', 'Student\HomeController@index');
