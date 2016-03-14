@@ -82,6 +82,7 @@ class AuthController extends Controller
             'email' => $data['email'],
             'office' => $data['office'],
             'password' => bcrypt($data['password']),
+            'firstLogin' => true,
         ]);
     }
 
