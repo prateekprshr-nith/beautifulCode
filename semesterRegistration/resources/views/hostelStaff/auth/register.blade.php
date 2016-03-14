@@ -4,7 +4,8 @@
     <div class="container col-sm-offset-2 col-sm-8">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <strong>Add a new hostel staff member</strong>
+                <span class="glyphicon glyphicon-plus"></span>
+                <strong> Add a new hostel staff member</strong>
             </div>
             <div class="panel-body">
                 <form class="form-horizontal" role="form" method="POST" action="/hostelStaffs/register"
