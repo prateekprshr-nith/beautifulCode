@@ -138,13 +138,20 @@ Route::group(['middleware' => 'web'], function () {
             Route::get('students', 'Admin\HomeController@manageStudents');
             Route::delete('students/{rollNo?}', 'Admin\HomeController@removeStudent');
 
-            // Department and section management routes
+            // Department management routes
             Route::get('departments', 'Admin\HomeController@manageDepartments');
             Route::put('departments', 'Admin\HomeController@addDepartment');
             Route::delete('departments/{dCode?}', 'Admin\HomeController@removeDepartment');
+
+            // Section management routes
             Route::get('sections', 'Admin\HomeController@manageSections');
             Route::put('sections', 'Admin\HomeController@addSection');
             Route::delete('sections/{sectionId?}', 'Admin\HomeController@removeSection');
+
+            // Hostel management routes
+            Route::get('hostels', 'Admin\HomeController@manageHostels');
+            Route::put('hostels', 'Admin\HomeController@addHostel');
+            Route::delete('hostels/{hostelId?}', 'Admin\HomeController@removeHostel');
         });
     });
 
