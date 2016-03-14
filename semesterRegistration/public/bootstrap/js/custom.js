@@ -8,21 +8,22 @@
  * is same in password and confirm
  * password fields of the web page
  */
-function checkPassword()
+function checkPassword(formId, buttonId)
 {
-    var password = document.forms["registerForm"]["password"].value;
-    var cPassword = document.forms["registerForm"]["confirmPassword"].value;
+
+    var password = document.forms[formId]["password"].value;
+    var cPassword = document.forms[formId]["confirmPassword"].value;
 
     if(password != cPassword) {
         document.getElementById('passwordErrorMsg').setAttribute('class', 'alert alert-danger text-center');
         document.getElementById('passwordErrorMsg').innerHTML = 'Passwords do not match!!';
-        document.getElementById('registerButton').setAttribute('disabled', '');
+        document.getElementById(buttonId).setAttribute('disabled', '');
     }
     else
     {
         document.getElementById('passwordErrorMsg').removeAttribute('class');
         document.getElementById('passwordErrorMsg').innerHTML = '';
-        document.getElementById('registerButton').removeAttribute('disabled');
+        document.getElementById(buttonId).removeAttribute('disabled');
     }
 }
 
