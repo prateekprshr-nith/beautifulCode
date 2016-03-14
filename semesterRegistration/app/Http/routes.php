@@ -41,8 +41,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('logout', 'Teacher\Auth\AuthController@logout');
         Route::post('password/email', 'Teacher\Auth\PasswordController@sendResetLinkEmail');
         Route::post('password/reset', 'Teacher\Auth\PasswordController@reset');
-        Route::get('password/reset/{token?}', 'Teacher\Auth\PasswordController@showResetForm')->middleware('home');;
+        Route::get('password/reset/{token?}', 'Teacher\Auth\PasswordController@showResetForm')->middleware('home');
         Route::post('register', 'Teacher\Auth\AuthController@register');
+        Route::get('firstLogin', 'Teacher\Auth\FirstLoginController@showPasswordUpdateForm')->middleware('normalLogin:teacher');
+        Route::put('firstLogin', 'Teacher\Auth\FirstLoginController@updatePassword');
 
         // Manual registration is disabled
         // Route::get('register', 'Teacher\Auth\AuthController@showRegistrationForm');
@@ -62,6 +64,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('password/reset', 'LibraryStaff\Auth\PasswordController@reset');
         Route::get('password/reset/{token?}', 'LibraryStaff\Auth\PasswordController@showResetForm')->middleware('home');
         Route::post('register', 'LibraryStaff\Auth\AuthController@register');
+        Route::get('firstLogin', 'LibraryStaff\Auth\FirstLoginController@showPasswordUpdateForm')->middleware('normalLogin:libraryStaff');
+        Route::put('firstLogin', 'LibraryStaff\Auth\FirstLoginController@updatePassword');
 
         // Manual registration is disabled
         // Route::get('register', 'LibraryStaff\Auth\AuthController@showRegistrationForm');
@@ -81,6 +85,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('password/reset', 'HostelStaff\Auth\PasswordController@reset');
         Route::get('password/reset/{token?}', 'HostelStaff\Auth\PasswordController@showResetForm')->middleware('home');
         Route::post('register', 'HostelStaff\Auth\AuthController@register');
+        Route::get('firstLogin', 'HostelStaff\Auth\FirstLoginController@showPasswordUpdateForm')->middleware('normalLogin:hostelStaff');
+        Route::put('firstLogin', 'HostelStaff\Auth\FirstLoginController@updatePassword');
 
         // Manual registration is disabled
         // Route::get('register', 'HostelStaff\Auth\AuthController@showRegistrationForm');
@@ -100,6 +106,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('password/reset', 'AdminStaff\Auth\PasswordController@reset');
         Route::get('password/reset/{token?}', 'AdminStaff\Auth\PasswordController@showResetForm')->middleware('home');
         Route::post('register', 'AdminStaff\Auth\AuthController@register');
+        Route::get('firstLogin', 'AdminStaff\Auth\FirstLoginController@showPasswordUpdateForm')->middleware('normalLogin:adminStaff');
+        Route::put('firstLogin', 'AdminStaff\Auth\FirstLoginController@updatePassword');
 
         // Manual registration is disabled
         // Route::get('register', 'AdminStaff\Auth\AuthController@showRegistrationForm');
