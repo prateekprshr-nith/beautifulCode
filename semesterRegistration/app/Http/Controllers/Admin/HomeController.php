@@ -275,5 +275,49 @@ class HomeController extends Controller
 
         return redirect()->back();
     }
+
+    /**
+     * Show the hostels currently present in the database
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function manageHostels()
+    {
+        $hostelArr = Hostel::all();
+        return view('admin.manage.hostels', ['hostels' => $hostelArr, 'count' => 0]);
+    }
+
+    /**
+     * Add a hostel
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function addHostel (Request $request)
+    {
+        $hostelId = $request['hostelId'];
+        $name = $request['name'];
+
+        Hostel::create(['hostelId' => $hostelId, 'name' => $name]);
+
+        return redirect()->back()
+            ->with('status', 'Success');
+    }
+
+    /**
+     * Remove a hostel
+     *
+     * @param $hostelId
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function removeHostel ($hostelId)
+    {
+        if($hostelId != null)
+        {
+            Hostel::destroy($hostelId);
+        }
+
+        return redirect()->back();
+    }
 }
 
