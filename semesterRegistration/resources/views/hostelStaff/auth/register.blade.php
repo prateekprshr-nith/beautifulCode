@@ -67,7 +67,7 @@
 
                             <div class="col-md-8">
                                 <input required class="form-control" name="password" type="password" id="password"
-                                       onkeyup="checkPassword()">
+                                       onkeyup="checkPassword('registerForm', 'registerButton')">
                             </div>
                         </div>
                         <div class="form-group row col-md-6 center-block">
@@ -76,7 +76,7 @@
 
                             <div class="col-md-8">
                                 <input required class="form-control" name="confirmPassword" type="password"
-                                       id="confirmPassword" onkeyup="checkPassword()">
+                                       id="confirmPassword" onkeyup="checkPassword('registerForm', 'registerButton')">
                             </div>
                         </div>
                     </div>
