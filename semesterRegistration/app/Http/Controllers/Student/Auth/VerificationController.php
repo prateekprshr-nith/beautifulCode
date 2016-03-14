@@ -34,7 +34,7 @@ class VerificationController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    protected function showVerificationForm ()
+    public function showVerificationForm ()
     {
         return view($this->verificationView);
     }
@@ -45,7 +45,7 @@ class VerificationController extends Controller
      * @param $request
      * @return \Illuminate\Http\Response
      */
-    protected function verifyUserAccount (Request $request)
+    public function verifyUserAccount (Request $request)
     {
         // Get currently logged in student
         $student = Student::find(Auth::guard('student')->user()->rollNo);
@@ -72,7 +72,7 @@ class VerificationController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function sendVerifiactionMail ()
+    public function sendVerifiactionMail ()
     {
         // Get currently logged in student
         $student = Student::find(Auth::guard('student')->user()->rollNo);
