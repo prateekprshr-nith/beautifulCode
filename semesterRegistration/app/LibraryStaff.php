@@ -18,7 +18,7 @@ class LibraryStaff extends Authenticatable
 
     // Fillable and hidden attributes
     protected $fillable = [
-        'id', 'name', 'email', 'password',
+        'id', 'name', 'email', 'password', 'firstLogin',
     ];
 
     protected $hidden = [

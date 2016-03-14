@@ -18,7 +18,7 @@ class HostelStaff extends Authenticatable
 
     // Fillable and hidden attributes
     protected $fillable = [
-        'id', 'hostelId', 'name', 'email', 'password',
+        'id', 'hostelId', 'name', 'email', 'password', 'firstLogin',
     ];
 
      protected $hidden = [

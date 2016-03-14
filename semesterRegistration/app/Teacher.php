@@ -19,7 +19,7 @@ class Teacher extends Authenticatable
     // Fillable and hidden arrtibutes
     protected $fillable = [
         'facultyId', 'dCode', 'name', 'email', 'office',
-        'semester', 'password'
+        'semester', 'password', 'firstLogin',
     ];
 
     protected $hidden = [
