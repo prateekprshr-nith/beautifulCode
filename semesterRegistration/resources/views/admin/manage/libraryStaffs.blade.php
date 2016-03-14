@@ -6,11 +6,12 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <strong>Library Staff members currently registered in the system</strong>
+                        <span class="glyphicon glyphicon-user"></span>
+                        <strong> Library Staff members currently registered in the system</strong>
                     </div>
                     <div class="panel-body">
                         @if (count($libraryStaffs) > 0)
-                                <!-- Current libraryStaffs list -->
+                        <!-- Current libraryStaffs list -->
                         <table class="table table-hover">
                             <thead>
                             <tr>

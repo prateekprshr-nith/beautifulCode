@@ -6,7 +6,8 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <strong>Teachers currently registered in the system</strong>
+                        <span class="glyphicon glyphicon-user"></span>
+                        <strong> Teachers currently registered in the system</strong>
                     </div>
                         <div class="panel-body">
                             @if (count($teachers) > 0)
