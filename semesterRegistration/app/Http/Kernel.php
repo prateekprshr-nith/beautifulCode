@@ -52,5 +52,7 @@ class Kernel extends HttpKernel
         'adminIp' => \App\Http\Middleware\RedirectIfNotAdminIp::class,
         'verify' => \App\Http\Middleware\VerifyAccount::class,
         'verified' => \App\Http\Middleware\RedirectIfVerified::class,
+        'firstLogin' => \App\Http\Middleware\FirstLogin::class,
+        'normalLogin' => \App\Http\Middleware\RedirectIfNotFirstLogin::class,
     ];
 }
