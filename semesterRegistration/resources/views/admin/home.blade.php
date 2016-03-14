@@ -7,7 +7,8 @@
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <strong>Manage users</strong>
+                <span class="glyphicon glyphicon-dashboard"></span>
+                <strong> Manage Users</strong>
             </div>
             <div class="panel-body">
                 <div class="btn-group btn-group-justified">
@@ -31,11 +32,12 @@
         </div>
     </div>
 
-    <!-- Second panle: Manage departments and sections -->
+    <!-- Second panle: Manage Departments, Sections and Hostels-->
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <strong>Manage departments and sections</strong>
+                <span class="glyphicon glyphicon-dashboard"></span>
+                <strong> Manage Departments, Sections and Hostels</strong>
             </div>
             <div class="panel-body">
                 <div class="btn-group btn-group-justified">
@@ -44,6 +46,9 @@
                     </a>
                     <a href="/admins/manage/sections" class="btn btn-default">
                         <span class="glyphicon glyphicon-user"></span> Manage Sections
+                    </a>
+                    <a href="/admins/manage/hostels" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-user"></span> Manage Hostels
                     </a>
                 </div>
             </div>
