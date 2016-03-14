@@ -58,7 +58,8 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <strong>Add new hostel</strong>
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <strong> Add new hostel</strong>
                     </div>
                     <div class="panel-body">
                         @if (session('status'))
