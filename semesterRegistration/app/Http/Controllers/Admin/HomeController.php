@@ -170,6 +170,24 @@ class HomeController extends Controller
     }
 
     /**
+     * Manually verify a student
+     *
+     * @param $rollNo
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function verifyStudent ($rollNo)
+    {
+        if($rollNo != null)
+        {
+            $student = Student::find($rollNo);
+            $student->verified = true;
+            $student->save();
+        }
+
+        return redirect('admins/manage/students');
+    }
+
+    /**
      * Remove a student
      *
      * @param $rollNo

@@ -136,6 +136,7 @@ Route::group(['middleware' => 'web'], function () {
             Route::get('hostelStaffs', 'Admin\HomeController@manageHostelStaffs');
             Route::delete('hostelStaffs/{id?}', 'Admin\HomeController@removeHostelStaff');
             Route::get('students', 'Admin\HomeController@manageStudents');
+            Route::put('students/{rollNo?}', 'Admin\HomeController@verifyStudent');
             Route::delete('students/{rollNo?}', 'Admin\HomeController@removeStudent');
 
             // Department management routes

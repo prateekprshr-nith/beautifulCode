@@ -21,7 +21,8 @@
                                             <th>Email</th>
                                             <th>Deparment Code</th>
                                             <th>Verified</th>
-                                            <th>Action</th>
+                                            <th>Verify</th>
+                                            <th>Remove</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -35,9 +36,22 @@
                                             <td>
                                                 @if($student->verified)
                                                     Yes
+                                                    {{-- */$disabled= 'disabled';/* --}}
                                                 @else
                                                     No
+                                                    {{-- */$disabled= '';/* --}}
                                                 @endif
+                                            </td>
+                                            <td>
+                                                <form action="/admins/manage/students/{{$student->rollNo}}" method="POST">
+                                                {{ csrf_field() }}
+                                                {{ method_field('PUT') }}
+
+                                                <button type="submit" class="btn btn-primary" {{$disabled}}
+                                                        onclick="return confirm('Are you sure?')">
+                                                    <span class="glyphicon glyphicon-check"></span> Verify
+                                                </button>
+                                                </form>
                                             </td>
                                             <td>
                                                 <form action="/admins/manage/students/{{$student->rollNo}}" method="POST">
