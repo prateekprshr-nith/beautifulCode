@@ -6,7 +6,8 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <strong>Sections currently entered in the database.</strong>
+                        <span class="glyphicon glyphicon-pushpin"></span>
+                        <strong> Sections currently entered in the database.</strong>
                     </div>
                     <div class="panel-body">
                         @if (count($sections) > 0)

@@ -6,7 +6,8 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <strong>Hostels currently entered in the database.</strong>
+                        <span class="glyphicon glyphicon-pushpin"></span>
+                        <strong> Hostels currently entered in the database.</strong>
                     </div>
                     <div class="panel-body">
                         @if (count($hostels) > 0)
