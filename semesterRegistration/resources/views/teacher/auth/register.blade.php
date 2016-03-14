@@ -55,13 +55,9 @@
                             <div class="col-md-8">
                                 <select required id="department" name="dCode" class="form-control">
                                     <option value="">Select a Department...</option>
-                                    <option value="CSED">Computer Science and Engineering Dept.</option>
-                                    <option value="ECED">Electronics and Communication Engineering Dept.</option>
-                                    <option value="EED">Electrical and Electronics Engineering Dept.</option>
-                                    <option value="MED">Mechanical Engineering Dept.</option>
-                                    <option value="CED">Civil Engineering Dept.</option>
-                                    <option value="CHED">Chemical Engineering Dept.</option>
-                                    <option value="ARD">Architecture Dept.</option>
+                                    @foreach($departments as $department)
+                                        <option value="{{$department->dCode}}">{{$department->dName}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
