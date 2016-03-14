@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Student\Auth;
 
+use App\Section;
 use Validator;
 use App\Student;
+use App\Department;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -97,5 +99,21 @@ class AuthController extends Controller
         ]);
 
         return $student;
+    }
+
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        // Get the list of departments
+        $departmentArr = Department::all();
+
+        // Get the list of sections
+        $sectionArr = Section::all();
+
+        return view($this->registerView)->with(['departments' => $departmentArr, 'sections' => $sectionArr]);
     }
 }
