@@ -53,7 +53,9 @@ class HomeController extends Controller
     public function manageTeachers()
     {
         $teacherArr = Teacher::all();
-        return view('teacher.auth.register', ['teachers' => $teacherArr, 'count' => 0]);
+        $departmentArr = Department::all();
+        return view('teacher.auth.register',
+            ['teachers' => $teacherArr, 'count' => 0, 'departments' => $departmentArr]);
     }
 
     /**
