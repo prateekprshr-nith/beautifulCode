@@ -121,6 +121,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('firstLogin', 'AdminStaff\Auth\FirstLoginController@showPasswordUpdateForm')->middleware('normalLogin:adminStaff');
         Route::put('firstLogin', 'AdminStaff\Auth\FirstLoginController@updatePassword');
 
+        // AdminStaff info update routes
+        Route::get('/updateInfo', 'AdminStaff\InformationUpdateController@showUpdateInfoForm');
+        Route::patch('/updateInfo', 'AdminStaff\InformationUpdateController@updateInfo');
+
         // Manual registration is disabled
         // Route::get('register', 'AdminStaff\Auth\AuthController@showRegistrationForm');
 
