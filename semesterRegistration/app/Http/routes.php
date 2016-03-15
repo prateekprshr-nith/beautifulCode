@@ -15,7 +15,7 @@ Route::group(['middleware' => 'web'], function () {
     // Student route group
     Route::group(['prefix' => '/students'], function () {
 
-        //Student auth routes
+        // Student auth routes
         Route::get('login', 'Student\Auth\AuthController@showLoginForm')->middleware('home');
         Route::post('login', 'Student\Auth\AuthController@login');
         Route::get('logout', 'Student\Auth\AuthController@logout');
@@ -35,7 +35,7 @@ Route::group(['middleware' => 'web'], function () {
     // Teacher route group
     Route::group(['prefix' => '/teachers'], function () {
 
-        //Teacher auth routes
+        // Teacher auth routes
         Route::get('login', 'Teacher\Auth\AuthController@showLoginForm')->middleware('home');
         Route::post('login', 'Teacher\Auth\AuthController@login');
         Route::get('logout', 'Teacher\Auth\AuthController@logout');
@@ -56,7 +56,7 @@ Route::group(['middleware' => 'web'], function () {
     // LibraryStaff route group
     Route::group(['prefix' => '/libraryStaffs'], function () {
 
-        //LibraryStaff auth routes
+        // LibraryStaff auth routes
         Route::get('login', 'LibraryStaff\Auth\AuthController@showLoginForm')->middleware('home');
         Route::post('login', 'LibraryStaff\Auth\AuthController@login');
         Route::get('logout', 'LibraryStaff\Auth\AuthController@logout');
@@ -77,7 +77,7 @@ Route::group(['middleware' => 'web'], function () {
     // HostelStaff route group
     Route::group(['prefix' => '/hostelStaffs'], function () {
 
-        //HostelStaff auth routes
+        // HostelStaff auth routes
         Route::get('login', 'HostelStaff\Auth\AuthController@showLoginForm')->middleware('home');
         Route::post('login', 'HostelStaff\Auth\AuthController@login');
         Route::get('logout', 'HostelStaff\Auth\AuthController@logout');
@@ -98,7 +98,7 @@ Route::group(['middleware' => 'web'], function () {
     // AdminStaff route group
     Route::group(['prefix' => '/adminStaffs'], function () {
 
-        //AdminStaff auth routes
+        // AdminStaff auth routes
         Route::get('login', 'AdminStaff\Auth\AuthController@showLoginForm')->middleware('home');
         Route::post('login', 'AdminStaff\Auth\AuthController@login');
         Route::get('logout', 'AdminStaff\Auth\AuthController@logout');
@@ -119,10 +119,14 @@ Route::group(['middleware' => 'web'], function () {
     // Admin route group
     Route::group(['prefix' => '/admins'], function () {
 
-        //Admin auth routes
+        // Admin auth routes
         Route::get('login', 'Admin\Auth\AuthController@showLoginForm')->middleware(['home', 'adminIp']);
         Route::post('login', 'Admin\Auth\AuthController@login');
         Route::get('logout', 'Admin\Auth\AuthController@logout');
+
+        // Admin info update routes
+        Route::get('/updateInfo', 'Admin\InformationUpdateController@showUpdateInfoForm');
+        Route::patch('/updateInfo', 'Admin\InformationUpdateController@updateInfo');
 
         /*
          * Registration and password reset routes have not been
