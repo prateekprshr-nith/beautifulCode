@@ -96,6 +96,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('firstLogin', 'HostelStaff\Auth\FirstLoginController@showPasswordUpdateForm')->middleware('normalLogin:hostelStaff');
         Route::put('firstLogin', 'HostelStaff\Auth\FirstLoginController@updatePassword');
 
+        // HostelStaff info update routes
+        Route::get('/updateInfo', 'HostelStaff\InformationUpdateController@showUpdateInfoForm');
+        Route::patch('/updateInfo', 'HostelStaff\InformationUpdateController@updateInfo');
+
         // Manual registration is disabled
         // Route::get('register', 'HostelStaff\Auth\AuthController@showRegistrationForm');
 
