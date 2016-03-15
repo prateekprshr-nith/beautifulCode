@@ -32,14 +32,15 @@ class InformationUpdateController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
+     * @param Teacher $teacher
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator(array $data, Teacher $teacher)
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:teachers',
+            'email' => 'required|email|max:255|unique:teachers,email,'.$teacher->facultyId.',facultyId',
             'office' => 'required',
             'password' => 'required|min:8',
         ]);
@@ -76,7 +77,7 @@ class InformationUpdateController extends Controller
         $newPassword = $request['password'];
 
         // Validate the new information
-        $validator = $this->validator($request->all());
+        $validator = $this->validator($request->all(), $teacher);
 
         if ($validator->fails())
         {
