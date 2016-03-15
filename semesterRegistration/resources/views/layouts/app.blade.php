@@ -77,7 +77,7 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><span class="glyphicon glyphicon-refresh"></span> Update Pofile</a></li>
+                                <li><a href="/{{$user}}s/updateInfo"><span class="glyphicon glyphicon-refresh"></span> Update Profile</a></li>
                                 <li><a href="/{{$user}}s/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                             </ul>
                         </li>
