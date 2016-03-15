@@ -71,6 +71,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('firstLogin', 'LibraryStaff\Auth\FirstLoginController@showPasswordUpdateForm')->middleware('normalLogin:libraryStaff');
         Route::put('firstLogin', 'LibraryStaff\Auth\FirstLoginController@updatePassword');
 
+        // LibraryStaff info update routes
+        Route::get('/updateInfo', 'LibraryStaff\InformationUpdateController@showUpdateInfoForm');
+        Route::patch('/updateInfo', 'LibraryStaff\InformationUpdateController@updateInfo');
+
         // Manual registration is disabled
         // Route::get('register', 'LibraryStaff\Auth\AuthController@showRegistrationForm');
 
