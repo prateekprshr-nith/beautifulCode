@@ -46,6 +46,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('firstLogin', 'Teacher\Auth\FirstLoginController@showPasswordUpdateForm')->middleware('normalLogin:teacher');
         Route::put('firstLogin', 'Teacher\Auth\FirstLoginController@updatePassword');
 
+        // Teacher info update routes
+        Route::get('/updateInfo', 'Teacher\InformationUpdateController@showUpdateInfoForm');
+        Route::patch('/updateInfo', 'Teacher\InformationUpdateController@updateInfo');
+
         // Manual registration is disabled
         // Route::get('register', 'Teacher\Auth\AuthController@showRegistrationForm');
 
