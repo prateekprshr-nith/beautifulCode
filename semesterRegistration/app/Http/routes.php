@@ -28,6 +28,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('verify', 'Student\Auth\VerificationController@verifyUserAccount');
         Route::get('verify/sendVerificationMail', 'Student\Auth\VerificationController@sendVerifiactionMail')->middleware('verified:student');
 
+        // Student info update routes
+        Route::get('/updateInfo', 'Student\InformationUpdateController@showUpdateInfoForm');
+        Route::patch('/updateInfo', 'Student\InformationUpdateController@updateInfo');
+
         // Student view routes
         Route::get('home', 'Student\HomeController@index');
     });
