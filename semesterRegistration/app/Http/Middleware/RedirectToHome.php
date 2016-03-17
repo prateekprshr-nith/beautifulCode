@@ -28,6 +28,7 @@ class RedirectToHome
         $guardArr = [
             'student', 'teacher', 'libraryStaff',
             'hostelStaff', 'adminStaff', 'admin',
+            'chiefWardenStaff',
         ];
 
         // Check if any of the above
