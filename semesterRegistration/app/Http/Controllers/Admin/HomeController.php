@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\ChiefWardenStaff;
 use App\Hostel;
 use App\Teacher;
 use App\Student;
@@ -128,6 +129,34 @@ class HomeController extends Controller
         }
 
         return redirect('admins/manage/adminStaffs');
+    }
+
+    /**
+     * Show the chiefWardenStaff registration form
+     * and currently registered adminStaff
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function manageChiefWardenStaffs()
+    {
+        $chiefWardenStaffArr = ChiefWardenStaff::all();
+        return view('chiefWardenStaff.auth.register', ['chiefWardenStaffs' => $chiefWardenStaffArr, 'count' => 0]);
+    }
+
+    /**
+     * Remove an chiefWardenStaff
+     *
+     * @param $id
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
+     */
+    public function removeChiefWardenStaff($id)
+    {
+        if ($id != null)
+        {
+            ChiefWardenStaff::destroy($id);
+        }
+
+        return redirect('admins/manage/chiefWardenStaffs');
     }
 
     /**
