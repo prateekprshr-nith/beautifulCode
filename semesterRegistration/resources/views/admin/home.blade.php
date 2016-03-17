@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
 
     <!-- First panel: Manage users -->
     <div class="col-md-12">
@@ -23,6 +23,9 @@
                     </a>
                     <a href="/admins/manage/libraryStaffs" class="btn btn-default">
                         <span class="glyphicon glyphicon-user"></span> Manage Library Staff
+                    </a>
+                    <a href="/admins/manage/chiefWardenStaffs" class="btn btn-default">
+                        <span class="glyphicon glyphicon-user"></span> Manage ChiefWarden Staff
                     </a>
                     <a href="/admins/manage/students" class="btn btn-default">
                         <span class="glyphicon glyphicon-user"></span> Manage Students
