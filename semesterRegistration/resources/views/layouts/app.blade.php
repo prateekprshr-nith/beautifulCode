@@ -47,6 +47,8 @@
                     {{-- */$user = 'hostelStaff';/* --}}
                 @elseif(Auth::guard('adminStaff')->user())
                     {{-- */$user = 'adminStaff';/* --}}
+                @elseif(Auth::guard('chiefWardenStaff')->user())
+                    {{-- */$user = 'chiefWardenStaff';/* --}}
                 @elseif(Auth::guard('admin')->user())
                     {{-- */$user = 'admin';/* --}}
                 @elseif(Auth::guest())
