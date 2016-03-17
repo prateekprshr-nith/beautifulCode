@@ -66,6 +66,11 @@ return [
             'provider' => 'adminStaffs',
         ],
 
+        'chiefWardenStaff' => [
+            'driver' => 'session',
+            'provider' => 'chiefWardenStaffs',
+        ],
+
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
@@ -118,6 +123,11 @@ return [
         'adminStaffs' => [
             'driver' => 'eloquent',
             'model' => App\AdminStaff::class,
+        ],
+
+        'chiefWardenStaffs' => [
+            'driver' => 'eloquent',
+            'model' => App\ChiefWardenStaff::class,
         ],
 
         'teachers' => [
@@ -182,6 +192,13 @@ return [
         'hostelStaffs' => [
             'provider' => 'hostelStaffs',
             'email' => 'hostelStaff.auth.emails.password',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        'chiefWardenStaffs' => [
+            'provider' => 'chiefWardenStaffs',
+            'email' => 'chiefWardenStaff.auth.emails.password',
             'table' => 'password_resets',
             'expire' => 60,
         ],
