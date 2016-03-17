@@ -12,6 +12,7 @@ $ composer install
 To migrate the database tables, do your proper settings in .env file and run
 ```bash
 $ php artisan migrate
+$ php artisan db:seed
 ```
 
 Happy Programming :)
