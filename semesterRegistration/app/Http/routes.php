@@ -111,6 +111,31 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('home', 'HostelStaff\HomeController@index');
     });
 
+    // ChiefWardenStaff route group
+    Route::group(['prefix' => '/chiefWardenStaffs'], function () {
+
+        // ChiefWardenStaff auth routes
+        Route::get('login', 'ChiefWardenStaff\Auth\AuthController@showLoginForm')->middleware('home');
+        Route::post('login', 'ChiefWardenStaff\Auth\AuthController@login');
+        Route::get('logout', 'ChiefWardenStaff\Auth\AuthController@logout');
+        Route::post('password/email', 'ChiefWardenStaff\Auth\PasswordController@sendResetLinkEmail');
+        Route::post('password/reset', 'ChiefWardenStaff\Auth\PasswordController@reset');
+        Route::get('password/reset/{token?}', 'ChiefWardenStaff\Auth\PasswordController@showResetForm')->middleware('home');
+        Route::post('register', 'ChiefWardenStaff\Auth\AuthController@register');
+        Route::get('firstLogin', 'ChiefWardenStaff\Auth\FirstLoginController@showPasswordUpdateForm')->middleware('normalLogin:chiefWardenStaff');
+        Route::put('firstLogin', 'ChiefWardenStaff\Auth\FirstLoginController@updatePassword');
+
+        // ChiefWardenStaff info update routes
+        Route::get('/updateInfo', 'ChiefWardenStaff\InformationUpdateController@showUpdateInfoForm');
+        Route::patch('/updateInfo', 'ChiefWardenStaff\InformationUpdateController@updateInfo');
+
+        // Manual registration is disabled
+        // Route::get('register', 'ChiefWardenStaff\Auth\AuthController@showRegistrationForm');
+
+        // ChiefWardenStaff view routes
+        Route::get('home', 'ChiefWardenStaff\HomeController@index');
+    });
+
     // AdminStaff route group
     Route::group(['prefix' => '/adminStaffs'], function () {
 
@@ -167,6 +192,8 @@ Route::group(['middleware' => 'web'], function () {
             Route::delete('adminStaffs/{id?}', 'Admin\HomeController@removeAdminStaff');
             Route::get('hostelStaffs', 'Admin\HomeController@manageHostelStaffs');
             Route::delete('hostelStaffs/{id?}', 'Admin\HomeController@removeHostelStaff');
+            Route::get('chiefWardenStaffs', 'Admin\HomeController@manageChiefWardenStaffs');
+            Route::delete('chiefWardenStaffs/{id?}', 'Admin\HomeController@removeChiefWardenStaff');
             Route::get('students', 'Admin\HomeController@manageStudents');
             Route::put('students/{rollNo?}', 'Admin\HomeController@verifyStudent');
             Route::delete('students/{rollNo?}', 'Admin\HomeController@removeStudent');
