@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Student\Auth;
 
-use App\Section;
 use Validator;
 use App\Student;
+use App\Section;
 use App\Department;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -115,5 +118,18 @@ class AuthController extends Controller
         $sectionArr = Section::all();
 
         return view($this->registerView)->with(['departments' => $departmentArr, 'sections' => $sectionArr]);
+    }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function logout()
+    {
+        Auth::guard($this->getGuard())->logout();
+        Session::flush();
+
+        return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
     }
 }
