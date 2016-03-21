@@ -41,3 +41,12 @@ function toggleVisibility(elementId)
         document.getElementById(elementId).setAttribute('hidden', '');
     }
 }
+
+/*
+ * This function loads an avatar icon in
+ * case user has no profilepicture.
+ */
+function loadAvatarIcon()
+{
+    document.getElementById('avatarImage').src = '/images/circle.png';
+}
