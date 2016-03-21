@@ -8,11 +8,16 @@
 
     <!-- Bootstrap -->
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bootstrap/css/fileinput.min.css" media="all" rel="stylesheet">
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="/bootstrap/js/jquery.min.js"></script>
+
     <!-- Java script files -->
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/bootstrap/js/custom.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/bootstrap/js/fileinput.min.js"></script>
+    <script src="/bootstrap/js/plugins/canvas-to-blob.min.js"></script>
 </head>
 
 <body>
@@ -31,11 +36,14 @@
 
             <div class="collapse navbar-collapse" id="mynavbar-content">
 
-                <!-- Get the user
-                Please note that this code is bit tricky. Do not try
-                to change it. But if you did try that and failed then
-                increment the counter below
-                No. of hours wasted = 0 -->
+                <!--
+                     Get the user. Please note that this code is a
+                     bit tricky. Do not try to change it. But
+                     if you did try that and failed then
+                     increment the counter below :D.
+
+                     No. of hours wasted = 0
+                -->
 
                 @if(Auth::guard('student')->user())
                     {{-- */$user= 'student';/* --}}
@@ -72,6 +80,10 @@
                                         Admin
                                     </strong>
                                 @else
+                                    @if($user == 'student')
+                                        <img src="{{ url('/students/image') }}" id="avatarImage" width="20" height="20"
+                                             class="img-rounded" alt="Cinque Terre" onerror="loadAvatarIcon()">
+                                    @endif
                                     <strong>
                                         {{Auth::guard($user)->user()->name}}
                                     </strong>
