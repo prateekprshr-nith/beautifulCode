@@ -1,20 +1,21 @@
 <?php
 
 /*
- * This file contains all the routes for the application
+ * This file contains all the routes for the application.
  */
 
-
-Route::group(['middleware' => 'web'], function () {
-
+Route::group(['middleware' => 'web'], function ()
+{
     // Landing page
-    Route::get('/', function () {
+    Route::get('/', function ()
+    {
         return view('welcome');
     })->middleware('home');
 
-    // Student route group
-    Route::group(['prefix' => '/students'], function () {
 
+    // Student route group
+    Route::group(['prefix' => '/students'], function ()
+    {
         // Student auth routes
         Route::get('login', 'Student\Auth\AuthController@showLoginForm')->middleware('home');
         Route::post('login', 'Student\Auth\AuthController@login');
@@ -31,14 +32,22 @@ Route::group(['middleware' => 'web'], function () {
         // Student info update routes
         Route::get('/updateInfo', 'Student\InformationUpdateController@showUpdateInfoForm');
         Route::patch('/updateInfo', 'Student\InformationUpdateController@updateInfo');
+        Route::get('updateInfo/image/', 'Student\InformationUpdateController@showImageUploadForm')->middleware('hasImage');
+        Route::patch('/updateInfo/image', 'Student\InformationUpdateController@updateImage');
+        Route::get('updateInfo/image/skip', 'Student\InformationUpdateController@setImageUploadSkipSession')->middleware('hasImage');
 
         // Student view routes
         Route::get('home', 'Student\HomeController@index');
+
+        // Student image route, fetches the image of student
+        Route::get('image', 'Student\HomeController@getImage');
+
     });
 
-    // Teacher route group
-    Route::group(['prefix' => '/teachers'], function () {
 
+    // Teacher route group
+    Route::group(['prefix' => '/teachers'], function ()
+    {
         // Teacher auth routes
         Route::get('login', 'Teacher\Auth\AuthController@showLoginForm')->middleware('home');
         Route::post('login', 'Teacher\Auth\AuthController@login');
@@ -61,9 +70,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('home', 'Teacher\HomeController@index');
     });
 
-    // LibraryStaff route group
-    Route::group(['prefix' => '/libraryStaffs'], function () {
 
+    // LibraryStaff route group
+    Route::group(['prefix' => '/libraryStaffs'], function ()
+    {
         // LibraryStaff auth routes
         Route::get('login', 'LibraryStaff\Auth\AuthController@showLoginForm')->middleware('home');
         Route::post('login', 'LibraryStaff\Auth\AuthController@login');
@@ -86,9 +96,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('home', 'LibraryStaff\HomeController@index');
     });
 
-    // HostelStaff route group
-    Route::group(['prefix' => '/hostelStaffs'], function () {
 
+    // HostelStaff route group
+    Route::group(['prefix' => '/hostelStaffs'], function ()
+    {
         // HostelStaff auth routes
         Route::get('login', 'HostelStaff\Auth\AuthController@showLoginForm')->middleware('home');
         Route::post('login', 'HostelStaff\Auth\AuthController@login');
@@ -111,9 +122,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('home', 'HostelStaff\HomeController@index');
     });
 
-    // ChiefWardenStaff route group
-    Route::group(['prefix' => '/chiefWardenStaffs'], function () {
 
+    // ChiefWardenStaff route group
+    Route::group(['prefix' => '/chiefWardenStaffs'], function ()
+    {
         // ChiefWardenStaff auth routes
         Route::get('login', 'ChiefWardenStaff\Auth\AuthController@showLoginForm')->middleware('home');
         Route::post('login', 'ChiefWardenStaff\Auth\AuthController@login');
@@ -136,9 +148,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('home', 'ChiefWardenStaff\HomeController@index');
     });
 
-    // AdminStaff route group
-    Route::group(['prefix' => '/adminStaffs'], function () {
 
+    // AdminStaff route group
+    Route::group(['prefix' => '/adminStaffs'], function ()
+    {
         // AdminStaff auth routes
         Route::get('login', 'AdminStaff\Auth\AuthController@showLoginForm')->middleware('home');
         Route::post('login', 'AdminStaff\Auth\AuthController@login');
@@ -161,9 +174,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('home', 'AdminStaff\HomeController@index');
     });
 
-    // Admin route group
-    Route::group(['prefix' => '/admins'], function () {
 
+    // Admin route group
+    Route::group(['prefix' => '/admins'], function ()
+    {
         // Admin auth routes
         Route::get('login', 'Admin\Auth\AuthController@showLoginForm')->middleware(['home', 'adminIp']);
         Route::post('login', 'Admin\Auth\AuthController@login');
@@ -181,8 +195,8 @@ Route::group(['middleware' => 'web'], function () {
 
         // Admin view routes
         Route::get('home', 'Admin\HomeController@index');
-        Route::group(['prefix' => 'manage'], function () {
-
+        Route::group(['prefix' => 'manage'], function ()
+        {
             // User account creation and deletion routes
             Route::get('teachers', 'Admin\HomeController@manageTeachers');
             Route::delete('teachers/{id?}', 'Admin\HomeController@removeTeacher');
@@ -214,6 +228,4 @@ Route::group(['middleware' => 'web'], function () {
             Route::delete('hostels/{hostelId?}', 'Admin\HomeController@removeHostel');
         });
     });
-
-
 });
