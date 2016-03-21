@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Student;
 
 use Validator;
 use App\Student;
+use App\StudentImage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 /**
  * Class InformationUpdateController, this class
@@ -18,6 +20,9 @@ class InformationUpdateController extends Controller
 {
     // Information update view
     protected $updateInfoView = 'student.update.update';
+
+    // Image update view
+    protected $updateImageView = 'student.update.updateImage';
 
     /**
      * Create a new controller instance.
@@ -107,4 +112,88 @@ class InformationUpdateController extends Controller
                 ->with('status', 'Success');
         }
     }
+
+    /**
+     * Show the image upload form
+     *
+     * @return mixed
+     */
+    public function showImageUploadForm ()
+    {
+        return view($this->updateImageView);
+    }
+
+    /**
+     * Upload / update student image
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function updateImage (Request $request)
+    {
+        if($request->hasFile('image'))
+        {
+            $this->validate($request, [
+                'image' => 'image|required|max:1024',
+            ]);
+
+            if ($request->file('image')->isValid())
+            {
+                $image = $request->file('image');
+                $rollNo = Auth::guard('student')->user()->rollNo;
+
+                // Set the image parameters
+                $imageQuality = 70;
+                $imagePath = env('IMAGE_DIR') . '/avatars/' . $rollNo . '.jpg';
+
+                // Save the image
+                Image::make($image->getRealPath())
+                    ->save($imagePath, $imageQuality);
+
+                // Save the image path in database
+                // in case of first time upload.
+                $studentImage = new StudentImage;
+                
+                if($studentImage::find($rollNo) == null)
+                {
+                    $studentImage->rollNo = $rollNo;
+                    $studentImage->imagePath = $imagePath;
+                    $studentImage->save();
+                }
+
+                return redirect('/students/home');
+            }
+            else
+            {
+                return redirect()->back()
+                    ->withErrors('Upload unsuccessful!!!');
+            }
+        }
+        else
+        {
+            return redirect()->back()
+                ->withErrors('Please choose an image file!!!');
+        }
+    }
+
+    /**
+     * This function sets a session variable
+     * in case a student does not want to
+     * upload his profile picture.
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function setImageUploadSkipSession (Request $request)
+    {
+        // Set the session variable to skip the
+        // image upload page on furthur
+        // student requests.
+        if(!$request->session()->has('imageUploadSkipped'))
+        {
+            $request->session()->put('imageUploadSkipped', true);
+        }
+
+        return redirect('/students/home');
+    } 
 }
