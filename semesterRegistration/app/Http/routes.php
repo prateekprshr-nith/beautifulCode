@@ -31,8 +31,9 @@ Route::group(['middleware' => 'web'], function ()
 
         // Student info update routes
         Route::get('/updateInfo', 'Student\InformationUpdateController@showUpdateInfoForm');
-        Route::patch('/updateInfo', 'Student\InformationUpdateController@updateInfo');
-        Route::get('updateInfo/image/', 'Student\InformationUpdateController@showImageUploadForm')->middleware('hasImage');
+        Route::patch('/updateInfo/info', 'Student\InformationUpdateController@updateInfo');
+        Route::patch('/updateInfo/password', 'Student\InformationUpdateController@updatePassword');
+        Route::get('updateInfo/image', 'Student\InformationUpdateController@showImageUploadForm')->middleware('hasImage');
         Route::patch('/updateInfo/image', 'Student\InformationUpdateController@updateImage');
         Route::get('updateInfo/image/skip', 'Student\InformationUpdateController@setImageUploadSkipSession')->middleware('hasImage');
 
