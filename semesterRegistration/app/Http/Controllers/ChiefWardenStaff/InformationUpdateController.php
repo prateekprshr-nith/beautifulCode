@@ -41,7 +41,6 @@ class InformationUpdateController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:chiefWardenStaffs,email,'.$chiefWardenStaff->id.',id',
-            'password' => 'required|min:8',
         ]);
     }
 
@@ -72,7 +71,6 @@ class InformationUpdateController extends Controller
         $chiefWardenStaff = ChiefWardenStaff::find(Auth::guard('chiefWardenStaff')->user()->id);
         $newName = $request['name'];
         $newEmail = $request['email'];
-        $newPassword = $request['password'];
 
         // Validate the new information
         $validator = $this->validator($request->all(), $chiefWardenStaff);
@@ -88,11 +86,35 @@ class InformationUpdateController extends Controller
             // Save updated information
             $chiefWardenStaff->name = $newName;
             $chiefWardenStaff->email = $newEmail;
-            $chiefWardenStaff->password = bcrypt($newPassword);
             $chiefWardenStaff->save();
 
             return redirect()->back()
                 ->with('status', 'Success');
         }
+    }
+
+    /**
+     * Update user password
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function updatePassword (Request $request)
+    {
+        // Get the logged in user
+        $chiefWardenStaff = ChiefWardenStaff::find(Auth::guard('chiefWardenStaff')->user()->id);
+        $newPassword = $request['password'];
+
+        // Validate the password
+        $this->validate($request, [
+            'password' => 'required|min:8',
+        ]);
+
+        // Save updated password
+        $chiefWardenStaff->password = bcrypt($newPassword);
+        $chiefWardenStaff->save();
+
+        return redirect()->back()
+            ->with('status', 'Success');
     }
 }
