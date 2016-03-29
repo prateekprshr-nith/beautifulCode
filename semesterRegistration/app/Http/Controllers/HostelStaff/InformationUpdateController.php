@@ -41,7 +41,6 @@ class InformationUpdateController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:hostelStaffs,email,'.$hostelStaff->id.',id',
-            'password' => 'required|min:8',
         ]);
     }
 
@@ -73,7 +72,6 @@ class InformationUpdateController extends Controller
         $newName = $request['name'];
         $newHostelId = $request['hostelId'];
         $newEmail = $request['email'];
-        $newPassword = $request['password'];
 
         // Validate the new information
         $validator = $this->validator($request->all(), $hostelStaff);
@@ -90,11 +88,35 @@ class InformationUpdateController extends Controller
             $hostelStaff->name = $newName;
             $hostelStaff->hostelId = $newHostelId;
             $hostelStaff->email = $newEmail;
-            $hostelStaff->password = bcrypt($newPassword);
             $hostelStaff->save();
 
             return redirect()->back()
                 ->with('status', 'Success');
         }
+    }
+
+    /**
+     * Update user password
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function updatePassword (Request $request)
+    {
+        // Get the logged in user
+        $hostelStaff = HostelStaff::find(Auth::guard('hostelStaff')->user()->id);
+        $newPassword = $request['password'];
+
+        // Validate the password
+        $this->validate($request, [
+            'password' => 'required|min:8',
+        ]);
+
+        // Save updated password
+        $hostelStaff->password = bcrypt($newPassword);
+        $hostelStaff->save();
+
+        return redirect()->back()
+            ->with('status', 'Success');
     }
 }
