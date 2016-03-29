@@ -52,7 +52,6 @@ class InformationUpdateController extends Controller
             'phoneNo' => 'required|regex:/(\+91)?[0-9]{10}/|unique:students',
             'currentAddress' => 'required',
             'permanentAddress' => 'required',
-            'password' => 'required|min:8',
             'dob' => 'required|date',
         ]);
     }
@@ -87,7 +86,6 @@ class InformationUpdateController extends Controller
         $newMotherName = $request['motherName'];
         $newEmail = $request['email'];
         $newDob = $request['dob'];
-        $newPassword = $request['password'];
 
         // Validate the new information
         $validator = $this->validator($request->all(), $student);
@@ -106,12 +104,36 @@ class InformationUpdateController extends Controller
             $student->fatherName = $newFatherName;
             $student->motherName = $newMotherName;
             $student->dob = $newDob;
-            $student->password = bcrypt($newPassword);
             $student->save();
 
             return redirect()->back()
                 ->with('status', 'Success');
         }
+    }
+
+    /**
+     * Update user password
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function updatePassword (Request $request)
+    {
+        // Get the logged in user
+        $student = Student::find(Auth::guard('student')->user()->rollNo);
+        $newPassword = $request['password'];
+
+        // Validate the password
+        $this->validate($request, [
+            'password' => 'required|min:8',
+        ]);
+
+        // Save updated password
+        $student->password = bcrypt($newPassword);
+        $student->save();
+
+        return redirect()->back()
+            ->with('status', 'Success');
     }
 
     /**
