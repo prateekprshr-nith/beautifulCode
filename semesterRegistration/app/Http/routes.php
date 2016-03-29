@@ -89,7 +89,8 @@ Route::group(['middleware' => 'web'], function ()
 
         // LibraryStaff info update routes
         Route::get('/updateInfo', 'LibraryStaff\InformationUpdateController@showUpdateInfoForm');
-        Route::patch('/updateInfo', 'LibraryStaff\InformationUpdateController@updateInfo');
+        Route::patch('/updateInfo/info', 'LibraryStaff\InformationUpdateController@updateInfo');
+        Route::patch('/updateInfo/password', 'LibraryStaff\InformationUpdateController@updatePassword');
 
         // Manual registration is disabled
         // Route::get('register', 'LibraryStaff\Auth\AuthController@showRegistrationForm');
