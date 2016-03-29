@@ -116,7 +116,8 @@ Route::group(['middleware' => 'web'], function ()
 
         // HostelStaff info update routes
         Route::get('/updateInfo', 'HostelStaff\InformationUpdateController@showUpdateInfoForm');
-        Route::patch('/updateInfo', 'HostelStaff\InformationUpdateController@updateInfo');
+        Route::patch('/updateInfo/info', 'HostelStaff\InformationUpdateController@updateInfo');
+        Route::patch('/updateInfo/password', 'HostelStaff\InformationUpdateController@updatePassword');
 
         // Manual registration is disabled
         // Route::get('register', 'HostelStaff\Auth\AuthController@showRegistrationForm');
