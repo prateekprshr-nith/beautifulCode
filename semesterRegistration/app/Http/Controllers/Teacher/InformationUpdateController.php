@@ -42,7 +42,6 @@ class InformationUpdateController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:teachers,email,'.$teacher->facultyId.',facultyId',
             'office' => 'required',
-            'password' => 'required|min:8',
         ]);
     }
 
@@ -74,7 +73,6 @@ class InformationUpdateController extends Controller
         $newName = $request['name'];
         $newEmail = $request['email'];
         $newOffice = $request['office'];
-        $newPassword = $request['password'];
 
         // Validate the new information
         $validator = $this->validator($request->all(), $teacher);
@@ -91,11 +89,36 @@ class InformationUpdateController extends Controller
             $teacher->name = $newName;
             $teacher->email = $newEmail;
             $teacher->office = $newOffice;
-            $teacher->password = bcrypt($newPassword);
             $teacher->save();
 
             return redirect()->back()
                 ->with('status', 'Success');
         }
     }
+
+    /**
+     * Update user password
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function updatePassword (Request $request)
+    {
+        // Get the logged in user
+        $teacher = Teacher::find(Auth::guard('teacher')->user()->facultyId);
+        $newPassword = $request['password'];
+
+        // Validate the password
+        $this->validate($request, [
+            'password' => 'required|min:8',
+        ]);
+
+        // Save updated password
+        $teacher->password = bcrypt($newPassword);
+        $teacher->save();
+
+        return redirect()->back()
+            ->with('status', 'Success');
+    }
 }
+
