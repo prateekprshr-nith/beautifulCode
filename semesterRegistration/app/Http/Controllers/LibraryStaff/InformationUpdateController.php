@@ -41,7 +41,6 @@ class InformationUpdateController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:libraryStaffs,email,'.$libraryStaff->id.',id',
-            'password' => 'required|min:8',
         ]);
     }
 
@@ -72,7 +71,6 @@ class InformationUpdateController extends Controller
         $libraryStaff = LibraryStaff::find(Auth::guard('libraryStaff')->user()->id);
         $newName = $request['name'];
         $newEmail = $request['email'];
-        $newPassword = $request['password'];
 
         // Validate the new information
         $validator = $this->validator($request->all(), $libraryStaff);
@@ -88,11 +86,35 @@ class InformationUpdateController extends Controller
             // Save updated information
             $libraryStaff->name = $newName;
             $libraryStaff->email = $newEmail;
-            $libraryStaff->password = bcrypt($newPassword);
             $libraryStaff->save();
 
             return redirect()->back()
                 ->with('status', 'Success');
         }
+    }
+
+    /**
+     * Update user password
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function updatePassword (Request $request)
+    {
+        // Get the logged in user
+        $libraryStaff = LibraryStaff::find(Auth::guard('libraryStaff')->user()->id);
+        $newPassword = $request['password'];
+
+        // Validate the password
+        $this->validate($request, [
+            'password' => 'required|min:8',
+        ]);
+
+        // Save updated password
+        $libraryStaff->password = bcrypt($newPassword);
+        $libraryStaff->save();
+
+        return redirect()->back()
+            ->with('status', 'Success');
     }
 }
