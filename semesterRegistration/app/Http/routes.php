@@ -62,7 +62,8 @@ Route::group(['middleware' => 'web'], function ()
 
         // Teacher info update routes
         Route::get('/updateInfo', 'Teacher\InformationUpdateController@showUpdateInfoForm');
-        Route::patch('/updateInfo', 'Teacher\InformationUpdateController@updateInfo');
+        Route::patch('/updateInfo/info', 'Teacher\InformationUpdateController@updateInfo');
+        Route::patch('/updateInfo/password', 'Teacher\InformationUpdateController@updatePassword');
 
         // Manual registration is disabled
         // Route::get('register', 'Teacher\Auth\AuthController@showRegistrationForm');
