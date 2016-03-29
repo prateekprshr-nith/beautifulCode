@@ -170,7 +170,8 @@ Route::group(['middleware' => 'web'], function ()
 
         // AdminStaff info update routes
         Route::get('/updateInfo', 'AdminStaff\InformationUpdateController@showUpdateInfoForm');
-        Route::patch('/updateInfo', 'AdminStaff\InformationUpdateController@updateInfo');
+        Route::patch('/updateInfo/info', 'AdminStaff\InformationUpdateController@updateInfo');
+        Route::patch('/updateInfo/password', 'AdminStaff\InformationUpdateController@updatePassword');
 
         // Manual registration is disabled
         // Route::get('register', 'AdminStaff\Auth\AuthController@showRegistrationForm');
