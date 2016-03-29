@@ -143,7 +143,8 @@ Route::group(['middleware' => 'web'], function ()
 
         // ChiefWardenStaff info update routes
         Route::get('/updateInfo', 'ChiefWardenStaff\InformationUpdateController@showUpdateInfoForm');
-        Route::patch('/updateInfo', 'ChiefWardenStaff\InformationUpdateController@updateInfo');
+        Route::patch('/updateInfo/info', 'ChiefWardenStaff\InformationUpdateController@updateInfo');
+        Route::patch('/updateInfo/password', 'ChiefWardenStaff\InformationUpdateController@updatePassword');
 
         // Manual registration is disabled
         // Route::get('register', 'ChiefWardenStaff\Auth\AuthController@showRegistrationForm');
