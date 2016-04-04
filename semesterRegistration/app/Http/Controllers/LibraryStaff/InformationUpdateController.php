@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\LibraryStaff;
 
 use Validator;
+use App\Hostel;
 use App\LibraryStaff;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -55,7 +56,11 @@ class InformationUpdateController extends Controller
     {
         // Get the logged in libraryStaff
         $libraryStaff = LibraryStaff::find(Auth::guard('libraryStaff')->user()->id);
-        return view($this->updateInfoView, ['libraryStaff' => $libraryStaff]);
+
+        // Get the list of hostels present in databse
+        $hostels = Hostel::all();
+
+        return view($this->updateInfoView, ['libraryStaff' => $libraryStaff, 'hostels' => $hostels]);
     }
 
     /**
