@@ -4,14 +4,14 @@
 Steps to fork and getting this to work along with laravel:
 
 ```bash
-$ git fork https://github.com/prateekprshr-nith/beautifulCode.git
+$ git clone https://github.com/prateekprshr-nith/beautifulCode.git
 $ cd beautifulCode/semesterRegistration
 $ composer install
 ```
 
 To migrate the database tables, do your proper settings in .env file and run
 ```bash
-$ php artisan migrate
+$ php artisan migrate:refresh
 $ php artisan db:seed
 ```
 
