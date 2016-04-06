@@ -49,7 +49,7 @@ class InformationUpdateController extends Controller
             'fatherName' => 'required|max:255',
             'motherName' =>'required|max:255',
             'email' => 'required|email|max:255|unique:students,email,'.$student->rollNo.',rollNo',
-            'phoneNo' => 'required|regex:/(\+91)?[0-9]{10}/|unique:students',
+            'phoneNo' => 'required|regex:/(\+91)?[0-9]{10}/|unique:students,phoneNo,'.$student->phoneNo.'phoneNo',
             'currentAddress' => 'required',
             'permanentAddress' => 'required',
             'dob' => 'required|date',
