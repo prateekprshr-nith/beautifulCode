@@ -165,6 +165,8 @@ class InformationUpdateController extends Controller
         {
             $this->validate($request, [
                 'image' => 'image|required|max:1024',
+            ], [
+                'image' => 'The file must be a valid image file.'
             ]);
 
             if ($request->file('image')->isValid())
