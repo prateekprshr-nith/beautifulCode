@@ -64,12 +64,6 @@
                 @endif
 
                 @if($user != 'guest')
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mynavbar-content">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
                     <!-- #TODO add the other tabs here -->
 
                     <ul class="nav navbar-nav navbar-right">
