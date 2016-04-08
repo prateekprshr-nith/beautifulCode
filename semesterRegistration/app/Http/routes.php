@@ -181,6 +181,33 @@ Route::group(['middleware' => 'web'], function ()
     });
 
 
+    // DepartmentStaff route group
+    Route::group(['prefix' => '/departmentStaffs'], function ()
+    {
+        // DepartmentStaff auth routes
+        Route::get('login', 'DepartmentStaff\Auth\AuthController@showLoginForm')->middleware('home');
+        Route::post('login', 'DepartmentStaff\Auth\AuthController@login');
+        Route::get('logout', 'DepartmentStaff\Auth\AuthController@logout');
+        Route::post('password/email', 'DepartmentStaff\Auth\PasswordController@sendResetLinkEmail');
+        Route::post('password/reset', 'DepartmentStaff\Auth\PasswordController@reset');
+        Route::get('password/reset/{token?}', 'DepartmentStaff\Auth\PasswordController@showResetForm')->middleware('home');
+        Route::post('register', 'DepartmentStaff\Auth\AuthController@register');
+        Route::get('firstLogin', 'DepartmentStaff\Auth\FirstLoginController@showPasswordUpdateForm')->middleware('normalLogin:departmentStaff');
+        Route::put('firstLogin', 'DepartmentStaff\Auth\FirstLoginController@updatePassword');
+
+        // DepartmentStaff info update routes
+        Route::get('/updateInfo', 'DepartmentStaff\InformationUpdateController@showUpdateInfoForm');
+        Route::patch('/updateInfo/info', 'DepartmentStaff\InformationUpdateController@updateInfo');
+        Route::patch('/updateInfo/password', 'DepartmentStaff\InformationUpdateController@updatePassword');
+
+        // Manual registration is disabled
+        // Route::get('register', 'DepartmentStaff\Auth\AuthController@showRegistrationForm');
+
+        // DepartmentStaff view routes
+        Route::get('home', 'DepartmentStaff\HomeController@index');
+    });
+
+
     // Admin route group
     Route::group(['prefix' => '/admins'], function ()
     {
@@ -212,6 +239,8 @@ Route::group(['middleware' => 'web'], function ()
             Route::delete('adminStaffs/{id?}', 'Admin\HomeController@removeAdminStaff');
             Route::get('hostelStaffs', 'Admin\HomeController@manageHostelStaffs');
             Route::delete('hostelStaffs/{id?}', 'Admin\HomeController@removeHostelStaff');
+            Route::get('departmentStaffs', 'Admin\HomeController@manageDepartmentStaffs');
+            Route::delete('departmentStaffs/{id?}', 'Admin\HomeController@removeDepartmentStaff');
             Route::get('chiefWardenStaffs', 'Admin\HomeController@manageChiefWardenStaffs');
             Route::delete('chiefWardenStaffs/{id?}', 'Admin\HomeController@removeChiefWardenStaff');
             Route::get('students', 'Admin\HomeController@manageStudents');
