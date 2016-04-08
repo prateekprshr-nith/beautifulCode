@@ -39,7 +39,7 @@ class InformationUpdateController extends Controller
     protected function validator(array $data, ChiefWardenStaff $chiefWardenStaff)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'name' => 'required|max:255|regex:/^[a-zA-Z ]*$/',
             'email' => 'required|email|max:255|unique:chiefWardenStaffs,email,'.$chiefWardenStaff->id.',id',
         ]);
     }

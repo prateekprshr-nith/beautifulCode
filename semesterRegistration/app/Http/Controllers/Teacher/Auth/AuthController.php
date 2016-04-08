@@ -60,7 +60,7 @@ class AuthController extends Controller
         return Validator::make($data, [
             'facultyId' => 'required|unique:teachers',
             'dCode' => 'required|regex:/[A-Z]{3,5}/',
-            'name' => 'required|max:255',
+            'name' => 'required|max:255|regex:/^[a-zA-Z ]*$/',
             'email' => 'required|email|max:255|unique:teachers',
             'office' => 'required',
             'password' => 'required|min:8',

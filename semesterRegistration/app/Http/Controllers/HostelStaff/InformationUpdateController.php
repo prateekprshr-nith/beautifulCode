@@ -39,7 +39,7 @@ class InformationUpdateController extends Controller
     protected function validator(array $data, HostelStaff $hostelStaff)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'name' => 'required|max:255|regex:/^[a-zA-Z ]*$/',
             'email' => 'required|email|max:255|unique:hostelStaffs,email,'.$hostelStaff->id.',id',
         ]);
     }

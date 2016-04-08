@@ -45,9 +45,9 @@ class InformationUpdateController extends Controller
     protected function validator(array $data, Student $student)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'fatherName' => 'required|max:255',
-            'motherName' =>'required|max:255',
+            'name' => 'required|max:255|regex:/^[a-zA-Z ]*$/',
+            'fatherName' => 'required|max:255|regex:/^[a-zA-Z ]*$/',
+            'motherName' =>'required|max:255|regex:/^[a-zA-Z ]*$/',
             'email' => 'required|email|max:255|unique:students,email,'.$student->rollNo.',rollNo',
             'phoneNo' => 'required|regex:/(\+91)?[0-9]{10}/|unique:students,phoneNo,'.$student->phoneNo.',phoneNo',
             'currentAddress' => 'required',
@@ -193,7 +193,8 @@ class InformationUpdateController extends Controller
                     $studentImage->save();
                 }
 
-                return redirect('/students/home');
+                return redirect()->back()
+                    ->with('success');
             }
             else
             {
