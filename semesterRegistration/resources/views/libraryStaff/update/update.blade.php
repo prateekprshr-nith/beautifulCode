@@ -15,7 +15,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <form class="form-horizontal" role="form" method="POST" action="/libraryStaffs/updateInfo"
+                        <form class="form-horizontal" role="form" method="POST" action="/libraryStaffs/updateInfo/info"
                               accept-charset="UTF-8" id="updateInfoForm">
                             {{ csrf_field() }}
                             {{ method_field('PATCH') }}
@@ -23,39 +23,71 @@
                             <!-- Display Validation Errors -->
                             @include('common.errors')
 
-                            <!-- Arnav and mumuksh write your code here-->
-
-                            <!-- First row current password-->
+                            <!-- First row name-->
                             <div class="form-group">
-                                <label class="col-md-4 control-label" for="password">New password</label>
-                                <div class="col-md-6">
-                                    <input required class="form-control" name="password" type="password"
-                                           id="password" onkeyup="checkPassword('updateInfoForm', 'updateInfoButton')">
+                                <label class="col-md-4 control-label" for="name">Name</label>
+                                <div class="col-md-4">
+                                    <input required class="form-control" name="name" type="text"
+                                           id="name" value="{{$libraryStaff->name}}">
                                 </div>
-                            </div>
-
-                            <!-- Second row new password-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="confirmPassword">Confirm</label>
-                                <div class="col-md-6">
-                                    <input required class="form-control" name="confirmPassword" type="password"
-                                           id="confirmPassword" onkeyup="checkPassword('updateInfoForm', 'updateInfoButton')">
-                                </div>
-                            </div>
-
-                            <!-- Third row error msg-->
-                            <div class="col-md-12">
-                                <p id="passwordErrorMsg"></p>
-                            </div>
-
-                            <!-- Fourth row update-->
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <button class="btn btn-primary" type="submit" id="updateInfoButton">
-                                        <span class="glyphicon glyphicon-refresh"></span> Update
+                                <div class="col-md-2">
+                                    <button class="btn btn-primary" type="submit" id="UpdateButton">
+                                        <span class="glyphicon glyphicon-edit"></span> Submit
                                     </button>
                                 </div>
                             </div>
+
+                            <!-- Second row email-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="email">Email</label>
+                                <div class="col-md-4">
+                                    <input required class="form-control" name="email" type="text"
+                                           id="email" value="{{$libraryStaff->email}}">
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-primary" type="submit" id="UpdateButton">
+                                        <span class="glyphicon glyphicon-edit"></span> Submit
+                                    </button>
+                                </div>
+                            </div>
+
+                        </form>
+
+                            <!--2nd Form for password -->
+                            <form class="form-horizontal" role="form" method="POST" action="/libraryStaffs/updateInfo/password"
+                                  accept-charset="UTF-8" id="updatePasswordForm">
+                                {{ csrf_field() }}
+                                {{ method_field('PATCH') }}
+
+                                        <!-- First row password-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="password">Password</label>
+                                    <div class="col-md-4">
+                                        <input required class="form-control" name="password" type="password"
+                                               id="password" onkeyup="checkPassword('updatePasswordForm', 'updatePasswordButton')"
+                                        >
+                                    </div>
+                                </div>
+
+                                <!-- Second row confirm password-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="confirmPassword">Confirm Password</label>
+                                    <div class="col-md-4">
+                                        <input required class="form-control" name="confirmPassword" type="password"
+                                               id="updatePassword" onkeyup="checkPassword('updatePasswordForm', 'updatePasswordButton')"
+                                        >
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-primary" type="submit" id="updatePasswordButton">
+                                            <span class="glyphicon glyphicon-edit"></span> Submit
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Third error msg-->
+                                <div class="col-md-12">
+                                    <p id="passwordErrorMsg"></p>
+                                </div>
                         </form>
                     </div>
                 </div>

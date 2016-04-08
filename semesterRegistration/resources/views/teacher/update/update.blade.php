@@ -28,7 +28,7 @@
                                 <label class="col-md-4 control-label" for="name">Name</label>
                                 <div class="col-md-4">
                                     <input required class="form-control" name="name" type="text"
-                                           id="name" value={{$teacher -> name}}>
+                                           id="name" value="{{$teacher->name}}">
                                 </div>
                                 <div class="col-md-2">
                                     <button class="btn btn-primary" type="submit" id="UpdateButton">
@@ -42,7 +42,7 @@
                                 <label class="col-md-4 control-label" for="email">Email</label>
                                 <div class="col-md-4">
                                     <input required class="form-control" name="email" type="text"
-                                           id="email" value={{$teacher -> email}}>
+                                           id="email" value="{{$teacher->email}}">
                                 </div>
                                 <div class="col-md-2">
                                     <button class="btn btn-primary" type="submit" id="UpdateButton">
@@ -56,7 +56,7 @@
                                 <label class="col-md-4 control-label" for="office">Office</label>
                                 <div class="col-md-4">
                                     <input required class="form-control" name="office" type="text"
-                                           id="office" value={{$teacher -> office}}>
+                                           id="office" value="{{$teacher->office}}">
                                 </div>
                                 <div class="col-md-2">
                                     <button class="btn btn-primary" type="submit" id="UpdateButton">

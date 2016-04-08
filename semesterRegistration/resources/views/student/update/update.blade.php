@@ -26,11 +26,7 @@
                         <strong> Update: Please enter your details correctly</strong>
                     </div>
                     <div class="panel-body">
-                        @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
-                            </div>
-                        @endif
+
                         <form class="form-horizontal" role="form" method="POST" action="/students/updateInfo/info"
                               accept-charset="UTF-8" id="updateInfoForm">
                             {{ csrf_field() }}
@@ -41,7 +37,7 @@
                                 <label class="col-md-4 control-label" for="name">Name</label>
                                 <div class="col-md-4">
                                     <input required class="form-control" name="name" type="text"
-                                           id="name" value={{$student -> name}}>
+                                           id="name" value="{{$student->name}}">
                                 </div>
                                 <div class="col-md-2">
                                     <button class="btn btn-primary" type="submit" id="UpdateButton">
@@ -55,7 +51,7 @@
                                 <label class="col-md-4 control-label" for="email">Email</label>
                                 <div class="col-md-4">
                                     <input required class="form-control" name="email" type="text"
-                                           id="email" value={{$student -> email}}>
+                                           id="email" value="{{$student -> email}}">
                                 </div>
                                 <div class="col-md-2">
                                     <button class="btn btn-primary" type="submit" id="UpdateButton">
@@ -69,7 +65,7 @@
                                 <label class="col-md-4 control-label" for="fatherName">Father's Name</label>
                                 <div class="col-md-4">
                                     <input required class="form-control" name="fatherName" type="text"
-                                           id="fatherName" value={{$student -> fatherName}}>
+                                           id="fatherName" value="{{$student -> fatherName}}">
                                 </div>
                                 <div class="col-md-2">
                                     <button class="btn btn-primary" type="submit" id="UpdateButton">
@@ -83,7 +79,7 @@
                                 <label class="col-md-4 control-label" for="motherName">Mother's Name</label>
                                 <div class="col-md-4">
                                     <input required class="form-control" name="motherName" type="text"
-                                           id="motherName" value={{$student -> motherName}}>
+                                           id="motherName" value="{{$student -> motherName}}">
                                 </div>
                                 <div class="col-md-2">
                                     <button class="btn btn-primary" type="submit" id="UpdateButton">
@@ -97,7 +93,7 @@
                                 <label class="col-md-4 control-label" for="phoneNo">Phone Number</label>
                                 <div class="col-md-4">
                                     <input required class="form-control" name="phoneNo" type="text"
-                                           id="phoneNo" value={{$student -> phoneNo}}>
+                                           id="phoneNo" value="{{$student -> phoneNo}}">
                                 </div>
                                 <div class="col-md-2">
                                     <button class="btn btn-primary" type="submit" id="UpdateButton">
@@ -111,7 +107,7 @@
                                 <label class="col-md-4 control-label" for="dob">Birth Date (mm-dd-yyy)</label>
                                 <div class="col-md-4">
                                     <input required class="form-control" name="dob" type="date"
-                                           id="dob" value={{$student -> dob}}>
+                                           id="dob" value="{{$student -> dob}}">
                                 </div>
                                 <div class="col-md-2">
                                     <button class="btn btn-primary" type="submit" id="UpdateButton">
@@ -125,7 +121,7 @@
                                 <label class="col-md-4 control-label" for="currentAddress">Current Address</label>
                                 <div class="col-md-4">
                                     <input required class="form-control" name="currentAddress" type="text"
-                                           id="currentAddress" value={{$student -> currentAddress}}>
+                                           id="currentAddress" value="{{$student -> currentAddress}}">
                                 </div>
                                 <div class="col-md-2">
                                     <button class="btn btn-primary" type="submit" id="UpdateButton">
@@ -139,7 +135,7 @@
                                 <label class="col-md-4 control-label" for="permanentAddress">Permanent Address</label>
                                 <div class="col-md-4">
                                     <input required class="form-control" name="permanentAddress" type="text"
-                                           id="permanentAddress" value={{$student -> permanentAddress}}>
+                                           id="permanentAddress" value="{{$student -> permanentAddress}}">
                                 </div>
                                 <div class="col-md-2">
                                     <button class="btn btn-primary" type="submit" id="UpdateButton">
