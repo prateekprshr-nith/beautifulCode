@@ -13,22 +13,25 @@
             <div class="panel-body">
                 <div class="btn-group btn-group-justified">
                     <a href="/admins/manage/teachers" class="btn btn-default">
-                        <span class="glyphicon glyphicon-user"></span> Manage Teachers
+                        <span class="glyphicon glyphicon-user"></span> Teachers
                     </a>
                     <a href="/admins/manage/hostelStaffs" class="btn btn-default">
-                        <span class="glyphicon glyphicon-user"></span> Manage Hostel Staff
+                        <span class="glyphicon glyphicon-user"></span> Hostel Staff
+                    </a>
+                    <a href="/admins/manage/departmentStaffs" class="btn btn-default">
+                        <span class="glyphicon glyphicon-user"></span> Department Staff
                     </a>
                     <a href="/admins/manage/adminStaffs" class="btn btn-default">
-                        <span class="glyphicon glyphicon-user"></span> Manage Admin Staff
+                        <span class="glyphicon glyphicon-user"></span> Admin Staff
                     </a>
                     <a href="/admins/manage/libraryStaffs" class="btn btn-default">
-                        <span class="glyphicon glyphicon-user"></span> Manage Library Staff
+                        <span class="glyphicon glyphicon-user"></span> Library Staff
                     </a>
                     <a href="/admins/manage/chiefWardenStaffs" class="btn btn-default">
-                        <span class="glyphicon glyphicon-user"></span> Manage ChiefWarden Staff
+                        <span class="glyphicon glyphicon-user"></span> ChiefWarden Staff
                     </a>
                     <a href="/admins/manage/students" class="btn btn-default">
-                        <span class="glyphicon glyphicon-user"></span> Manage Students
+                        <span class="glyphicon glyphicon-user"></span> Students
                     </a>
                 </div>
             </div>
