@@ -53,6 +53,8 @@
                     {{-- */$user = 'libraryStaff';/* --}}
                 @elseif(Auth::guard('hostelStaff')->user())
                     {{-- */$user = 'hostelStaff';/* --}}
+                @elseif(Auth::guard('departmentStaff')->user())
+                {{-- */$user = 'departmentStaff';/* --}}
                 @elseif(Auth::guard('adminStaff')->user())
                     {{-- */$user = 'adminStaff';/* --}}
                 @elseif(Auth::guard('chiefWardenStaff')->user())
