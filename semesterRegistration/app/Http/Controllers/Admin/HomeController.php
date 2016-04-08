@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\ChiefWardenStaff;
 use App\Hostel;
 use App\Teacher;
 use App\Student;
@@ -12,6 +11,8 @@ use App\AdminStaff;
 use App\HostelStaff;
 use App\LibraryStaff;
 use App\Http\Requests;
+use App\DepartmentStaff;
+use App\ChiefWardenStaff;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -187,6 +188,36 @@ class HomeController extends Controller
         }
 
         return redirect('admins/manage/hostelStaffs');
+    }
+
+    /**
+     * Show the departmentStaff registration form
+     * and currently registered departmentStaff
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function manageDepartmentStaffs()
+    {
+        $departmentStaffArr = DepartmentStaff::all();
+        $departmentArr = Department::all();
+        return view('departmentStaff.auth.register',
+            ['departmentStaffs' => $departmentStaffArr, 'count' => 0, 'departments' => $departmentArr]);
+    }
+
+    /**
+     * Remove a departmentStaff
+     *
+     * @param $id
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
+     */
+    public function removeDepartmentStaff($id)
+    {
+        if ($id != null)
+        {
+            DepartmentStaff::destroy($id);
+        }
+
+        return redirect('admins/manage/departmentStaffs');
     }
 
     /**

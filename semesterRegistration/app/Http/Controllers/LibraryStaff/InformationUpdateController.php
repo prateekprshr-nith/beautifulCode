@@ -28,6 +28,7 @@ class InformationUpdateController extends Controller
     public function __construct ()
     {
         $this->middleware('auth:libraryStaff');
+        $this->middleware('firstLogin:libraryStaff');
     }
 
     /**
