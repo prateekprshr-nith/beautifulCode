@@ -71,6 +71,11 @@ return [
             'provider' => 'chiefWardenStaffs',
         ],
 
+        'departmentStaff' => [
+            'driver' => 'session',
+            'provider' => 'departmentStaffs',
+        ],
+
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
@@ -128,6 +133,11 @@ return [
         'chiefWardenStaffs' => [
             'driver' => 'eloquent',
             'model' => App\ChiefWardenStaff::class,
+        ],
+
+        'departmentStaffs' => [
+            'driver' => 'eloquent',
+            'model' => App\DepartmentStaff::class,
         ],
 
         'teachers' => [
@@ -199,6 +209,13 @@ return [
         'chiefWardenStaffs' => [
             'provider' => 'chiefWardenStaffs',
             'email' => 'chiefWardenStaff.auth.emails.password',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        'departmentStaffs' => [
+            'provider' => 'departmentStaffs',
+            'email' => 'departmentStaff.auth.emails.password',
             'table' => 'password_resets',
             'expire' => 60,
         ],
