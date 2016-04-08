@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\HostelStaff;
 
 use Validator;
+use app\Hostel;
 use App\HostelStaff;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
