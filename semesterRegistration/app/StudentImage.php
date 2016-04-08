@@ -18,7 +18,7 @@ class StudentImage extends Model
 
     // Fillable and hidded attributes
     protected $fillable = [
-        'rollNo', 'image'
+        'rollNo', 'imagePath'
     ];
 
 

@@ -2,15 +2,14 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Foundation\Auth\User as Authenticatable;
 /**
  * Class AdminStaff, this model corresponds
  * to 'adminStaffs' databse table
  *
  * @package App
  */
-class AdminStaff extends Model
+class AdminStaff extends Authenticatable
 {
     protected $table = 'adminStaffs';
     protected $primaryKey = 'id';
@@ -18,7 +17,7 @@ class AdminStaff extends Model
 
     // Fillable and hidden attributes
     protected $fillable = [
-        'id', 'name', 'email', 'password',
+        'id', 'name', 'email', 'password', 'firstLogin',
     ];
 
     protected $hidden = [

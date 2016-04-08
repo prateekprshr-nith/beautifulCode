@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+        'guard' => 'student',
+        'passwords' => 'students',
     ],
 
     /*
@@ -36,6 +36,46 @@ return [
     */
 
     'guards' => [
+        'student' => [
+            'driver' => 'session',
+            'provider' => 'students',
+        ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+
+        'teacher' => [
+            'driver' => 'session',
+            'provider' => 'teachers',
+        ],
+
+        'libraryStaff' => [
+            'driver' => 'session',
+            'provider' => 'libraryStaffs',
+        ],
+
+        'hostelStaff' => [
+            'driver' => 'session',
+            'provider' => 'hostelStaffs',
+        ],
+
+        'adminStaff' => [
+            'driver' => 'session',
+            'provider' => 'adminStaffs',
+        ],
+
+        'chiefWardenStaff' => [
+            'driver' => 'session',
+            'provider' => 'chiefWardenStaffs',
+        ],
+
+        'departmentStaff' => [
+            'driver' => 'session',
+            'provider' => 'departmentStaffs',
+        ],
+
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
@@ -65,9 +105,44 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'students' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Student::class,
+        ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Admin::class,
+        ],
+
+        'hostelStaffs' => [
+            'driver' => 'eloquent',
+            'model' => App\HostelStaff::class,
+        ],
+
+        'libraryStaffs' => [
+            'driver' => 'eloquent',
+            'model' => App\LibraryStaff::class,
+        ],
+
+        'adminStaffs' => [
+            'driver' => 'eloquent',
+            'model' => App\AdminStaff::class,
+        ],
+
+        'chiefWardenStaffs' => [
+            'driver' => 'eloquent',
+            'model' => App\ChiefWardenStaff::class,
+        ],
+
+        'departmentStaffs' => [
+            'driver' => 'eloquent',
+            'model' => App\DepartmentStaff::class,
+        ],
+
+        'teachers' => [
+            'driver' => 'eloquent',
+            'model' => App\Teacher::class,
         ],
 
         // 'users' => [
@@ -96,9 +171,51 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'email' => 'auth.emails.password',
+        'students' => [
+            'provider' => 'students',
+            'email' => 'student.auth.emails.password',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        'teachers' => [
+            'provider' => 'teachers',
+            'email' => 'teacher.auth.emails.password',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        'adminStaffs' => [
+            'provider' => 'adminStaffs',
+            'email' => 'adminStaff.auth.emails.password',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        'libraryStaffs' => [
+            'provider' => 'libraryStaffs',
+            'email' => 'libraryStaff.auth.emails.password',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        'hostelStaffs' => [
+            'provider' => 'hostelStaffs',
+            'email' => 'hostelStaff.auth.emails.password',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        'chiefWardenStaffs' => [
+            'provider' => 'chiefWardenStaffs',
+            'email' => 'chiefWardenStaff.auth.emails.password',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        'departmentStaffs' => [
+            'provider' => 'departmentStaffs',
+            'email' => 'departmentStaff.auth.emails.password',
             'table' => 'password_resets',
             'expire' => 60,
         ],

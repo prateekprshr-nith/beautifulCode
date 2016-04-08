@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * Class HostelStaff, this model corresponds
@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App
  */
-class HostelStaff extends Model
+class HostelStaff extends Authenticatable
 {
     protected $table = 'hostelStaffs';
     protected $primaryKey = 'id';
@@ -18,7 +18,7 @@ class HostelStaff extends Model
 
     // Fillable and hidden attributes
     protected $fillable = [
-        'id', 'hostelId', 'name', 'email', 'password',
+        'id', 'hostelId', 'name', 'email', 'password', 'firstLogin',
     ];
 
      protected $hidden = [

@@ -48,5 +48,13 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'home' => \App\Http\Middleware\RedirectToHome::class,
+        'adminIp' => \App\Http\Middleware\RedirectIfNotAdminIp::class,
+        'verify' => \App\Http\Middleware\VerifyAccount::class,
+        'verified' => \App\Http\Middleware\RedirectIfVerified::class,
+        'firstLogin' => \App\Http\Middleware\FirstLogin::class,
+        'normalLogin' => \App\Http\Middleware\RedirectIfNotFirstLogin::class,
+        'noImage' => \App\Http\Middleware\UploadImage::class,
+        'hasImage' => \App\Http\Middleware\RedirectIfImageUploaded::class,
     ];
 }

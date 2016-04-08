@@ -19,7 +19,7 @@ class CreateStudentImagesTable extends Migration
         Schema::create('studentImages', function (Blueprint $table)
         {
             $table->string('rollNo', '20');
-            $table->binary('image');
+            $table->string('imagePath', '100');
             $table->timestamps();
 
             // Key constraints

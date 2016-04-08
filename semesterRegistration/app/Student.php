@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * Class Student, this model corresponds
@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App
  */
-class Student extends Model
+class Student extends Authenticatable
 {
     protected $table = 'students';
     protected $primaryKey = 'rollNo';
@@ -21,10 +21,11 @@ class Student extends Model
         'rollNo', 'dCode', 'semNo', 'registrationNo', 'sectionId',
         'name', 'fatherName', 'motherName', 'email', 'phoneNo',
         'currentAddress', 'permanentAddress', 'password', 'dob',
+        'verificationCode', 'verified',
     ];
 
     protected $hidden = [
-        'password', 'remember_token'
+        'password', 'remember_token', 'verificationCode',
     ];
 
 
