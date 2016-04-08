@@ -4,7 +4,8 @@
     <div class="container col-md-offset-2 col-md-8">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <strong>Registration: Please enter your details correctly</strong>
+                <span class="glyphicon glyphicon-user"></span>
+                <strong> Registration: Please enter your details correctly</strong>
             </div>
             <div class="panel-body">
                 <form class="form-horizontal" role="form" method="POST" action="/students/register"
@@ -144,10 +145,7 @@
                             <label class="col-md-4 control-label" for="currentAddress">Current address</label>
 
                             <div class="col-md-8">
-                            <textarea required class="form-control" rows="2" name="currentAddress" type="text"
-                                      id="currentAddress">
-
-                            </textarea>
+                            <textarea required class="form-control verticalAlign" rows="2" name="currentAddress" id="currentAddress"></textarea>
                             </div>
                         </div>
                         <div class="form-group row col-md-6 center-block">
@@ -155,10 +153,7 @@
                             <label class="col-md-4 control-label" for="permanentAddress">Permanent address</label>
 
                             <div class="col-md-8">
-                            <textarea required class="form-control" rows="2" name="permanentAddress" type="text"
-                                      id="permanentAddress">
-
-                            </textarea>
+                            <textarea required class="form-control verticalAlign" rows="2" name="permanentAddress" id="permanentAddress"></textarea>
                             </div>
                         </div>
                     </div>
