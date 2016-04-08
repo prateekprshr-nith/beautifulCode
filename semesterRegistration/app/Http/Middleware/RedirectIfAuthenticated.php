@@ -36,6 +36,10 @@ class RedirectIfAuthenticated
             {
                 return redirect('/hostelStaffs/home');
             }
+            else if($guard == 'departmentStaff')
+            {
+                return redirect('/departmentStaffs/home');
+            }
             else if($guard == 'chiefWardenStaff')
             {
                 return redirect('/chiefWardenStaffs/home');

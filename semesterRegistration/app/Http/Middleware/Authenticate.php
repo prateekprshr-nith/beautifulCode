@@ -45,6 +45,10 @@ class Authenticate
             {
                 return redirect()->guest('/libraryStaffs/login');
             }
+            elseif($guard == 'departmentStaff')
+            {
+                return redirect()->guest('/departmentStaffs/login');
+            }
             elseif($guard == 'chiefWardenStaff')
             {
                 return redirect()->guest('/chiefWardenStaffs/login');
