@@ -55,7 +55,11 @@ class InformationUpdateController extends Controller
     {
         // Get the logged in hostelStaff
         $hostelStaff = HostelStaff::find(Auth::guard('hostelStaff')->user()->id);
-        return view($this->updateInfoView, ['hostelStaff' => $hostelStaff]);
+
+        // Get the list of hostels present in databse
+        $hostels = Hostel::all();
+       
+        return view($this->updateInfoView, ['hostelStaff' => $hostelStaff, 'hostels' => $hostels]);
     }
 
     /**
