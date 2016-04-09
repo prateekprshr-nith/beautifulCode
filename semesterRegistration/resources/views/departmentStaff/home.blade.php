@@ -13,7 +13,7 @@
                         </p>
 
                         <button class="btn btn-sm btn-primary pull-right" data-toggle="modal" data-target="#myModal">
-                            <span class="glyphicon glyphicon-plus"></span> Add a course
+                            <span class="glyphicon glyphicon-plus"></span> Add a new course
                         </button>
 
                         <div class="clearfix"></div>
@@ -70,7 +70,8 @@
             </div>
         </div>
     </div>
-    <!-- Course creation form -->
+
+    <!-- Course creation Modal form -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -104,9 +105,9 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                         <button type="submit"  class="btn btn-primary" id="createButton">
-                            <span class="glyphicon glyphicon-log-in"></span> Create
+                            <span class="glyphicon glyphicon-plus"></span> Add
                         </button>
                     </div>
                 </form>
