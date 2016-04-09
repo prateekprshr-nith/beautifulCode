@@ -205,6 +205,10 @@ Route::group(['middleware' => 'web'], function ()
 
         // DepartmentStaff view routes
         Route::get('home', 'DepartmentStaff\HomeController@index');
+
+        // Course management routes
+        Route::put('home', 'DepartmentStaff\HomeController@addCourse');
+        Route::delete('home', 'DepartmentStaff\HomeController@removeCourse');
     });
 
 
