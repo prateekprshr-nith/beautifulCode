@@ -80,6 +80,7 @@
                     <!-- #TODO add the other tabs here -->
 
                     <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/{{$user}}s/home">Home</a></li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 @if($user == 'admin')
