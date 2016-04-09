@@ -18,6 +18,17 @@
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/bootstrap/js/fileinput.min.js"></script>
     <script src="/bootstrap/js/plugins/canvas-to-blob.min.js"></script>
+
+    <style>
+        .panel-heading p {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: normal;
+            width: 75%;
+            padding-top: 8px;
+        }
+    </style>
 </head>
 
 <body>
