@@ -17,6 +17,8 @@ class Course extends Model
     // Fillabe attributes
     protected $fillable = [
         'courseCode', 'dCode', 'courseName',
+        'semNo', 'lectures', 'tutorials',
+        'practicals', 'hours', 'credits',
     ];
 
     /**
