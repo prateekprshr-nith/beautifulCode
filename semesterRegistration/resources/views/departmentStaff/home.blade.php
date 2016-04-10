@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-10 col-md-offset-1">
+            <div class="col-md-12 col-md-offset-0">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <p class="panel-title pull-left">
@@ -32,12 +32,17 @@
                             <!-- Current courses list -->
                             <table class="table table-hover">
                                 <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Course Code</th>
-                                    <th>Course Name</th>
-                                    <th></th>
-                                </tr>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Course Code</th>
+                                        <th>Course Name</th>
+                                        <th>Semester</th>
+                                        <th>L</th>
+                                        <th>T</th>
+                                        <th>P</th>
+                                        <th>Hours</th>
+                                        <th>Credits</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                 @foreach ($courses as $course)
@@ -45,6 +50,12 @@
                                         <td>{{ ++$count }}</td>
                                         <td>{{ $course->courseCode }}</td>
                                         <td>{{ $course->courseName }}</td>
+                                        <td>{{ $course->semNo }}</td>
+                                        <td>{{ $course->lectures }}</td>
+                                        <td>{{ $course->tutorials }}</td>
+                                        <td>{{ $course->practicals }}</td>
+                                        <td>{{ $course->hours }}</td>
+                                        <td>{{ $course->credits }}</td>
                                         <td>
                                             <form action="/departmentStaffs/home" method="POST">
                                                 {{ csrf_field() }}
@@ -62,6 +73,7 @@
                                 </tbody>
                             </table>
                         @else
+                            @include('common.errors')
                             No Course is currently entered in the database.
                         @endif
 
@@ -103,6 +115,55 @@
                                 <input required class="form-control" name="courseName" type="text" id="courseName">
                             </div>
                         </div>
+
+                        <!-- Third row semester-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="semester">Semester</label>
+                            <div class="col-md-6">
+                                <input required class="form-control" name="semNo" type="number" min="1" max="10" id="semester">
+                            </div>
+                        </div>
+
+                        <!-- Fourth row lectures-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="lectures">Lectures</label>
+                            <div class="col-md-6">
+                                <input required class="form-control" name="lectures" type="number" min="1" id="lectures">
+                            </div>
+                        </div>
+
+                        <!-- FIfth row tutorials-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="tutorials">Tutorials</label>
+                            <div class="col-md-6">
+                                <input required class="form-control" name="tutorials" type="number" min="1" id="tutorials">
+                            </div>
+                        </div>
+
+                        <!-- FIfth row practicals-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="practicals">Practicals</label>
+                            <div class="col-md-6">
+                                <input required class="form-control" name="practicals" type="number" min="0" id="practicals">
+                            </div>
+                        </div>
+
+                        <!-- FIfth row hours-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="hours">Hours</label>
+                            <div class="col-md-6">
+                                <input required class="form-control" name="hours" type="number" min="1" id="hours">
+                            </div>
+                        </div>
+
+                        <!-- FIfth row credits-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="credits">Credits</label>
+                            <div class="col-md-6">
+                                <input required class="form-control" name="credits" type="number" min="1" id="credits">
+                            </div>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
