@@ -56,6 +56,12 @@ class HomeController extends Controller
         $this->validate($request, [
             'courseCode' => 'required|unique:courses',
             'courseName' => 'required',
+            'semNo' => 'required|numeric|min:1',
+            'lectures' => 'required|numeric|min:1',
+            'tutorials' => 'required|numeric|min:1',
+            'practicals' => 'required|numeric|min:0',
+            'hours' => 'required|numeric|min:1',
+            'credits' => 'required|numeric|min:1',
         ], [
             'unique' => 'This course is already present in the database'
         ]);
@@ -64,6 +70,12 @@ class HomeController extends Controller
             'courseCode' => $request['courseCode'],
             'dCode' => Auth::guard('departmentStaff')->user()->dCode,
             'courseName' => $request['courseName'],
+            'semNo' => $request['semNo'],
+            'lectures' => $request['lectures'],
+            'tutorials' => $request['tutorials'],
+            'practicals' => $request['practicals'],
+            'hours' => $request['hours'],
+            'credits' => $request['credits'],
         ];
 
         // Save the course
