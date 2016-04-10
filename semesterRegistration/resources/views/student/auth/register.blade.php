@@ -69,7 +69,7 @@
                             <label class="col-md-4 control-label" for="semester">Semester</label>
 
                             <div class="col-md-8">
-                                <input required class="form-control" name="semNo" type="text" id="semester">
+                                <input required class="form-control" name="semNo" type="number" min="1" max="10" id="semester">
                             </div>
                         </div>
                     </div>
