@@ -21,6 +21,12 @@ class CreateCoursesTable extends Migration
             $table->string('courseCode', '10');
             $table->string('courseName', '50');
             $table->string('dCode', '10');
+            $table->smallInteger('semNo');
+            $table->smallInteger('lectures');
+            $table->smallInteger('tutorials');
+            $table->smallInteger('practicals');
+            $table->smallInteger('hours');
+            $table->smallInteger('credits');
             $table->timestamps();
 
             // Key constraints
@@ -28,6 +34,11 @@ class CreateCoursesTable extends Migration
             $table->foreign('dCode')
                 ->references('dCode')
                 ->on('departments')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('semNo')
+                ->references('semNo')
+                ->on('semesters')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
