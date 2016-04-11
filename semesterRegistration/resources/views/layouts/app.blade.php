@@ -89,7 +89,7 @@
 
                         <!-- Tabs for faculty  users -->
                         @if($user == 'teacher')
-                            <li><a href="/{{$user}}s/semesterRegistration/registerAsIncharge">Course details</a></li>
+                            <li><a href="/{{$user}}s/semesterRegistration/semester">Register as an incharge</a></li>
                         @endif
 
                         <li class="dropdown">
