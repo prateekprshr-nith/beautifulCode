@@ -24,58 +24,59 @@
                                 <div class="alert alert-success">
                                     {{ session('status') }}
                                 </div>
-                                @endif
-
-                                        <!-- Display Validation Errors -->
-                                @include('common.errors')
-
-                                        <!-- Current courses list -->
-                                <table class="table table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Course Code</th>
-                                        <th>Course Name</th>
-                                        <th>Semester</th>
-                                        <th>L</th>
-                                        <th>T</th>
-                                        <th>P</th>
-                                        <th>Hours</th>
-                                        <th>Credits</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach ($courses as $course)
-                                        <tr>
-                                            <td>{{ ++$count }}</td>
-                                            <td>{{ $course->courseCode }}</td>
-                                            <td>{{ $course->courseName }}</td>
-                                            <td>{{ $course->semNo }}</td>
-                                            <td>{{ $course->lectures }}</td>
-                                            <td>{{ $course->tutorials }}</td>
-                                            <td>{{ $course->practicals }}</td>
-                                            <td>{{ $course->hours }}</td>
-                                            <td>{{ $course->credits }}</td>
-                                            <td>
-                                                <form action="/departmentStaffs/manage/courses" method="POST">
-                                                    {{ csrf_field() }}
-                                                    {{ method_field('DELETE') }}
-                                                    <input hidden name="courseCode" value="{{ $course->courseCode }}">
-
-                                                    <button type="submit" class="btn btn-sm btn-danger"
-                                                            onclick="return confirm('Are you sure?')">
-                                                        <span class="glyphicon glyphicon-remove"></span> Remove
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            @else
-                                @include('common.errors')
-                                No Course is currently entered in the database.
                             @endif
+
+                                    <!-- Display Validation Errors -->
+                            @include('common.errors')
+
+                                    <!-- Current courses list -->
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Course Code</th>
+                                    <th>Course Name</th>
+                                    <th>Semester</th>
+                                    <th>L</th>
+                                    <th>T</th>
+                                    <th>P</th>
+                                    <th>Hours</th>
+                                    <th>Credits</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($courses as $course)
+                                    <tr>
+                                        <td>{{ ++$count }}</td>
+                                        <td>{{ $course->courseCode }}</td>
+                                        <td>{{ $course->courseName }}</td>
+                                        <td>{{ $course->semNo }}</td>
+                                        <td>{{ $course->lectures }}</td>
+                                        <td>{{ $course->tutorials }}</td>
+                                        <td>{{ $course->practicals }}</td>
+                                        <td>{{ $course->hours }}</td>
+                                        <td>{{ $course->credits }}</td>
+                                        <td>
+                                            <form action="/departmentStaffs/manage/courses" method="POST">
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
+                                                <input hidden name="courseCode" value="{{ $course->courseCode }}">
+
+                                                <button type="submit" class="btn btn-sm btn-danger"
+                                                        onclick="return confirm('Are you sure?')">
+                                                    <span class="glyphicon glyphicon-remove"></span> Remove
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        @else
+                            @include('common.errors')
+                            No Course is currently entered in the database.
+                        @endif
 
                     </div>
                 </div>
