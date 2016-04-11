@@ -88,11 +88,13 @@
 
                             <td>
                                 @if($staffRegistrationStatus == 'Activated')
-                                    <a href="/admins/toggleRegistrationProcess/staff" class="btn btn-sm btn-danger">
+                                    <a href="/admins/toggleRegistrationProcess/staff"
+                                       class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">
                                         <span class="glyphicon glyphicon-remove"></span> De-Activate
                                     </a>
                                 @else
-                                    <a href="/admins/toggleRegistrationProcess/staff" class="btn btn-sm btn-primary">
+                                    <a href="/admins/toggleRegistrationProcess/staff"
+                                       class="btn btn-sm btn-primary" onclick="return confirm('Are you sure?')">
                                         <span class="glyphicon glyphicon-ok"></span> Activate
                                     </a>
                                 @endif
@@ -109,11 +111,13 @@
 
                             <td>
                                 @if($studentRegistrationStatus == 'Activated')
-                                    <a href="/admins/toggleRegistrationProcess/students" class="btn btn-sm btn-danger">
+                                    <a href="/admins/toggleRegistrationProcess/students"
+                                       class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">
                                         <span class="glyphicon glyphicon-remove"></span> De-Activate
                                     </a>
                                 @else
-                                    <a href="/admins/toggleRegistrationProcess/students" class="btn btn-sm btn-primary">
+                                    <a href="/admins/toggleRegistrationProcess/students"
+                                       class="btn btn-sm btn-primary" onclick="return confirm('Are you sure?')">
                                         <span class="glyphicon glyphicon-ok"></span> Activate
                                     </a>
                                 @endif
