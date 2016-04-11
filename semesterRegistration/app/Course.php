@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Course extends Model
 {
+    protected $table = 'courses';
     protected $primaryKey = 'courseCode';
     public $incrementing = false;
 
@@ -32,12 +33,12 @@ class Course extends Model
     }
 
     /**
-     * Get the teaching detail
+     * Get available courses
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function teachingDetail()
+    public function availableCourses ()
     {
-        return $this->hasOne('App\TeachingDetail', 'courseCode', 'courseCode');
+        return $this->hasMany('App\AvailableCourse', 'dCode', 'dCode');
     }
 }
