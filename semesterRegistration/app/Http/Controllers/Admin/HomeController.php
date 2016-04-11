@@ -12,6 +12,7 @@ use App\HostelStaff;
 use App\LibraryStaff;
 use App\Http\Requests;
 use App\DepartmentStaff;
+use App\AvailableCourse;
 use App\ChiefWardenStaff;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -69,6 +70,12 @@ class HomeController extends Controller
         ]);
     }
 
+    /**
+     * Set registration process active / in-active
+     *
+     * @param $user
+     * @return mixed
+     */
     public function toggleRegistrationProcess ($user)
     {
         if($user === 'staff')
@@ -76,6 +83,12 @@ class HomeController extends Controller
             if(file_exists(storage_path() . '/app/activeForStaff'))
             {
                 unlink(storage_path() . '/app/activeForStaff');
+
+                // Clear the tables
+                AvailableCourse::truncate();
+
+                Teacher::where('semNo', '!=', 'null')
+                    ->update(['semNo' => null]);
             }
             else
             {
