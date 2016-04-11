@@ -270,5 +270,8 @@ Route::group(['middleware' => 'web'], function ()
             Route::put('hostels', 'Admin\HomeController@addHostel');
             Route::delete('hostels/{hostelId?}', 'Admin\HomeController@removeHostel');
         });
+
+        // Semester registration process routes
+        Route::get('toggleRegistrationProcess/{users}', 'Admin\HomeController@toggleRegistrationProcess');
     });
 });
