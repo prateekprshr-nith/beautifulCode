@@ -81,6 +81,12 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/{{$user}}s/home">Home</a></li>
+
+                        <!-- Tabs for department staff users -->
+                        @if($user == 'departmentStaff')
+                            <li><a href="/{{$user}}s/manage/courses">Courses</a></li>
+                        @endif
+
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 @if($user == 'admin')
