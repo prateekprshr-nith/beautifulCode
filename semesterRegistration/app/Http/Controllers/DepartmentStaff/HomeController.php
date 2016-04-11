@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Auth;
  */
 class HomeController extends Controller
 {
+    // Course management views
+    protected $courseManagementView = 'departmentStaff.manage.courses';
+    
     /**
      * Create a new controller instance.
      *
@@ -36,13 +39,26 @@ class HomeController extends Controller
      */
     public function index()
     {
+        return view('departmentStaff.home');
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Course management routes
+
+    /**
+     * Show courses currently present in database
+     *
+     * @return mixed
+     */
+    public function manageCourses ()
+    {
         // Get the list of courses
         $courses = Course::where('dCode', Auth::guard('departmentStaff')->user()->dCode)->get();
 
         // Department code
         $dCode = Auth::guard('departmentStaff')->user()->dCode;
 
-        return view('departmentStaff.home', ['courses' => $courses, 'count' => 0, 'dCode' => $dCode]);
+        return view($this->courseManagementView, ['courses' => $courses, 'count' => 0, 'dCode' => $dCode]);
     }
 
     /**
