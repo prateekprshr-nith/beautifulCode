@@ -87,6 +87,11 @@
                             <li><a href="/{{$user}}s/manage/courses">Courses</a></li>
                         @endif
 
+                        <!-- Tabs for faculty  users -->
+                        @if($user == 'teacher')
+                            <li><a href="/{{$user}}s/semesterRegistration/registerAsIncharge">Course details</a></li>
+                        @endif
+
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 @if($user == 'admin')
