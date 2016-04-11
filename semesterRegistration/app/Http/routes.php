@@ -70,6 +70,15 @@ Route::group(['middleware' => 'web'], function ()
 
         // Teacher view routes
         Route::get('home', 'Teacher\HomeController@index');
+        Route::group(['prefix' => '/semesterRegistration'], function ()
+        {
+            Route::get('semester', 'Teacher\SemesterRegistrationController@showSemesterSelectionView');
+            Route::put('semester', 'Teacher\SemesterRegistrationController@addSemester');
+            Route::get('courses', 'Teacher\SemesterRegistrationController@showCourseSelectionView');
+            Route::put('courses', 'Teacher\SemesterRegistrationController@addCourse');
+            Route::delete('courses', 'Teacher\SemesterRegistrationController@removeCourse');
+        });
+
     });
 
 
