@@ -43,7 +43,58 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
+        // Registration status for staff
+        if(file_exists(storage_path() . '/app/activeForStaff'))
+        {
+            $staffRegistrationStatus= 'Activated';
+        }
+        else
+        {
+            $staffRegistrationStatus = 'Deactivated';
+        }
+
+        // Registration status for students
+        if(file_exists(storage_path() . '/app/activeForStudents'))
+        {
+            $studentRegistrationStatus= 'Activated';
+        }
+        else
+        {
+            $studentRegistrationStatus = 'Deactivated';
+        }
+
+        return view('admin.home', [
+            'staffRegistrationStatus' => $staffRegistrationStatus,
+            'studentRegistrationStatus' => $studentRegistrationStatus,
+        ]);
+    }
+
+    public function toggleRegistrationProcess ($user)
+    {
+        if($user === 'staff')
+        {
+            if(file_exists(storage_path() . '/app/activeForStaff'))
+            {
+                unlink(storage_path() . '/app/activeForStaff');
+            }
+            else
+            {
+                touch(storage_path() . '/app/activeForStaff');
+            }
+        }
+        else if($user === 'students')
+        {
+            if(file_exists(storage_path() . '/app/activeForStudents'))
+            {
+                unlink(storage_path() . '/app/activeForStudents');
+            }
+            else
+            {
+                touch(storage_path() . '/app/activeForStudents');
+            }
+        }
+        
+        return redirect()->back();
     }
 
     /**
