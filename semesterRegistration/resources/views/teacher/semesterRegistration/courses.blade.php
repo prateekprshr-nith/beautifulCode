@@ -103,10 +103,10 @@
 
                             @include('common.errors')
 
-                            <label class="col-md-2 control-label" for="department">Course</label>
+                            <label class="col-md-2 control-label" for="courseCode">Course</label>
 
                             <div class="col-md-8">
-                                <select required id="course" name="courseCode" class="form-control">
+                                <select required id="courseCode" name="courseCode" class="form-control">
                                     <option value="">Select a Course...</option>
                                     @foreach($courses as $course)
                                         <option value="{{$course->courseCode}}">{{$course->courseCode}} : {{$course->courseName}}</option>
