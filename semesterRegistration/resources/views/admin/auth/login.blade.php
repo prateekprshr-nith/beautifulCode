@@ -18,7 +18,7 @@
 
                             <!-- First row Id-->
                             <div class="form-group">
-                                <label class="col-md-4 control-label" for="adminId">Id</label>
+                                <label class="col-md-4 control-label" for="adminId">ID</label>
                                 <div class="col-md-6">
                                     <input required class="form-control" name="adminId" type="text" id="adminId">
                                 </div>
