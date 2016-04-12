@@ -18,7 +18,7 @@
 
                             <!-- First row facultyId-->
                             <div class="form-group">
-                                <label class="col-md-4 control-label" for="id">Staff Id</label>
+                                <label class="col-md-4 control-label" for="id">ID</label>
                                 <div class="col-md-6">
                                     <input required class="form-control" name="id" type="text" id="id">
                                 </div>
