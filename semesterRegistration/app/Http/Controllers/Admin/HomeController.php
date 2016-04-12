@@ -12,6 +12,7 @@ use App\HostelStaff;
 use App\LibraryStaff;
 use App\Http\Requests;
 use App\DepartmentStaff;
+use App\AvailableCourse;
 use App\ChiefWardenStaff;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -43,7 +44,70 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
+        // Registration status for staff
+        if(file_exists(storage_path() . '/app/activeForStaff'))
+        {
+            $staffRegistrationStatus= 'Activated';
+        }
+        else
+        {
+            $staffRegistrationStatus = 'Deactivated';
+        }
+
+        // Registration status for students
+        if(file_exists(storage_path() . '/app/activeForStudents'))
+        {
+            $studentRegistrationStatus= 'Activated';
+        }
+        else
+        {
+            $studentRegistrationStatus = 'Deactivated';
+        }
+
+        return view('admin.home', [
+            'staffRegistrationStatus' => $staffRegistrationStatus,
+            'studentRegistrationStatus' => $studentRegistrationStatus,
+        ]);
+    }
+
+    /**
+     * Set registration process active / in-active
+     *
+     * @param $user
+     * @return mixed
+     */
+    public function toggleRegistrationProcess ($user)
+    {
+        if($user === 'staff')
+        {
+            if(file_exists(storage_path() . '/app/activeForStaff'))
+            {
+                unlink(storage_path() . '/app/activeForStaff');
+
+                // Clear the tables
+                AvailableCourse::truncate();
+
+                Teacher::where('semNo', '!=', 'null')
+                    ->update(['semNo' => null]);
+            }
+            else
+            {
+                touch(storage_path() . '/app/activeForStaff');
+            }
+        }
+        else if($user === 'students')
+        {
+            if(file_exists(storage_path() . '/app/activeForStudents'))
+            {
+                unlink(storage_path() . '/app/activeForStudents');
+            }
+            else
+            {
+                touch(storage_path() . '/app/activeForStudents');
+            }
+        }
+        
+        return redirect()->back();
     }
 
     /**

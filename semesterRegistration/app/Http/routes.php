@@ -70,6 +70,15 @@ Route::group(['middleware' => 'web'], function ()
 
         // Teacher view routes
         Route::get('home', 'Teacher\HomeController@index');
+        Route::group(['prefix' => '/semesterRegistration'], function ()
+        {
+            Route::get('semester', 'Teacher\SemesterRegistrationController@showSemesterSelectionView');
+            Route::put('semester', 'Teacher\SemesterRegistrationController@addSemester');
+            Route::get('courses', 'Teacher\SemesterRegistrationController@showCourseSelectionView');
+            Route::put('courses', 'Teacher\SemesterRegistrationController@addCourse');
+            Route::delete('courses', 'Teacher\SemesterRegistrationController@removeCourse');
+        });
+
     });
 
 
@@ -205,6 +214,14 @@ Route::group(['middleware' => 'web'], function ()
 
         // DepartmentStaff view routes
         Route::get('home', 'DepartmentStaff\HomeController@index');
+
+        Route::group(['prefix' => 'manage'], function ()
+        {
+            // Course management routes
+            Route::get('courses', 'DepartmentStaff\HomeController@manageCourses');
+            Route::put('courses', 'DepartmentStaff\HomeController@addCourse');
+            Route::delete('courses', 'DepartmentStaff\HomeController@removeCourse');
+        });
     });
 
 
@@ -262,5 +279,8 @@ Route::group(['middleware' => 'web'], function ()
             Route::put('hostels', 'Admin\HomeController@addHostel');
             Route::delete('hostels/{hostelId?}', 'Admin\HomeController@removeHostel');
         });
+
+        // Semester registration process routes
+        Route::get('toggleRegistrationProcess/{users}', 'Admin\HomeController@toggleRegistrationProcess');
     });
 });

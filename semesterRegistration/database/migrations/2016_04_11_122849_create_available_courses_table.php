@@ -1,13 +1,9 @@
-<?php
+N<?php
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-/**
- * Class CreateCoursesTable, this class
- * creates a courses database table
- */
-class CreateCoursesTable extends Migration
+class CreateAvailableCoursesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,21 +12,15 @@ class CreateCoursesTable extends Migration
      */
     public function up()
     {
-        Schema::create('courses', function (Blueprint $table)
+        Schema::create('availableCourses', function (Blueprint $table)
         {
-            $table->string('courseCode', '10');
-            $table->string('courseName', '50');
             $table->string('dCode', '10');
             $table->smallInteger('semNo');
-            $table->smallInteger('lectures');
-            $table->smallInteger('tutorials');
-            $table->smallInteger('practicals');
-            $table->smallInteger('hours');
-            $table->smallInteger('credits');
+            $table->string('courseCode', '10');
             $table->timestamps();
 
             // Key constraints
-            $table->primary('courseCode');
+            $table->primary(['dCode', 'semNo', 'courseCode']);
             $table->foreign('dCode')
                 ->references('dCode')
                 ->on('departments')
@@ -39,6 +29,11 @@ class CreateCoursesTable extends Migration
             $table->foreign('semNo')
                 ->references('semNo')
                 ->on('semesters')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('courseCode')
+                ->references('courseCode')
+                ->on('courses')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
@@ -51,6 +46,6 @@ class CreateCoursesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('courses');
+        Schema::drop('availableCourses');
     }
 }

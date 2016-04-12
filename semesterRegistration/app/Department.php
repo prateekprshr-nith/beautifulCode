@@ -63,7 +63,14 @@ class Department extends Model
         return $this->hasMany('App\Student', 'dCode', 'dCode');
     }
 
-
-
-
+    /**
+     * Get the staff members of this department
+     * Department 1 : many Department Staff
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function staffs()
+    {
+        return $this->hasMany('App\DepartmentStaff', 'dCode', 'dCode');
+    }
 }

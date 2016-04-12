@@ -7,6 +7,7 @@ Steps to fork and getting this to work along with laravel:
 $ git clone https://github.com/prateekprshr-nith/beautifulCode.git
 $ cd beautifulCode/semesterRegistration
 $ composer install
+$ php artisan key:generate
 ```
 
 To migrate the database tables, do your proper settings in .env file and run

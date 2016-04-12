@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container col-md-offset-2 col-md-8">
+    <div class="container col-md-offset-1 col-md-10">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <span class="glyphicon glyphicon-user"></span>
@@ -69,7 +69,7 @@
                             <label class="col-md-4 control-label" for="semester">Semester</label>
 
                             <div class="col-md-8">
-                                <input required class="form-control" name="semNo" type="text" id="semester">
+                                <input required class="form-control" name="semNo" type="number" min="1" max="10" id="semester">
                             </div>
                         </div>
                     </div>

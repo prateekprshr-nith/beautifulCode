@@ -23,9 +23,6 @@
                             <!-- Display Validation Errors -->
                             @include('common.errors')
 
-
-                            <!-- Arnav and mumuksh write your code here-->
-
                             <!-- First row name-->
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="name">Name</label>
@@ -42,7 +39,7 @@
 
                             <!-- Second row Department id ask about the drop down list -->
                             <div class="form-group">
-                                <label class="col-md-4 control-label" for="dCode">Department Code</label>
+                                <label class="col-md-4 control-label" for="dCode">Department</label>
                                 <div class="col-md-4">
                                     <select required id="dCode" name="dCode" class="form-control">
                                         <option value="">Select a Department...</option>
@@ -76,42 +73,42 @@
                             </div>
                         </form>
 
-                            <!--2nd Form for password -->
-                            <form class="form-horizontal" role="form" method="POST" action="/departmentStaffs/updateInfo/password"
-                                  accept-charset="UTF-8" id="updatePasswordForm">
-                                {{ csrf_field() }}
-                                {{ method_field('PATCH') }}
+                        <!--2nd Form for password -->
+                        <form class="form-horizontal" role="form" method="POST" action="/departmentStaffs/updateInfo/password"
+                              accept-charset="UTF-8" id="updatePasswordForm">
+                            {{ csrf_field() }}
+                            {{ method_field('PATCH') }}
 
-                                        <!-- First row password-->
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="password">Password</label>
-                                    <div class="col-md-4">
-                                        <input required class="form-control" name="password" type="password"
-                                               id="password" onkeyup="checkPassword('updatePasswordForm', 'updatePasswordButton')"
-                                        >
-                                    </div>
+                                    <!-- First row password-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="password">Password</label>
+                                <div class="col-md-4">
+                                    <input required class="form-control" name="password" type="password"
+                                           id="password" onkeyup="checkPassword('updatePasswordForm', 'updatePasswordButton')"
+                                    >
                                 </div>
+                            </div>
 
-                                <!-- Second row confirm password-->
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="confirmPassword">Confirm Password</label>
-                                    <div class="col-md-4">
-                                        <input required class="form-control" name="confirmPassword" type="password"
-                                               id="updatePassword" onkeyup="checkPassword('updatePasswordForm', 'updatePasswordButton')"
-                                        >
-                                    </div>
-                                    <div class="col-md-2">
-                                        <button class="btn btn-primary" type="submit" id="updatePasswordButton">
-                                            <span class="glyphicon glyphicon-edit"></span> Submit
-                                        </button>
-                                    </div>
+                            <!-- Second row confirm password-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="confirmPassword">Confirm Password</label>
+                                <div class="col-md-4">
+                                    <input required class="form-control" name="confirmPassword" type="password"
+                                           id="updatePassword" onkeyup="checkPassword('updatePasswordForm', 'updatePasswordButton')"
+                                    >
                                 </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-primary" type="submit" id="updatePasswordButton">
+                                        <span class="glyphicon glyphicon-edit"></span> Submit
+                                    </button>
+                                </div>
+                            </div>
 
-                                <!-- Third error msg-->
-                                <div class="col-md-12">
-                                    <p id="passwordErrorMsg"></p>
-                                </div>
-                            </form>
+                            <!-- Third error msg-->
+                            <div class="col-md-12">
+                                <p id="passwordErrorMsg"></p>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
