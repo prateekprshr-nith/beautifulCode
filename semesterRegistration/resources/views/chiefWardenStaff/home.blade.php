@@ -1,17 +1,35 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                        <strong> Personal Information</strong>
+                    </div>
 
-                <div class="panel-body">
-                    Chief Warden Staff. You are logged in!
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <tbody>
+                            <tr>
+                                <td><strong>Name</strong></td>
+                                <td>{{Auth::guard('chiefWardenStaff')->user()->name}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ID</strong></td>
+                                <td>{{Auth::guard('chiefWardenStaff')->user()->id}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Email</strong></td>
+                                <td>{{Auth::guard('chiefWardenStaff')->user()->email}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
