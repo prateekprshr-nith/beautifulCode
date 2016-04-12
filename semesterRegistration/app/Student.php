@@ -91,4 +91,14 @@ class Student extends Authenticatable
     {
         return $this->hasOne('App\StudentImage', 'rollNo', 'rollNo');
     }
+
+    /**
+     * Get the currentStudentState
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function currentStudentState ()
+    {
+        return $this->hasOne('App\CurrentStudentState', 'rollNo', 'rollNo');
+    }
 }
