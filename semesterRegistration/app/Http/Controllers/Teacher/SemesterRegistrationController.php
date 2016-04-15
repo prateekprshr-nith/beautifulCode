@@ -111,6 +111,11 @@ class SemesterRegistrationController extends Controller
      */
     public function addSemester (Request $request)
     {
+        if(!file_exists(storage_path() . '/app/activeForStaff'))
+        {
+            return view($this->inactiveView);
+        }
+
         $this->validate($request, [
             'semNo' => 'required|numeric|min:1|unique:teachers,semNo,NULL,id,dCode,' . Auth::guard('teacher')->user()->dCode,
         ], [
@@ -134,6 +139,11 @@ class SemesterRegistrationController extends Controller
      */
     public function addCourse (Request $request)
     {
+        if(!file_exists(storage_path() . '/app/activeForStaff'))
+        {
+            return view($this->inactiveView);
+        }
+
         $availableCourse = [
             'courseCode' => $request['courseCode'],
             'dCode' => Auth::guard('teacher')->user()->dCode,
@@ -153,6 +163,11 @@ class SemesterRegistrationController extends Controller
      */
     public function removeCourse (Request $request)
     {
+        if(!file_exists(storage_path() . '/app/activeForStaff'))
+        {
+            return view($this->inactiveView);
+        }
+
         $course = [
             'dCode' => Auth::guard('teacher')->user()->dCode,
             'semNo' => Auth::guard('teacher')->user()->semNo,
