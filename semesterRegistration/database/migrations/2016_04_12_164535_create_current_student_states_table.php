@@ -22,6 +22,7 @@ class CreateCurrentStudentStatesTable extends Migration
             $table->smallInteger('semNo');
             $table->boolean('hostler');
             $table->boolean('feeReceipt');
+            $table->smallInteger('step');
             $table->timestamps();
 
             // Key constraints
