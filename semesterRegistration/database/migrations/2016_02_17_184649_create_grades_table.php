@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 
 /**
  * Class CreateGradesTable, this migration
- * creates the 'grades' talbe in databse
+ * creates the 'grades' table in databse
  */
 class CreateGradesTable extends Migration
 {
@@ -19,24 +19,22 @@ class CreateGradesTable extends Migration
         Schema::create('grades', function (Blueprint $table)
         {
             $table->string('rollNo');
-            $table->decimal('sem1', '4', '2')->unsigned();
-            $table->decimal('sem2', '4', '2')->unsigned();
-            $table->decimal('sem3', '4', '2')->unsigned();
-            $table->decimal('sem4', '4', '2')->unsigned();
-            $table->decimal('sem5', '4', '2')->unsigned();
-            $table->decimal('sem6', '4', '2')->unsigned();
-            $table->decimal('sem7', '4', '2')->unsigned();
-            $table->decimal('sem8', '4', '2')->unsigned();
-            $table->decimal('sem9', '4', '2')->unsigned();
-            $table->decimal('sem10', '4', '2')->unsigned();
+            $table->smallInteger('semNo');
             $table->decimal('sgpi', '4', '2')->unsigned();
+            $table->decimal('cgpi', '4', '2')->unsigned();
+            $table->string('supplementaries', '200')->nullable();
             $table->timestamps();
 
             // Key constraints
-            $table->primary('rollNo');
+            $table->primary(['rollNo', 'semNo']);
             $table->foreign('rollNo')
                 ->references('rollNo')
                 ->on('students')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->foreign('semNo')
+                ->references('semNo')
+                ->on('semesters')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
