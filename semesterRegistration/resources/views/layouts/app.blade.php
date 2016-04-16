@@ -20,6 +20,10 @@
     <script src="/bootstrap/js/plugins/canvas-to-blob.min.js"></script>
 
     <style>
+        textarea.verticalAlign {
+            resize: vertical;
+        }
+
         .panel-heading p {
             white-space: nowrap;
             overflow: hidden;
