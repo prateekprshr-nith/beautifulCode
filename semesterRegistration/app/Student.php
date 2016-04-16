@@ -78,7 +78,7 @@ class Student extends Authenticatable
      */
     public function grade()
     {
-        return $this->hasOne('App\Grade', 'rollNo', 'rollNo');
+        return $this->hasMany('App\Grade', 'rollNo', 'rollNo');
     }
 
     /**
