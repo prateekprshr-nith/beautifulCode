@@ -19,6 +19,7 @@ class CreateCurrentStudentStatesTable extends Migration
         Schema::create('currentStudentStates', function (Blueprint $table)
         {
             $table->string('rollNo', '20');
+            $table->smallInteger('semNo');
             $table->boolean('hostler');
             $table->boolean('feeReceipt');
             $table->timestamps();
