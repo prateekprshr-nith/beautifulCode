@@ -187,10 +187,16 @@
                             <input type="submit" hidden id="submit">
                         </form>
 
+                        <p class="well well-sm">
+                            <span class="glyphicon glyphicon-alert"></span>
+                            <strong>Tip:</strong> Please check all your details before clicking next. You won't be able to come back to this
+                            step later on.
+                        </p>
+
                     </div>
 
                     <div class="panel-footer text-right">
-                        <label for="submit" class="btn btn-primary btn-sm">
+                        <label for="submit" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure?')">
                             <span class="glyphicon glyphicon-arrow-right"></span> Next step
                         </label>
                     </div>
