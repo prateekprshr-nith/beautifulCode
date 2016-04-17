@@ -21,7 +21,6 @@ class SemesterRegistrationController extends Controller
     // Views dealing with semester registration
     protected $semesterSelectionView = 'teacher.semesterRegistration.semester';
     protected $courseSelectionView = 'teacher.semesterRegistration.courses';
-    protected $inactiveView = 'common.inactive';
 
     /**
      * Create a new controller instance.
@@ -44,7 +43,7 @@ class SemesterRegistrationController extends Controller
      */
     public function showSemesterSelectionView()
     {
-        if(!file_exists(storage_path() . '/app/activeForStaff'))
+        if(!$this->isRegistrationActive('staff'))
         {
             return view($this->inactiveView);
         }
@@ -59,7 +58,7 @@ class SemesterRegistrationController extends Controller
      */
     public function showCourseSelectionView ()
     {
-        if(!file_exists(storage_path() . '/app/activeForStaff'))
+        if(!$this->isRegistrationActive('staff'))
         {
             return view($this->inactiveView);
         }
@@ -111,7 +110,7 @@ class SemesterRegistrationController extends Controller
      */
     public function addSemester (Request $request)
     {
-        if(!file_exists(storage_path() . '/app/activeForStaff'))
+        if(!$this->isRegistrationActive('staff'))
         {
             return view($this->inactiveView);
         }
@@ -139,7 +138,7 @@ class SemesterRegistrationController extends Controller
      */
     public function addCourse (Request $request)
     {
-        if(!file_exists(storage_path() . '/app/activeForStaff'))
+        if(!$this->isRegistrationActive('staff'))
         {
             return view($this->inactiveView);
         }
@@ -163,7 +162,7 @@ class SemesterRegistrationController extends Controller
      */
     public function removeCourse (Request $request)
     {
-        if(!file_exists(storage_path() . '/app/activeForStaff'))
+        if(!$this->isRegistrationActive('staff'))
         {
             return view($this->inactiveView);
         }
