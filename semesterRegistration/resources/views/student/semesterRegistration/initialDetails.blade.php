@@ -158,7 +158,7 @@
                             <!-- Fee and hostel details -->
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="feeReceipt">
-                                    Do you have fee receipt?
+                                    Do you have fee receipt with your name and roll no. clearly printed on it?
                                 </label>
                                 <div class="col-md-6">
                                     <label class="radio-inline">
@@ -187,7 +187,9 @@
                             <input type="submit" hidden id="submit">
                         </form>
 
-                        <p class="well well-sm">
+                        <hr class="gradientHr col-md-11">
+
+                        <p class="well well-sm col-md-12">
                             <span class="glyphicon glyphicon-alert"></span>
                             <strong>Tip:</strong> Please check all your details before clicking next. You won't be able to come back to this
                             step later on.
