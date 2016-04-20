@@ -18,7 +18,7 @@ class CurrentStudentState extends Model
 
     // Fillable and hidden arrtibutes
     protected $fillable = [
-        'rollNo', 'semNo', 'hostler', 'feeReceipt', 'step',
+        'rollNo', 'semNo', 'hostler', 'feeReceipt', 'hostelId', 'step',
     ];
 
     /**
@@ -29,5 +29,15 @@ class CurrentStudentState extends Model
     public function student ()
     {
         return $this->belongsTo('App\Student', 'rollNo', 'rollNo');
+    }
+
+    /**
+     * Get the hostel associated with this request
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function hostel ()
+    {
+        return $this->belongsTo('App\Hostel', 'hostelId', 'hostelId');
     }
 }
