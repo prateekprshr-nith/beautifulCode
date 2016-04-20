@@ -36,49 +36,60 @@ class RedirectIfInvalidStep
      */
     public function handle($request, Closure $next, $currentStep)
     {
-        $currentStudentState = CurrentStudentState::find(Auth::guard('student')->user()->rollNo);
-
-        // If student has not completed the first step
-        // then redirect him to initial details page
-        // other wise redirect him to the correct
-        // page accourding to his current state
-        if($currentStudentState == null)
+        if(Auth::guard('student')->check())
         {
-            // This check avoids redirection loop
-            // in case the student is accessing
-            // the initial details page
-            if($currentStep != 1)
-            {
-                return redirect('/students/semesterRegistration/initialDetails');
+            $currentStudentState = CurrentStudentState::find(Auth::guard('student')->user()->rollNo);
+
+            /**
+             * If student has not completed the first step
+             * then redirect him to initial details page
+             * other wise redirect him to the correct
+             * page accourding to his current state
+             */
+            if ($currentStudentState == null)
+            { 
+                /*
+                 * This check avoids redirection loop
+                 * in case the student is accessing
+                 * the initial details page
+                 */
+                if ($currentStep != 1)
+                {
+                    return redirect('/students/semesterRegistration/initialDetails');
+                }
+
+                return $next($request);
             }
-
-            return $next($request);
-        }
-        else
-        {
-            $step = $currentStudentState->step;
-
-            // Redirect if student tries to visit a step
-            // without completing the previous one and
-            // let the request pass to the inner
-            // layers if his request if valid
-            if($currentStep != $step + 1)
+            else
             {
-                if($step == 1)
+                $step = $currentStudentState->step;
+                
+                /**
+                 * Redirect if student tries to visit a step
+                 * without completing the previous one and
+                 * let the request pass to the inner
+                 * layers if his request if valid
+                 */
+                if ($currentStep != $step + 1)
                 {
-                    return redirect('/students/semesterRegistration/feeAndHostelDetails');
+                    if ($step == 1)
+                    {
+                        return redirect('/students/semesterRegistration/feeAndHostelDetails');
+                    }
+                    elseif ($step == 2)
+                    {
+                        return redirect('/students/semesterRegistration/courseDetails');
+                    }
+                    else    // if ($step == 3)
+                    {
+                        return redirect('/students/semesterRegistration/status');
+                    }
                 }
-                elseif($step == 2)
-                {
-                    return redirect('/students/semesterRegistration/courseDetails');
-                }
-                else    // if ($step == 3)
-                {
-                    return redirect('/students/semesterRegistration/status');
-                }
-            }
 
-            return $next($request);
+                return $next($request);
+            }
         }
+
+        return $next($request);
     }
 }
