@@ -143,6 +143,7 @@ class SemesterRegistrationController extends Controller
         $currentStudentState->feeReceipt = $data['feeReceipt'];
         $currentStudentState->hostler = $data['hostler'];
         $currentStudentState->semNo = $data['semNo'];
+        $currentStudentState->approved = false;
         $currentStudentState->step = 1;
         $currentStudentState->save();
         
@@ -284,6 +285,50 @@ class SemesterRegistrationController extends Controller
     }
 
     /**
+     * Re-upload the fee receipt of student
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function reUploadFeeReceipt (Request $request)
+    {
+        if($request->hasFile('image'))
+        {
+            $this->validate($request, [
+                'image' => 'image|required|max:2048',
+            ], [
+                'image' => 'The file must be a valid image file.'
+            ]);
+
+            if ($request->file('image')->isValid())
+            {
+                $image = $request->file('image');
+                $rollNo = Auth::guard('student')->user()->rollNo;
+
+                // Set the image parameters
+                $imageQuality = 70;
+                $imagePath = env('IMAGE_DIR') . '/feeReceipts/' . $rollNo . '.jpg';
+
+                // Save the image
+                Image::make($image->getRealPath())
+                    ->save($imagePath, $imageQuality);
+
+                // Update the request status
+                TeacherRequest::where(['rollNo' => Auth::guard('student')->user()->rollNo])
+                    ->update(['status' => 'new', 'remarks' => null]);
+
+                return redirect()->back()
+                    ->with('success');
+            }
+            else
+            {
+                return redirect()->back()
+                    ->withErrors('Upload unsuccessful!!!');
+            }
+        }
+    }
+
+    /**
      * Show course details view to the student
      *
      * @return mixed
@@ -323,12 +368,20 @@ class SemesterRegistrationController extends Controller
         return redirect('/students/semesterRegistration/status');
     }
 
+    /**
+     * Show registration status to the student
+     *
+     * @return mixed
+     */
     public function showRegistrationStatusView ()
     {
         if(!$this->isRegistrationActive('student'))
         {
             return view($this->inactiveView);
         }
-        // #TODO
+
+        $currentStudentState = $this->getCurrentStudentState();
+
+        return view($this->registrationStatusView, ['currentStudentState' => $currentStudentState]);
     }
 }
