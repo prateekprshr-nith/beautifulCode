@@ -48,4 +48,14 @@ class Hostel extends Model
     {
         return $this->hasMany('App\CurrentStudentState', 'hostelId', 'hostelId');
     }
+
+    /**
+     * Get hostel staff requests associated with this hostel
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function hostelStaffRequests ()
+    {
+        return $this->hasMany('App\LibraryStaffRequest', 'hostelId', 'hostelId');
+    }
 }
