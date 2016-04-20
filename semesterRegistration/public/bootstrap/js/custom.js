@@ -46,9 +46,9 @@ function toggleVisibility(elementId)
  * This function loads an avatar icon in
  * case user has no profilepicture.
  */
-function loadAvatarIcon()
+function loadAvatarIcon(elementId)
 {
-    document.getElementById('avatarImage').src = '/images/circle.png';
+    document.getElementById(elementId).src = '/images/circle.png';
 }
 
 /*
