@@ -25,6 +25,11 @@ class DatabaseSeeder extends Seeder
             'MED' => 'Department of Mechanical Engineering',
             'CHED' => 'Department of Chemical Engineering',
             'ARD' => 'Department of Architecture',
+            'CHD' => 'Department of Chemistry',
+            'HSD' => 'Department of Humanities and Social Sciences',
+            'MSD' => 'Department of Management Studies',
+            'MD' => 'Department of Mathematics',
+            'PD' => 'Department of Physics',
         ];
 
         foreach($deptArr as $dCode => $dName)
