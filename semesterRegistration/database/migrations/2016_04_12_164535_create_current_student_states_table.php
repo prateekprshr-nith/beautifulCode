@@ -23,6 +23,7 @@ class CreateCurrentStudentStatesTable extends Migration
             $table->boolean('hostler');
             $table->boolean('feeReceipt');
             $table->string('hostelId', '10')->nullable();
+            $table->boolean('approved');
             $table->smallInteger('step');
             $table->timestamps();
 
