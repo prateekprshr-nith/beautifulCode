@@ -22,6 +22,7 @@ class CreateCurrentStudentStatesTable extends Migration
             $table->smallInteger('semNo');
             $table->boolean('hostler');
             $table->boolean('feeReceipt');
+            $table->string('hostelId', '10')->nullable();
             $table->smallInteger('step');
             $table->timestamps();
 
@@ -31,7 +32,12 @@ class CreateCurrentStudentStatesTable extends Migration
                 ->references('rollNo')
                 ->on('students')
                 ->onDelete('cascade')
-                ->onUpdate('cascade'); 
+                ->onUpdate('cascade');
+            $table->foreign('hostelId')
+                ->references('hostelId')
+                ->on('hostels')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
