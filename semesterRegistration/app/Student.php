@@ -78,7 +78,7 @@ class Student extends Authenticatable
      */
     public function grade()
     {
-        return $this->hasOne('App\Grade', 'rollNo', 'rollNo');
+        return $this->hasMany('App\Grade', 'rollNo', 'rollNo');
     }
 
     /**
@@ -90,5 +90,65 @@ class Student extends Authenticatable
     public function image()
     {
         return $this->hasOne('App\StudentImage', 'rollNo', 'rollNo');
+    }
+
+    /**
+     * Get the currentStudentState
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function currentStudentState ()
+    {
+        return $this->hasOne('App\CurrentStudentState', 'rollNo', 'rollNo');
+    }
+
+    /**
+     * Get the teacher request associated with this student
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function teacherRequest ()
+    {
+        return $this->hasOne('App\TeacherRequest', 'rollNo', 'rollNo');
+    }
+
+    /**
+     * Get the admin staff request associated with this student
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function adminStaffRequest ()
+    {
+        return $this->hasOne('App\AdminStaffRequest', 'rollNo', 'rollNo');
+    }
+
+    /**
+     * Get the library staff request associated with this student
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function libraryStaffRequest ()
+    {
+        return $this->hasOne('App\LibraryStaffRequest', 'rollNo', 'rollNo');
+    }
+
+    /**
+     * Get the chiefWarden staff request associated with this student
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function chiefWardenStaffRequest ()
+    {
+        return $this->hasOne('App\ChiefWardenStaffRequest', 'rollNo', 'rollNo');
+    }
+
+    /**
+     * Get the hostel staff request associated with this student
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function hostelStaffRequest ()
+    {
+        return $this->hasOne('App\HostelStaffRequest', 'rollNo', 'rollNo');
     }
 }

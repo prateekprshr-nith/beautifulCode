@@ -39,6 +39,17 @@ Route::group(['middleware' => 'web'], function ()
 
         // Student view routes
         Route::get('home', 'Student\HomeController@index');
+        Route::group(['prefix' => '/semesterRegistration'], function ()
+        {
+            Route::get('initialDetails', 'Student\SemesterRegistrationController@showInitialDetailsView')->middleware('step:1');
+            Route::put('initialDetails', 'Student\SemesterRegistrationController@addInitialDetails')->middleware('step:1');
+            Route::get('feeAndHostelDetails', 'Student\SemesterRegistrationController@showFeeAndHostelDetailsView')->middleware('step:2');
+            Route::put('feeAndHostelDetails', 'Student\SemesterRegistrationController@addFeeAndHostelDetails')->middleware('step:2');
+            Route::get('courseDetails', 'Student\SemesterRegistrationController@showCourseDetailsView')->middleware('step:3');
+            Route::put('courseDetails', 'Student\SemesterRegistrationController@addCourseDetails')->middleware('step:3');
+            Route::get('status', 'Student\SemesterRegistrationController@showRegistrationStatusView')->middleware('step:4');
+            Route::patch('reUploadFeeReceipt', 'Student\SemesterRegistrationController@reUploadFeeReceipt')->middleware('step:4');
+        });
 
         // Student image route, fetches the image of student
         Route::get('image', 'Student\HomeController@getImage');

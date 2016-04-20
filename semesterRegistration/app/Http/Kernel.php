@@ -56,5 +56,6 @@ class Kernel extends HttpKernel
         'normalLogin' => \App\Http\Middleware\RedirectIfNotFirstLogin::class,
         'noImage' => \App\Http\Middleware\UploadImage::class,
         'hasImage' => \App\Http\Middleware\RedirectIfImageUploaded::class,
+        'step' => \App\Http\Middleware\RedirectIfInvalidStep::class,
     ];
 }

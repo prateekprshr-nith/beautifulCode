@@ -21,7 +21,6 @@ class SemesterRegistrationController extends Controller
     // Views dealing with semester registration
     protected $semesterSelectionView = 'teacher.semesterRegistration.semester';
     protected $courseSelectionView = 'teacher.semesterRegistration.courses';
-    protected $inactiveView = 'common.inactive';
 
     /**
      * Create a new controller instance.
@@ -44,7 +43,7 @@ class SemesterRegistrationController extends Controller
      */
     public function showSemesterSelectionView()
     {
-        if(!file_exists(storage_path() . '/app/activeForStaff'))
+        if(!$this->isRegistrationActive('staff'))
         {
             return view($this->inactiveView);
         }
@@ -59,7 +58,7 @@ class SemesterRegistrationController extends Controller
      */
     public function showCourseSelectionView ()
     {
-        if(!file_exists(storage_path() . '/app/activeForStaff'))
+        if(!$this->isRegistrationActive('staff'))
         {
             return view($this->inactiveView);
         }
@@ -111,6 +110,11 @@ class SemesterRegistrationController extends Controller
      */
     public function addSemester (Request $request)
     {
+        if(!$this->isRegistrationActive('staff'))
+        {
+            return view($this->inactiveView);
+        }
+
         $this->validate($request, [
             'semNo' => 'required|numeric|min:1|unique:teachers,semNo,NULL,id,dCode,' . Auth::guard('teacher')->user()->dCode,
         ], [
@@ -134,6 +138,11 @@ class SemesterRegistrationController extends Controller
      */
     public function addCourse (Request $request)
     {
+        if(!$this->isRegistrationActive('staff'))
+        {
+            return view($this->inactiveView);
+        }
+
         $availableCourse = [
             'courseCode' => $request['courseCode'],
             'dCode' => Auth::guard('teacher')->user()->dCode,
@@ -153,6 +162,11 @@ class SemesterRegistrationController extends Controller
      */
     public function removeCourse (Request $request)
     {
+        if(!$this->isRegistrationActive('staff'))
+        {
+            return view($this->inactiveView);
+        }
+
         $course = [
             'dCode' => Auth::guard('teacher')->user()->dCode,
             'semNo' => Auth::guard('teacher')->user()->semNo,

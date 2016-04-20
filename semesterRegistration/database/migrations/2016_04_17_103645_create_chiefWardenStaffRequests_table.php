@@ -4,10 +4,10 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Class CreateStudentImagesTable, this migration
- * creates the 'studentImages' table in databse
+ * Class CreateChiefWardenStaffRequestsTable, this class
+ * creates the chiefWardenStaffRequests database table
  */
-class CreateStudentImagesTable extends Migration
+class CreateChiefWardenStaffRequestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,10 +16,11 @@ class CreateStudentImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('studentImages', function (Blueprint $table)
+        Schema::create('chiefWardenStaffRequests', function (Blueprint $table)
         {
             $table->string('rollNo', '20');
-            $table->string('imagePath', '200');
+            $table->string('status', '20');
+            $table->string('remarks', '200') ->nullable();
             $table->timestamps();
 
             // Key constraints
@@ -39,6 +40,6 @@ class CreateStudentImagesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('studentImages');
+        Schema::drop('chiefWardenStaffRequests');
     }
 }

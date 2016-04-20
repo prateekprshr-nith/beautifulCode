@@ -11,10 +11,16 @@ use App\AdminStaff;
 use App\HostelStaff;
 use App\LibraryStaff;
 use App\Http\Requests;
+use App\TeacherRequest;
 use App\DepartmentStaff;
 use App\AvailableCourse;
 use App\ChiefWardenStaff;
+use App\AdminStaffRequest;
+use App\HostelStaffRequest;
+use App\CurrentStudentState;
+use App\LibraryStaffRequest;
 use Illuminate\Http\Request;
+use App\ChiefWardenStaffRequest;
 use App\Http\Controllers\Controller;
 
 /**
@@ -45,7 +51,7 @@ class HomeController extends Controller
     public function index()
     {
         // Registration status for staff
-        if(file_exists(storage_path() . '/app/activeForStaff'))
+        if($this->isRegistrationActive('staff'))
         {
             $staffRegistrationStatus= 'Activated';
         }
@@ -55,7 +61,7 @@ class HomeController extends Controller
         }
 
         // Registration status for students
-        if(file_exists(storage_path() . '/app/activeForStudents'))
+        if($this->isRegistrationActive('student'))
         {
             $studentRegistrationStatus= 'Activated';
         }
@@ -80,13 +86,19 @@ class HomeController extends Controller
     {
         if($user === 'staff')
         {
-            if(file_exists(storage_path() . '/app/activeForStaff'))
+            if($this->isRegistrationActive('staff'))
             {
                 unlink(storage_path() . '/app/activeForStaff');
 
                 // Clear the tables
                 AvailableCourse::truncate();
-
+                CurrentStudentState::truncate();
+                TeacherRequest::truncate();
+                LibraryStaffRequest::truncate();
+                HostelStaffRequest::truncate();
+                AdminStaffRequest::truncate();
+                ChiefWardenStaffRequest::truncate();
+                
                 Teacher::where('semNo', '!=', 'null')
                     ->update(['semNo' => null]);
             }
@@ -97,7 +109,7 @@ class HomeController extends Controller
         }
         else if($user === 'students')
         {
-            if(file_exists(storage_path() . '/app/activeForStudents'))
+            if($this->isRegistrationActive('student'))
             {
                 unlink(storage_path() . '/app/activeForStudents');
             }

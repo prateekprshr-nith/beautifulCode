@@ -1,5 +1,5 @@
 /*
- * This file contains some custom functions used for
+ * This file contains custom functions used for
  * adding some interactivity to the web pages
  */
 
@@ -49,4 +49,19 @@ function toggleVisibility(elementId)
 function loadAvatarIcon()
 {
     document.getElementById('avatarImage').src = '/images/circle.png';
+}
+
+/*
+ * This function validates the size of file being uploaded
+ */
+function validateFileSize(formId, elementId)
+{
+    var x = document.getElementById(elementId);
+
+    // Check for the file size
+    if(x.files[0].size > 2097152)
+    {
+        alert('Please choose a file with size less than 2MB!!');
+        document.getElementById(formId).reset();
+    }
 }

@@ -31,7 +31,7 @@
             initialPreview: [
             ],
             overwriteInitial: false,
-            maxFileSize: 1024,
+            maxFileSize: 2048,
             initialCaption: ""
         });
     });

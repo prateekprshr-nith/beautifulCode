@@ -4,10 +4,10 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Class CreateStudentImagesTable, this migration
- * creates the 'studentImages' table in databse
+ * Class CreateHostelStaffRequestsTable, this class
+ * creates the hostelStaffRequests database table
  */
-class CreateStudentImagesTable extends Migration
+class CreateHostelStaffRequestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,10 +16,12 @@ class CreateStudentImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('studentImages', function (Blueprint $table)
+        Schema::create('hostelStaffRequests', function (Blueprint $table)
         {
             $table->string('rollNo', '20');
-            $table->string('imagePath', '200');
+            $table->string('hostelId', '10');
+            $table->string('status', '20');
+            $table->string('remarks', '200') ->nullable();
             $table->timestamps();
 
             // Key constraints
@@ -39,6 +41,6 @@ class CreateStudentImagesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('studentImages');
+        Schema::drop('hostelStaffRequests');
     }
 }

@@ -4,10 +4,10 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Class CreateGradesTable, this migration
- * creates the 'grades' table in databse
+ * Class CreateCurrentStudentStatesTable, this class
+ * creates the currentStudentStates database table
  */
-class CreateGradesTable extends Migration
+class CreateCurrentStudentStatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,25 +16,27 @@ class CreateGradesTable extends Migration
      */
     public function up()
     {
-        Schema::create('grades', function (Blueprint $table)
+        Schema::create('currentStudentStates', function (Blueprint $table)
         {
-            $table->string('rollNo');
+            $table->string('rollNo', '20');
             $table->smallInteger('semNo');
-            $table->decimal('sgpi', '4', '2')->unsigned();
-            $table->decimal('cgpi', '4', '2')->unsigned();
-            $table->string('supplementaries', '200')->nullable();
+            $table->boolean('hostler');
+            $table->boolean('feeReceipt');
+            $table->string('hostelId', '10')->nullable();
+            $table->boolean('approved');
+            $table->smallInteger('step');
             $table->timestamps();
 
             // Key constraints
-            $table->primary(['rollNo', 'semNo']);
+            $table->primary('rollNo');
             $table->foreign('rollNo')
                 ->references('rollNo')
                 ->on('students')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->foreign('semNo')
-                ->references('semNo')
-                ->on('semesters')
+            $table->foreign('hostelId')
+                ->references('hostelId')
+                ->on('hostels')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
@@ -47,6 +49,6 @@ class CreateGradesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('grades');
+        Schema::drop('currentStudentStates');
     }
 }
