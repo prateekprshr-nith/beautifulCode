@@ -30,4 +30,14 @@ class HostelStaffRequest extends Model
     {
         return $this->belongsTo('App\Student', 'rollNo', 'rollNo');
     }
+
+    /**
+     * Get the hostel details associated with this request
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function hostel ()
+    {
+        return $this->belongsTo('App\Hostel', 'hostelId', 'hostelId');
+    }
 }
