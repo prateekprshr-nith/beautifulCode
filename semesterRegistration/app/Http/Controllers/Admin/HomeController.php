@@ -11,10 +11,16 @@ use App\AdminStaff;
 use App\HostelStaff;
 use App\LibraryStaff;
 use App\Http\Requests;
+use App\TeacherRequest;
 use App\DepartmentStaff;
 use App\AvailableCourse;
 use App\ChiefWardenStaff;
+use App\AdminStaffRequest;
+use App\HostelStaffRequest;
+use App\CurrentStudentState;
+use App\LibraryStaffRequest;
 use Illuminate\Http\Request;
+use App\ChiefWardenStaffRequest;
 use App\Http\Controllers\Controller;
 
 /**
@@ -86,7 +92,13 @@ class HomeController extends Controller
 
                 // Clear the tables
                 AvailableCourse::truncate();
-
+                CurrentStudentState::truncate();
+                TeacherRequest::truncate();
+                LibraryStaffRequest::truncate();
+                HostelStaffRequest::truncate();
+                AdminStaffRequest::truncate();
+                ChiefWardenStaffRequest::truncate();
+                
                 Teacher::where('semNo', '!=', 'null')
                     ->update(['semNo' => null]);
             }
