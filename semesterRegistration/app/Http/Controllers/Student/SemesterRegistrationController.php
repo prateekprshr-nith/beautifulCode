@@ -3,12 +3,18 @@
 namespace App\Http\Controllers\Student;
 
 use App\Grade;
-use App\Student;
+use App\Hostel;
 use App\Http\Requests;
+use App\TeacherRequest;
+use App\AdminStaffRequest;
+use App\HostelStaffRequest;
 use Illuminate\Http\Request;
 use App\CurrentStudentState;
+use App\LibraryStaffRequest;
+use App\ChiefWardenStaffRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Intervention\Image\Facades\Image;
 
 /**
  * Class SemesterRegistrationController, this class contains
@@ -19,7 +25,6 @@ use App\Http\Controllers\Controller;
 class SemesterRegistrationController extends Controller
 {
     // Views for registration steps
-    protected $inactiveView = 'common.inactive';
     protected $initialDetailsView = 'student.semesterRegistration.initialDetails';
     protected $courseDetailsView = 'student.semesterRegistration.courseManagement';
     protected $registrationStatusView = 'student.semesterRegistration.registrationStatus';
@@ -35,21 +40,6 @@ class SemesterRegistrationController extends Controller
         $this->middleware('auth:student');
         $this->middleware('verify:student');
         $this->middleware('noImage');
-    }
-
-    /**
-     * Show the initial details view to the student
-     *
-     * @return mixed
-     */
-    public function showInitialDetailsView ()
-    {
-        if(!file_exists(storage_path() . '/app/activeForStudents'))
-        {
-            return view($this->inactiveView);
-        }
-
-        return view($this->initialDetailsView);
     }
 
     /**
@@ -111,13 +101,28 @@ class SemesterRegistrationController extends Controller
     }
 
     /**
+     * Show the initial details view to the student
+     *
+     * @return mixed
+     */
+    public function showInitialDetailsView ()
+    {
+        if(!$this->isRegistrationActive('student'))
+        {
+            return view($this->inactiveView);
+        }
+
+        return view($this->initialDetailsView);
+    }
+
+    /**
      * Add initial details of student
      *
      * @param Request $request
      */
     public function addInitialDetails (Request $request)
     {
-        if(!file_exists(storage_path() . '/app/activeForStudents'))
+        if(!$this->isRegistrationActive('student'))
         {
             return view($this->inactiveView);
         }
@@ -137,16 +142,161 @@ class SemesterRegistrationController extends Controller
         $currentStudentState->feeReceipt = $data['feeReceipt'];
         $currentStudentState->hostler = $data['hostler'];
         $currentStudentState->semNo = $data['semNo'];
+        $currentStudentState->step = 1;
         $currentStudentState->save();
         
-        // Now redirect accordingly
-        if($currentStudentState->feeReceipt == false && $currentStudentState->hostler == false)
+        // Now redirect to next step
+        return redirect('/students/semesterRegistration/feeAndHostelDetails');
+    }
+
+    /**
+     * Get the current state of student
+     *
+     * @return CurrentStudentState
+     */
+    protected function getCurrentStudentState ()
+    {
+        $currentStudentState = CurrentStudentState::find(Auth::guard('student')->user()->rollNo);
+        
+        return $currentStudentState;
+    }
+
+    /**
+     * Show hostel and feel details view to the student
+     *
+     * @return mixed
+     */
+    public function showFeeAndHostelDetailsView ()
+    {
+        if(!$this->isRegistrationActive('student'))
         {
-            return redirect('/students/semesterRegistration/courseDetails');
+            return view($this->inactiveView);
+        }
+
+        $currentStudentState = $this->getCurrentStudentState();
+
+        // Get the list of hostels
+        $hostels = Hostel::all();
+
+        return view($this->feeAndHostelDetailsView, ['currentStudentState' => $currentStudentState,
+            'hostels' => $hostels]);
+    }
+
+    /**
+     * Add fee and hostel details of the student and
+     * send the corresponding approval requests
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function addFeeAndHostelDetails (Request $request)
+    {
+        $currentStudentState = $this->getCurrentStudentState();
+
+        /*
+         * Check if the fee receipt image is present. If present, then upload
+         * the image and send the approval request to the teacher, otherwise
+         * send the approval request to accounts branch for verification
+         */
+        if($request->hasFile('image'))
+        {
+            $this->validate($request, [
+                'image' => 'image|required|max:2048',
+            ], [
+                'image' => 'The file must be a valid image file.'
+            ]);
+
+            if ($request->file('image')->isValid())
+            {
+                $image = $request->file('image');
+                $rollNo = Auth::guard('student')->user()->rollNo;
+
+                // Set the image parameters
+                $imageQuality = 70;
+                $imagePath = env('IMAGE_DIR') . '/feeReceipts/' . $rollNo . '.jpg';
+
+                // Save the image
+                Image::make($image->getRealPath())
+                    ->save($imagePath, $imageQuality);
+
+                /*
+                 * Update the image path in the database
+                 * and send the request to the teacher
+                 */
+                TeacherRequest::create([
+                    'rollNo' => Auth::guard('student')->user()->rollNo,
+                    'status' => 'new',
+                    'imagePath' => $imagePath,
+                ]);
+            }
+            else
+            {
+                return redirect()->back()
+                    ->withErrors('Upload unsuccessful!!!');
+            }
         }
         else
         {
-            return redirect('/students/semesterRegistration/feeAndHostelDetails');
+            // Send the request to accounts branch
+            AdminStaffRequest::create([
+                'rollNo' => Auth::guard('student')->user()->rollNo,
+                'status' => 'new',
+            ]);
         }
+
+        /*
+         * Check if the hostelId is present. If present, then send the approval request to the
+         * concerned hostel, otherwise send the approval request to chief warden office
+         */
+        if ($request->has('hostelId'))
+        {
+            $currentStudentState->hostelId = $request['hostelId'];
+            $currentStudentState->save();
+
+            // Send the request to the concerned hostel
+            HostelStaffRequest::create([
+                'rollNo' => Auth::guard('student')->user()->rollNo,
+                'hostelId' => $request['hostelId'],
+                'status' => 'new',
+            ]);
+        }
+        else
+        {
+            // Send the request to chief warden office for approval
+            ChiefWardenStaffRequest::create([
+                'rollNo' => Auth::guard('student')->user()->rollNo,
+                'status' => 'new',
+            ]);
+        }
+
+        // Send the request to library for approval
+        LibraryStaffRequest::create([
+            'rollNo' => Auth::guard('student')->user()->rollNo,
+            'status' => 'new',
+        ]);
+
+        $currentStudentState->step = 2;
+        $currentStudentState->save();
+
+        // Now redirect to next step
+        return redirect('/students/semesterRegistration/courseDetails');
+    }
+
+    public function showCourseDetailsView ()
+    {
+        if(!$this->isRegistrationActive('student'))
+        {
+            return view($this->inactiveView);
+        }
+        // #TODO
+    }
+
+    public function showRegistrationStatusView ()
+    {
+        if(!$this->isRegistrationActive('student'))
+        {
+            return view($this->inactiveView);
+        }
+        // #TODO
     }
 }
