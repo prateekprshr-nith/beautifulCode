@@ -51,7 +51,7 @@ class HomeController extends Controller
     public function index()
     {
         // Registration status for staff
-        if(file_exists(storage_path() . '/app/activeForStaff'))
+        if($this->isRegistrationActive('staff'))
         {
             $staffRegistrationStatus= 'Activated';
         }
@@ -61,7 +61,7 @@ class HomeController extends Controller
         }
 
         // Registration status for students
-        if(file_exists(storage_path() . '/app/activeForStudents'))
+        if($this->isRegistrationActive('student'))
         {
             $studentRegistrationStatus= 'Activated';
         }
@@ -86,7 +86,7 @@ class HomeController extends Controller
     {
         if($user === 'staff')
         {
-            if(file_exists(storage_path() . '/app/activeForStaff'))
+            if($this->isRegistrationActive('staff'))
             {
                 unlink(storage_path() . '/app/activeForStaff');
 
@@ -109,7 +109,7 @@ class HomeController extends Controller
         }
         else if($user === 'students')
         {
-            if(file_exists(storage_path() . '/app/activeForStudents'))
+            if($this->isRegistrationActive('student'))
             {
                 unlink(storage_path() . '/app/activeForStudents');
             }
