@@ -6,6 +6,7 @@ use App\Grade;
 use App\Hostel;
 use App\Http\Requests;
 use App\TeacherRequest;
+use App\AvailableCourse;
 use App\AdminStaffRequest;
 use App\HostelStaffRequest;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ class SemesterRegistrationController extends Controller
 {
     // Views for registration steps
     protected $initialDetailsView = 'student.semesterRegistration.initialDetails';
-    protected $courseDetailsView = 'student.semesterRegistration.courseManagement';
+    protected $courseDetailsView = 'student.semesterRegistration.courseDetails';
     protected $registrationStatusView = 'student.semesterRegistration.registrationStatus';
     protected $feeAndHostelDetailsView = 'student.semesterRegistration.feeAndHostelDetails';
 
@@ -282,13 +283,44 @@ class SemesterRegistrationController extends Controller
         return redirect('/students/semesterRegistration/courseDetails');
     }
 
+    /**
+     * Show course details view to the student
+     *
+     * @return mixed
+     */
     public function showCourseDetailsView ()
     {
         if(!$this->isRegistrationActive('student'))
         {
             return view($this->inactiveView);
         }
-        // #TODO
+
+        // Get the courses
+        $courses = AvailableCourse::where([
+            'dCode' => Auth::guard('student')->user()->dCode,
+            'semNo' => $this->getCurrentStudentState()->semNo,
+        ])->get();
+
+        return view($this->courseDetailsView, ['courses' => $courses, 'count' => 0]);
+    }
+
+    /**
+     * Add course details of the student
+     *
+     * @param Request $request
+     */
+    public function addCourseDetails (Request $request)
+    {
+        $currentStudentState = $this->getCurrentStudentState();
+
+        // #TODO open elective allocation logic to go here
+        // #TODO department elective allocation logic to go here
+
+        $currentStudentState->step = 3;
+        $currentStudentState->save();
+
+        // Now redirect to the status view
+        return redirect('/students/semesterRegistration/status');
     }
 
     public function showRegistrationStatusView ()
