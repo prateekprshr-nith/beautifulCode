@@ -119,7 +119,7 @@
                                 @else
                                     @if($user == 'student')
                                         <img src="{{ url('/students/image') }}" id="avatarImage" width="20" height="20"
-                                             class="img-rounded" alt="Cinque Terre" onerror="loadAvatarIcon()">
+                                             class="img-rounded" alt="Cinque Terre" onerror="loadAvatarIcon('avatarImage')">
                                     @endif
                                     <strong>
                                         {{Auth::guard($user)->user()->name}}
