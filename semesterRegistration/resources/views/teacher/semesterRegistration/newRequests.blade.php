@@ -84,7 +84,7 @@
                                             {{csrf_field()}}
                                             <input hidden name="rollNo" value="{{$request->rollNo}}">
                                             <td>
-                                                <button type="submit" class="btn btn-sm btn-primary">
+                                                <button type="submit" class="btn btn-sm btn-primary" onclick="return confirm('Are you sure?')">
                                                     <span class="glyphicon glyphicon-pause"></span> Keep on hold
                                                 </button>
                                             </td>
