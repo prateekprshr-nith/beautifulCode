@@ -255,7 +255,9 @@ class SemesterRegistrationController extends Controller
             'status' => 'pending',
         ])->get();
 
-        return view($this->pendingRequestsView, ['requests' => $requests, 'count' => 0]);
+        $requestCount = $this->getRequestCounts();
+
+        return view($this->pendingRequestsView, ['requests' => $requests, 'count' => 0,  'requestCount' => $requestCount]);
     }
 
     /**
