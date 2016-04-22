@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Teacher;
 use App\Course;
 use App\Teacher;
 use App\Http\Requests;
+use App\TeacherRequest;
 use App\AvailableCourse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -21,6 +22,9 @@ class SemesterRegistrationController extends Controller
     // Views dealing with semester registration
     protected $semesterSelectionView = 'teacher.semesterRegistration.semester';
     protected $courseSelectionView = 'teacher.semesterRegistration.courses';
+    protected $newRequestsView = 'teacher.semesterRegistration.newRequests';
+    protected $pendingRequestsView = 'teacher.semesterRegistration.pendingRequests';
+    protected $allRequestsView = 'teacher.semesterRegistration.allRequests';
 
     /**
      * Create a new controller instance.
@@ -177,5 +181,29 @@ class SemesterRegistrationController extends Controller
         $course = AvailableCourse::where($course)->delete();
 
         return redirect()->back();
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Student registration requests management functions
+
+    /**
+     * Show new requests view
+     *
+     * @return mixed
+     */
+    public function showNewRequestsView ()
+    {
+        if(!$this->isRegistrationActive('staff'))
+        {
+            return view($this->inactiveView);
+        }
+
+        // Get the requests
+        $requests = TeacherRequest::where([
+            'semNo' => Auth::guard('teacher')->user()->semNo,
+            'status' => 'new',
+        ])->get();
+
+        return view($this->newRequestsView, ['requests' => $requests, 'count' => 0]);
     }
 }
