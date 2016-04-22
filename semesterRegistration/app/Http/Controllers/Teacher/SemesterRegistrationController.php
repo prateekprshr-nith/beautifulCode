@@ -300,7 +300,9 @@ class SemesterRegistrationController extends Controller
             'semNo' => Auth::guard('teacher')->user()->semNo,
         ])->get();
 
-        return view($this->allRequestsView, ['requests' => $requests, 'count' => 0]);
+        $requestCount = $this->getRequestCounts();
+
+        return view($this->allRequestsView, ['requests' => $requests, 'count' => 0,  'requestCount' => $requestCount]);
     }
 
     /**
