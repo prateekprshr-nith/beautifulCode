@@ -12,7 +12,7 @@
             <div class="modal-body">
                 <h4 class="text-center"><span class="glyphicon glyphicon-picture"></span> Fee Receipt Image</h4>
                 <div class="text-center">
-                    <img src="" id="feeReceiptImage" class="img-thumbnail" height="500" width="500" alt="Error please refresh">
+                    <img src="" id="feeReceiptImage" class="img-thumbnail" height="400" width="400" alt="Error please refresh">
                 </div>
 
                 <hr class="gradientHr">
