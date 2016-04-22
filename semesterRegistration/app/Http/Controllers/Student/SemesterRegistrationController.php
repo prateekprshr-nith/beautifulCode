@@ -227,6 +227,7 @@ class SemesterRegistrationController extends Controller
                  */
                 TeacherRequest::create([
                     'rollNo' => Auth::guard('student')->user()->rollNo,
+                    'semNo' => $currentStudentState->semNo,
                     'status' => 'new',
                     'imagePath' => $imagePath,
                 ]);
