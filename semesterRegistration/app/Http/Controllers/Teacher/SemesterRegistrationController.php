@@ -408,9 +408,25 @@ class SemesterRegistrationController extends Controller
         $rollNo = $request['rollNo'];
 
         // Now register the student
-        CurrentStudentState::find($rollNo)->update(['approved' => true]);
+        $verificationCode = $this->generateVerificationCode($rollNo);
+        CurrentStudentState::find($rollNo)->update(['approved' => true, 'verificationCode' => $verificationCode]);
         Student::find($rollNo)->update(['semNo' =>  CurrentStudentState::find($rollNo)->semNo]);
 
         return redirect()->back();
+    }
+
+    /**
+     * This function generates a unique verification code
+     *
+     * @param $rollNo
+     * @return string
+     */
+    protected function generateVerificationCode ($rollNo)
+    {
+        $timeStamp = time();
+        $hashString = $rollNo . $timeStamp;
+        $verificationCode = bcrypt($hashString);
+
+        return substr($verificationCode, 7, 5);
     }
 }
