@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\TeacherRequest;
 use App\AvailableCourse;
 use Illuminate\Http\Request;
+use App\CurrentStudentState;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -248,5 +249,25 @@ class SemesterRegistrationController extends Controller
         ])->get();
 
         return view($this->approvedRequestsView, ['requests' => $requests, 'count' => 0]);
+    }
+
+    /**
+     * Show all requests view
+     *
+     * @return mixed
+     */
+    public function showAllRequestsView ()
+    {
+        if(!$this->isRegistrationActive('staff'))
+        {
+            return view($this->inactiveView);
+        }
+
+        // Get the student list
+        $requests = CurrentStudentState::where([
+            'semNo' => Auth::guard('teacher')->user()->semNo,
+        ])->get();
+
+        return view($this->allRequestsView, ['requests' => $requests, 'count' => 0]);
     }
 }
