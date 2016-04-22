@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Teacher;
 
 use App\Course;
+use App\Student;
 use App\Teacher;
 use App\Http\Requests;
 use App\TeacherRequest;
@@ -279,6 +280,11 @@ class SemesterRegistrationController extends Controller
      */
     public function getFeeReceiptImage ($rollNo)
     {
+        if(!$this->isRegistrationActive('staff'))
+        {
+            return view($this->inactiveView);
+        }
+
         // Get the fee receipt image and
         // return it as http response
         $imagePath = TeacherRequest::find($rollNo)->imagePath;
@@ -286,5 +292,24 @@ class SemesterRegistrationController extends Controller
         $image = Image::make($imagePath);
 
         return $image->response();
+    }
+
+    /**
+     * Get information of a student
+     *
+     * @param $rollNo
+     * @return mixed
+     */
+    public function getStudentInfo ($rollNo)
+    {
+        if(!$this->isRegistrationActive('staff'))
+        {
+            return view($this->inactiveView);
+        }
+
+        // Get the student
+        $student = Student::find($rollNo);
+
+        return $student;
     }
 }
