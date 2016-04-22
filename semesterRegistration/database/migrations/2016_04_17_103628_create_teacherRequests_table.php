@@ -19,6 +19,7 @@ class CreateTeacherRequestsTable extends Migration
         Schema::create('teacherRequests', function (Blueprint $table)
         {
             $table->string('rollNo', '20');
+            $table->smallInteger('semNo');
             $table->string('status', '20');
             $table->string('imagePath', '200');
             $table->string('remarks', '200') ->nullable();
