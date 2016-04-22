@@ -49,10 +49,13 @@
                             <tbody>
                                 @foreach ($requests as $request)
                                     <tr>
-                                        <td>{{ ++$count }}</td>
-                                        <td>{{ $request->rollNo }}</td>
+                                        <td>{{++$count}}</td>
+                                        <td>{{$request->rollNo}}</td>
                                         <td>
-                                            <a href="#" class="btn btn-sm btn-primary">
+                                            <a href="#" class="btn btn-sm btn-primary" data-toggle="modal"
+                                               data-target="#myModal" onclick='setImageSrc("feeReceiptImage",
+                                                    "/teachers/semesterRegistration/studentRequests/feeReceipts/",
+                                                    "{{$request->rollNo}}")' data-rollno="{{$request->rollNo}}">
                                                 <span class="glyphicon glyphicon-info-sign"></span> View fee receipt and info
                                             </a>
                                         </td>
@@ -78,5 +81,7 @@
             </div>
         </div>
     </div>
+
+    @include('teacher.partials.studentAndFeeInformationModal')
 
 @endsection
