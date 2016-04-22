@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\CurrentStudentState;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 /**
  * Class SemesterRegistrationController, this class contains
@@ -269,5 +270,21 @@ class SemesterRegistrationController extends Controller
         ])->get();
 
         return view($this->allRequestsView, ['requests' => $requests, 'count' => 0]);
+    }
+
+    /**
+     * Get the fee receipt of a student
+     *
+     * @param $rollNo
+     */
+    public function getFeeReceiptImage ($rollNo)
+    {
+        // Get the fee receipt image and
+        // return it as http response
+        $imagePath = TeacherRequest::find($rollNo)->imagePath;
+        
+        $image = Image::make($imagePath);
+
+        return $image->response();
     }
 }
