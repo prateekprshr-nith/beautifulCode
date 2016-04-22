@@ -13,16 +13,24 @@
                     <div class="panel-body">
                         <ul class="nav nav-tabs nav-justified">
                             <li role="presentation">
-                                <a href="/teachers/semesterRegistration/studentRequests/new">New Requests</a>
+                                <a href="/teachers/semesterRegistration/studentRequests/new">
+                                    New Requests <span class="badge">{{$requestCount['newCount']}}</span>
+                                </a>
                             </li>
                             <li role="presentation">
-                                <a href="/teachers/semesterRegistration/studentRequests/pending">Pending Requests</a>
+                                <a href="/teachers/semesterRegistration/studentRequests/pending">
+                                    Pending Requests <span class="badge">{{$requestCount['pendingCount']}}</span>
+                                </a>
                             </li>
                             <li role="presentation" class="active">
-                                <a href="/teachers/semesterRegistration/studentRequests/approved">Approved Requests</a>
+                                <a href="/teachers/semesterRegistration/studentRequests/approved">
+                                    Approved Requests <span class="badge">{{$requestCount['approvedCount']}}</span>
+                                </a>
                             </li>
                             <li role="presentation">
-                                <a href="/teachers/semesterRegistration/studentRequests/all">All Requests</a>
+                                <a href="/teachers/semesterRegistration/studentRequests/all">
+                                    All Requests <span class="badge">{{$requestCount['totalCount']}}</span>
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -49,7 +57,10 @@
                                         <td>{{++$count}}</td>
                                         <td>{{$request->rollNo}}</td>
                                         <td>
-                                            <a href="#" class="btn btn-sm btn-primary">
+                                            <a href="#" class="btn btn-sm btn-primary" data-toggle="modal"
+                                               data-target="#myModal" onclick='setImageSrc("feeReceiptImage",
+                                                    "/teachers/semesterRegistration/studentRequests/feeReceipts/",
+                                                    "{{$request->rollNo}}")' data-rollno="{{$request->rollNo}}">
                                                 <span class="glyphicon glyphicon-info-sign"></span> View fee receipt and info
                                             </a>
                                         </td>
@@ -62,5 +73,7 @@
             </div>
         </div>
     </div>
+
+    @include('teacher.partials.studentAndFeeInformationModal')
 
 @endsection
