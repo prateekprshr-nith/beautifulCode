@@ -391,4 +391,26 @@ class SemesterRegistrationController extends Controller
 
         return redirect()->back();
     }
+
+    /**
+     * Register a student for new semester
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function registerStudent (Request $request)
+    {
+        if(!$this->isRegistrationActive('staff'))
+        {
+            return view($this->inactiveView);
+        }
+
+        $rollNo = $request['rollNo'];
+
+        // Now register the student
+        CurrentStudentState::find($rollNo)->update(['approved' => true]);
+        Student::find($rollNo)->update(['semNo' =>  CurrentStudentState::find($rollNo)->semNo]);
+
+        return redirect()->back();
+    }
 }
