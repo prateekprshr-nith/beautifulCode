@@ -71,14 +71,19 @@
                                                 </button>
                                             </form>
                                         </td>
-                                        <td>
-                                            <a href="#" class="btn btn-sm btn-primary">
-                                                <span class="glyphicon glyphicon-pause"></span> Keep on hold
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <textarea class="form-control verticalAlign" rows="1"></textarea>
-                                        </td>
+                                        <form method="post" action="/teachers/semesterRegistration/studentRequests/hold">
+                                            {{method_field('PATCH')}}
+                                            {{csrf_field()}}
+                                            <input hidden name="rollNo" value="{{$request->rollNo}}">
+                                            <td>
+                                                <button type="submit" class="btn btn-sm btn-primary">
+                                                    <span class="glyphicon glyphicon-pause"></span> Keep on hold
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <textarea name="remarks" required class="form-control verticalAlign remark" rows="1"></textarea>
+                                            </td>
+                                        </form>
                                     </tr>
                                 @endforeach
                             </tbody>
