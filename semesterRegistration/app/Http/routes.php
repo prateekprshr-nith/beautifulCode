@@ -98,7 +98,8 @@ Route::group(['middleware' => 'web'], function ()
                 Route::get('approved', 'Teacher\SemesterRegistrationController@showApprovedRequestsView');
                 Route::get('all', 'Teacher\SemesterRegistrationController@showAllRequestsView');
                 Route::patch('approve', 'Teacher\SemesterRegistrationController@approveRequest');
-                Route::patch('addToPendingList', 'Teacher\SemesterRegistrationController@holdRequest');
+                Route::patch('hold', 'Teacher\SemesterRegistrationController@holdRequest');
+                Route::patch('register', 'Teacher\SemesterRegistrationController@registerStudent');
                 Route::get('feeReceipts/{rollNo}', 'Teacher\SemesterRegistrationController@getFeeReceiptImage');
                 Route::get('studentInfo/{rollNo}', 'Teacher\SemesterRegistrationController@getStudentInfo');
             });
