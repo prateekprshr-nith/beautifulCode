@@ -53,7 +53,7 @@
                                     <th>Library</th>
                                     <th>Hostel</th>
                                     <th>Chief warden's office</th>
-                                    <th>Register</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -65,67 +65,99 @@
                                             @if($request->feeReceipt == true)
                                                 @if($request->student->teacherRequest->status === 'new')
                                                     Awaiting approval
+                                                    {{-- */$feeStatus = 'new';/* --}}
                                                 @elseif($request->student->teacherRequest->status === 'pending')
                                                     Pending
+                                                    {{-- */$feeStatus = 'pending';/* --}}
                                                 @else
                                                     Approved
+                                                    {{-- */$feeStatus = 'approved';/* --}}
                                                 @endif
                                             @else
-                                                Not applicable
+                                                <p class="text-info">Not applicable</p>
                                             @endif
                                         </td>
                                         <td>
                                             @if($request->feeReceipt == false)
                                                 @if($request->student->adminStaffRequest->status === 'new')
                                                     Awaiting approval
+                                                    {{-- */$feeStatus = 'new';/* --}}
                                                 @elseif($request->student->adminStaffRequest->status === 'pending')
                                                     Pending
+                                                    {{-- */$feeStatus = 'pending';/* --}}
                                                 @else
                                                     Approved
+                                                    {{-- */$feeStatus = 'approved';/* --}}
                                                 @endif
                                             @else
-                                                Not applicable
+                                                <p class="text-info">Not applicable</p>
                                             @endif
                                         </td>
                                         <td>
                                             @if($request->student->libraryStaffRequest->status === 'new')
                                                 Awaiting approval
+                                                {{-- */$libraryStatus = 'new';/* --}}
                                             @elseif($request->student->libraryStaffRequest->status === 'pending')
                                                 Pending
+                                                {{-- */$libraryStatus = 'pending';/* --}}
                                             @else
                                                 Approved
+                                                {{-- */$libraryStatus = 'approved';/* --}}
                                             @endif
                                         </td>
                                         <td>
                                             @if($request->hostler == true)
                                                 @if($request->student->hostelStaffRequest->status === 'new')
                                                     Awaiting approval
+                                                    {{-- */$hostelStatus = 'new';/* --}}
                                                 @elseif($request->student->hostelStaffRequest->status === 'pending')
                                                     Pending
+                                                    {{-- */$hostelStatus = 'pending';/* --}}
                                                 @else
                                                     Approved
+                                                    {{-- */$hostelStatus = 'approved';/* --}}
                                                 @endif
                                             @else
-                                                Not applicable
+                                                <p class="text-info">Not applicable</p>
                                             @endif
                                         </td>
                                         <td>
                                             @if($request->hostler == false)
                                                 @if($request->student->chiefWardenStaffRequest->status === 'new')
                                                     Awaiting approval
+                                                    {{-- */$hostelStatus = 'new';/* --}}
                                                 @elseif($request->student->chiefWardenRequest->status === 'pending')
                                                     Pending
+                                                    {{-- */$hostelStatus = 'pending';/* --}}
                                                 @else
                                                     Approved
+                                                    {{-- */$hostelStatus = 'approved';/* --}}
                                                 @endif
                                             @else
-                                                Not applicable
+                                                <p class="text-info">Not applicable</p>
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="#" class="btn btn-sm btn-primary" onclick="return confirm('Are you sure?')">
-                                                <span class="glyphicon glyphicon-ok"></span> Register
-                                            </a>
+                                            @if($request->student->currentStudentState->approved == true)
+                                                <span class="glyphicon glyphicon-ok"></span> Registered
+                                            @elseif($feeStatus === 'approved' &&
+                                                    $libraryStatus === 'approved' &&
+                                                    $hostelStatus === 'approved')
+                                                <form method="post" action="/teachers/semesterRegistration/studentRequests/register">
+                                                    {{csrf_field()}}
+                                                    {{method_field('PATCH')}}
+
+                                                    <input hidden name="rollNo" value="{{$request->rollNo}}">
+
+                                                    <button type="submit" class="btn btn-sm btn-primary" onclick="return confirm('Are you sure?')">
+                                                        <span class="glyphicon glyphicon-ok"></span> Register
+                                                    </button>
+                                                </form>
+                                            @else
+                                                <button disabled type="submit" class="btn btn-sm btn-primary" onclick="return confirm('Are you sure?')">
+                                                    <span class="glyphicon glyphicon-ok"></span> Register
+                                                </button>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
