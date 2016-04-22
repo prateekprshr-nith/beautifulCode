@@ -191,6 +191,30 @@ class SemesterRegistrationController extends Controller
     // Student registration requests management functions
 
     /**
+     * Get request counts
+     *
+     * @return mixed
+     */
+    protected function getRequestCounts()
+    {
+        $countArr['newCount'] = count(TeacherRequest::where([
+            'semNo' => Auth::guard('teacher')->user()->semNo,
+            'status' => 'new',
+        ])->get());
+        $countArr['pendingCount'] = count(TeacherRequest::where([
+            'semNo' => Auth::guard('teacher')->user()->semNo,
+            'status' => 'pending',
+        ])->get());
+        $countArr['approvedCount'] = count(TeacherRequest::where([
+            'semNo' => Auth::guard('teacher')->user()->semNo,
+            'status' => 'approved',
+        ])->get());
+        $countArr['totalCount'] = $countArr['newCount'] +  $countArr['pendingCount'] + $countArr['approvedCount'];
+
+        return $countArr;
+    }
+
+    /**
      * Show new requests view
      *
      * @return mixed
@@ -208,7 +232,9 @@ class SemesterRegistrationController extends Controller
             'status' => 'new',
         ])->get();
 
-        return view($this->newRequestsView, ['requests' => $requests, 'count' => 0]);
+        $requestCount = $this->getRequestCounts();
+
+        return view($this->newRequestsView, ['requests' => $requests, 'count' => 0,  'requestCount' => $requestCount]);
     }
 
     /**
