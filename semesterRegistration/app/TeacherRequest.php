@@ -18,7 +18,7 @@ class TeacherRequest extends Model
 
     // Fillable and hidden arrtibutes
     protected $fillable = [
-        'rollNo', 'status', 'imagePath', 'remarks',
+        'rollNo', 'semNo', 'status', 'imagePath', 'remarks',
     ];
 
     /**
