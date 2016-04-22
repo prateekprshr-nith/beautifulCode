@@ -60,9 +60,16 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="#" class="btn btn-sm btn-danger">
-                                                <span class="glyphicon glyphicon-ok"></span> Approve
-                                            </a>
+                                            <form method="post" action="/teachers/semesterRegistration/studentRequests/approve">
+                                                {{method_field('PATCH')}}
+                                                {{csrf_field()}}
+
+                                                <input hidden name="rollNo" value="{{$request->rollNo}}">
+
+                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">
+                                                    <span class="glyphicon glyphicon-ok"></span> Approve
+                                                </button>
+                                            </form>
                                         </td>
                                         <td>
                                             <a href="#" class="btn btn-sm btn-primary">
