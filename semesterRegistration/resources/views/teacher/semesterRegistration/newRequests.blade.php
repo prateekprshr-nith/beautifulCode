@@ -19,6 +19,9 @@
                                 <a href="/teachers/semesterRegistration/studentRequests/pending">Pending Requests</a>
                             </li>
                             <li role="presentation">
+                                <a href="/teachers/semesterRegistration/studentRequests/approved">Approved Requests</a>
+                            </li>
+                            <li role="presentation">
                                 <a href="/teachers/semesterRegistration/studentRequests/all">All Requests</a>
                             </li>
                         </ul>
