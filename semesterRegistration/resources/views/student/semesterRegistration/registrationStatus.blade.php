@@ -194,46 +194,46 @@
     @if($currentStudentState->feeReceipt == true && $feeStatus === 'pending')
         <!-- Image re-upload Modal form -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">
-                        <span class="glyphicon glyphicon-plus"></span>
-                        <strong> Re-upload a clear image of your fee receipt</strong>
-                    </h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" role="form" method="POST" action="/students/semesterRegistration/reUploadFeeReceipt"
-                          accept-charset="UTF-8" id="updateInfoForm" enctype="multipart/form-data">
-                        {{ csrf_field() }}
-                        {{ method_field('PATCH') }}
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            <strong> Re-upload a clear image of your fee receipt</strong>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form" method="POST" action="/students/semesterRegistration/reUploadFeeReceipt"
+                              accept-charset="UTF-8" id="updateInfoForm" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            {{ method_field('PATCH') }}
 
 
-                        <div class="form-group">
-                            <label class="col-md-2 control-label" for="image">Image</label>
-                            <div class="col-md-8">
-                                <input required class="file-loading" name="image" type="file"
-                                       id="image">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="image">Image</label>
+                                <div class="col-md-8">
+                                    <input required class="file-loading" name="image" type="file"
+                                           id="image">
+                                </div>
                             </div>
-                        </div>
 
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
         <script>
-        $(document).on('ready', function() {
-            $("#image").fileinput({
-                initialPreview: [
-                ],
-                overwriteInitial: false,
-                maxFileSize: 2048,
-                initialCaption: ""
+            $(document).on('ready', function() {
+                $("#image").fileinput({
+                    initialPreview: [
+                    ],
+                    overwriteInitial: false,
+                    maxFileSize: 2048,
+                    initialCaption: ""
+                });
             });
-        });
-    </script>
+        </script>
     @endif
 
 @endsection
