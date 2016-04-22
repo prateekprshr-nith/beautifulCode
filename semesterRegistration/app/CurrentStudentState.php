@@ -18,7 +18,7 @@ class CurrentStudentState extends Model
 
     // Fillable and hidden arrtibutes
     protected $fillable = [
-        'rollNo', 'semNo', 'hostler', 'feeReceipt', 'hostelId', 'step', 'approved',
+        'rollNo', 'semNo', 'hostler', 'feeReceipt', 'hostelId', 'step', 'approved', 'verificationCode',
     ];
 
     /**
