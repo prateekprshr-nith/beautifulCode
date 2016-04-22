@@ -24,6 +24,10 @@
             resize: vertical;
         }
 
+        textarea.remark {
+            height: 34px;
+        }
+
         .panel-heading p {
             white-space: nowrap;
             overflow: hidden;
