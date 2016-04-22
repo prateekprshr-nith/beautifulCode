@@ -312,4 +312,25 @@ class SemesterRegistrationController extends Controller
 
         return $student;
     }
+
+    /**
+     * Approve a student registration request
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function approveRequest (Request $request)
+    {
+        if(!$this->isRegistrationActive('staff'))
+        {
+            return view($this->inactiveView);
+        }
+        
+        $rollNo = $request['rollNo'];
+
+        // Update the status of the student request as approved
+        TeacherRequest::find($rollNo)->update(['status' => 'approved']);
+
+        return redirect()->back();
+    }
 }
