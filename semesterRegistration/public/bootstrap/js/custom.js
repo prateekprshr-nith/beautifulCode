@@ -65,3 +65,11 @@ function validateFileSize(formId, elementId)
         document.getElementById(formId).reset();
     }
 }
+
+/*
+ * This function sets the src field of an image
+ */
+function setImageSrc(elementId, documentUrl, subUrl)
+{
+    document.getElementById(elementId).src = documentUrl + subUrl;
+}
