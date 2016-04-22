@@ -24,6 +24,7 @@ class SemesterRegistrationController extends Controller
     protected $courseSelectionView = 'teacher.semesterRegistration.courses';
     protected $newRequestsView = 'teacher.semesterRegistration.newRequests';
     protected $pendingRequestsView = 'teacher.semesterRegistration.pendingRequests';
+    protected $approvedRequestsView = 'teacher.semesterRegistration.approvedRequests';
     protected $allRequestsView = 'teacher.semesterRegistration.allRequests';
 
     /**
@@ -226,5 +227,26 @@ class SemesterRegistrationController extends Controller
         ])->get();
 
         return view($this->pendingRequestsView, ['requests' => $requests, 'count' => 0]);
+    }
+
+    /**
+     * Show approved requests view
+     *
+     * @return mixed
+     */
+    public function showApprovedRequestsView ()
+    {
+        if(!$this->isRegistrationActive('staff'))
+        {
+            return view($this->inactiveView);
+        }
+
+        // Get the requests
+        $requests = TeacherRequest::where([
+            'semNo' => Auth::guard('teacher')->user()->semNo,
+            'status' => 'approved',
+        ])->get();
+
+        return view($this->approvedRequestsView, ['requests' => $requests, 'count' => 0]);
     }
 }
