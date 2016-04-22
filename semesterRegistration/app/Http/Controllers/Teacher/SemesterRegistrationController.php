@@ -333,4 +333,30 @@ class SemesterRegistrationController extends Controller
 
         return redirect()->back();
     }
+
+    /**
+     * Hold a student registration request
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function holdRequest (Request $request)
+    {
+        if(!$this->isRegistrationActive('staff'))
+        {
+            return view($this->inactiveView);
+        }
+
+        $rollNo = $request['rollNo'];
+        $remarks = $request['remarks'];
+
+        // Update the status of the student request as
+        // pending and add the appropriate remarks
+        TeacherRequest::find($rollNo)->update([
+            'status' => 'pending',
+            'remarks' => $remarks,
+        ]);
+
+        return redirect()->back();
+    }
 }
