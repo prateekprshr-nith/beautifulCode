@@ -27,6 +27,8 @@
                         </ul>
                     </div>
 
+                    <br>
+
                     <!-- New requests list -->
                     <table class="table table-responsive">
                         @if($requests->isEmpty())
