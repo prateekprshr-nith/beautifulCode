@@ -278,7 +278,9 @@ class SemesterRegistrationController extends Controller
             'status' => 'approved',
         ])->get();
 
-        return view($this->approvedRequestsView, ['requests' => $requests, 'count' => 0]);
+        $requestCount = $this->getRequestCounts();
+
+        return view($this->approvedRequestsView, ['requests' => $requests, 'count' => 0,  'requestCount' => $requestCount]);
     }
 
     /**
