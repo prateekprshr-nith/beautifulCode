@@ -206,4 +206,25 @@ class SemesterRegistrationController extends Controller
 
         return view($this->newRequestsView, ['requests' => $requests, 'count' => 0]);
     }
+
+    /**
+     * Show pending requests view
+     *
+     * @return mixed
+     */
+    public function showPendingRequestsView ()
+    {
+        if(!$this->isRegistrationActive('staff'))
+        {
+            return view($this->inactiveView);
+        }
+
+        // Get the requests
+        $requests = TeacherRequest::where([
+            'semNo' => Auth::guard('teacher')->user()->semNo,
+            'status' => 'pending',
+        ])->get();
+
+        return view($this->pendingRequestsView, ['requests' => $requests, 'count' => 0]);
+    }
 }
