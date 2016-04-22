@@ -83,11 +83,25 @@ Route::group(['middleware' => 'web'], function ()
         Route::get('home', 'Teacher\HomeController@index');
         Route::group(['prefix' => '/semesterRegistration'], function ()
         {
+            // Routes for semester and course selection
             Route::get('semester', 'Teacher\SemesterRegistrationController@showSemesterSelectionView');
             Route::put('semester', 'Teacher\SemesterRegistrationController@addSemester');
             Route::get('courses', 'Teacher\SemesterRegistrationController@showCourseSelectionView');
             Route::put('courses', 'Teacher\SemesterRegistrationController@addCourse');
             Route::delete('courses', 'Teacher\SemesterRegistrationController@removeCourse');
+
+            // Routes for managing student requests
+            Route::group(['prefix' => '/studentRequests'], function ()
+            {
+                Route::get('new', 'Teacher\SemesterRegistrationController@showNewRequestsView');
+                Route::get('pending', 'Teacher\SemesterRegistrationController@showPendingRequestsView');
+                Route::get('approved', 'Teacher\SemesterRegistrationController@showApprovedRequestsView');
+                Route::get('all', 'Teacher\SemesterRegistrationController@showAllRequestsView');
+                Route::patch('approve', 'Teacher\SemesterRegistrationController@approveRequest');
+                Route::patch('addToPendingList', 'Teacher\SemesterRegistrationController@holdRequest');
+                Route::get('feeReceipts/{rollNo}', 'Teacher\SemesterRegistrationController@getFeeReceiptImage');
+                Route::get('studentInfo/{rollNo}', 'Teacher\SemesterRegistrationController@getStudentInfo');
+            });
         });
 
     });
