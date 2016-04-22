@@ -54,6 +54,7 @@
                                     <th>Hostel</th>
                                     <th>Chief warden's office</th>
                                     <th>Action</th>
+                                    <th>Code</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -159,6 +160,7 @@
                                                 </button>
                                             @endif
                                         </td>
+                                        <td>{{$request->student->currentStudentState->verificationCode}}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
