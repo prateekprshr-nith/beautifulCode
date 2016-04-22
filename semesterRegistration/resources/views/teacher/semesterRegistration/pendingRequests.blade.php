@@ -13,16 +13,24 @@
                     <div class="panel-body">
                         <ul class="nav nav-tabs nav-justified">
                             <li role="presentation">
-                                <a href="/teachers/semesterRegistration/studentRequests/new">New Requests</a>
+                                <a href="/teachers/semesterRegistration/studentRequests/new">
+                                    New Requests <span class="badge">{{$requestCount['newCount']}}</span>
+                                </a>
                             </li>
                             <li role="presentation" class="active">
-                                <a href="/teachers/semesterRegistration/studentRequests/pending">Pending Requests</a>
+                                <a href="/teachers/semesterRegistration/studentRequests/pending">
+                                    Pending Requests <span class="badge">{{$requestCount['pendingCount']}}</span>
+                                </a>
                             </li>
                             <li role="presentation">
-                                <a href="/teachers/semesterRegistration/studentRequests/approved">Approved Requests</a>
+                                <a href="/teachers/semesterRegistration/studentRequests/approved">
+                                    Approved Requests <span class="badge">{{$requestCount['approvedCount']}}</span>
+                                </a>
                             </li>
                             <li role="presentation">
-                                <a href="/teachers/semesterRegistration/studentRequests/all">All Requests</a>
+                                <a href="/teachers/semesterRegistration/studentRequests/all">
+                                    All Requests <span class="badge">{{$requestCount['totalCount']}}</span>
+                                </a>
                             </li>
                         </ul>
                     </div>
