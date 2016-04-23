@@ -172,6 +172,19 @@ Route::group(['middleware' => 'web'], function ()
 
         // HostelStaff view routes
         Route::get('home', 'HostelStaff\HomeController@index');
+        Route::group(['prefix' => '/semesterRegistration'], function ()
+        {
+            // Routes for managing student requests
+            Route::group(['prefix' => '/studentRequests'], function ()
+            {
+                Route::get('new', 'HostelStaff\SemesterRegistrationController@showNewRequestsView');
+                Route::get('pending', 'HostelStaff\SemesterRegistrationController@showPendingRequestsView');
+                Route::get('approved', 'HostelStaff\SemesterRegistrationController@showApprovedRequestsView');
+                Route::patch('approve', 'HostelStaff\SemesterRegistrationController@approveRequest');
+                Route::patch('hold', 'HostelStaff\SemesterRegistrationController@holdRequest');
+                Route::get('studentInfo/{rollNo}', 'HostelStaff\SemesterRegistrationController@getStudentInfo');
+            });
+        });
     });
 
 
