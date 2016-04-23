@@ -132,6 +132,19 @@ Route::group(['middleware' => 'web'], function ()
 
         // LibraryStaff view routes
         Route::get('home', 'LibraryStaff\HomeController@index');
+        Route::group(['prefix' => '/semesterRegistration'], function ()
+        {
+            // Routes for managing student requests
+            Route::group(['prefix' => '/studentRequests'], function ()
+            {
+                Route::get('new', 'LibraryStaff\SemesterRegistrationController@showNewRequestsView');
+                Route::get('pending', 'LibraryStaff\SemesterRegistrationController@showPendingRequestsView');
+                Route::get('approved', 'LibraryStaff\SemesterRegistrationController@showApprovedRequestsView');
+                Route::patch('approve', 'LibraryStaff\SemesterRegistrationController@approveRequest');
+                Route::patch('hold', 'LibraryStaff\SemesterRegistrationController@holdRequest');
+                Route::get('studentInfo/{rollNo}', 'LibraryStaff\SemesterRegistrationController@getStudentInfo');
+            });
+        });
     });
 
 
