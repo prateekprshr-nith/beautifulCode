@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-
-    <div class="container">
+    @if(Auth::guard('teacher')->user()->semNo != null)
+        <div class="container">
         <div class="row">
             <div class="col-md-12 col-md-offset-0">
                 <div class="panel panel-default">
@@ -53,6 +53,7 @@
                                     <th>Library</th>
                                     <th>Hostel</th>
                                     <th>Chief warden's office</th>
+                                    <th>Student Information</th>
                                     <th>Action</th>
                                     <th>Code</th>
                                 </tr>
@@ -139,6 +140,14 @@
                                             @endif
                                         </td>
                                         <td>
+                                            <a href="#" class="btn btn-sm btn-primary" data-toggle="modal"
+                                               data-target="#myModal" onclick='setImageSrc("feeReceiptImage",
+                                                    "/teachers/semesterRegistration/studentRequests/feeReceipts/",
+                                                    "{{$request->rollNo}}")' data-rollno="{{$request->rollNo}}">
+                                                <span class="glyphicon glyphicon-info-sign"></span> View student info
+                                            </a>
+                                        </td>
+                                        <td>
                                             @if($request->student->currentStudentState->approved == true)
                                                 <span class="glyphicon glyphicon-ok"></span> Registered
                                             @elseif($feeStatus === 'approved' &&
@@ -170,5 +179,26 @@
             </div>
         </div>
     </div>
+
+        @include('teacher.partials.studentAndFeeInformationModal')
+    @else
+        <style>
+            .element {
+                position: relative;
+                top: 50%;
+                transform: translateY(10%);
+            }
+        </style>
+        <div class="container element">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="jumbotron text-center">
+                        <h3>Please <a href="/teachers/semesterRegistration/semester">register</a> as an incharge first. </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
 
 @endsection
