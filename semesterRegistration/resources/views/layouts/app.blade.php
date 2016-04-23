@@ -109,18 +109,13 @@
                             <li><a href="/{{$user}}s/manage/courses">Courses</a></li>
                         @endif
 
-                        <!-- Tabs for admin staff users -->
-                        @if($user == 'adminStaff')
-                            <li>
-                                <a href="/{{$user}}s/semesterRegistration/studentRequests/new">
-                                    Registration Requests
-                                </a>
-                            </li>
-                        @endif
-
                         <!-- Tabs for faculty  users -->
                         @if($user == 'teacher')
                             <li><a href="/{{$user}}s/semesterRegistration/semester">Register as an incharge</a></li>
+                        @endif
+
+                        <!-- Tabs for staff users -->
+                        @if($user != 'admin' && $user != 'student' && $user != 'departmentStaff')
                             <li>
                                 <a href="/{{$user}}s/semesterRegistration/studentRequests/new">
                                     Registration Requests
