@@ -32,7 +32,7 @@ class CreateStudentsTable extends Migration
             $table->string('sectionId', '10');
             $table->string('password', '100');
             $table->date('dob');
-            $table->string('verificationCode', '100');
+            $table->string('verificationCode', '100')->nullable();
             $table->boolean('verified');
             $table->rememberToken();
             $table->timestamps();
