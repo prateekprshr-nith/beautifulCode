@@ -212,6 +212,19 @@ Route::group(['middleware' => 'web'], function ()
 
         // ChiefWardenStaff view routes
         Route::get('home', 'ChiefWardenStaff\HomeController@index');
+        Route::group(['prefix' => '/semesterRegistration'], function ()
+        {
+            // Routes for managing student requests
+            Route::group(['prefix' => '/studentRequests'], function ()
+            {
+                Route::get('new', 'ChiefWardenStaff\SemesterRegistrationController@showNewRequestsView');
+                Route::get('pending', 'ChiefWardenStaff\SemesterRegistrationController@showPendingRequestsView');
+                Route::get('approved', 'ChiefWardenStaff\SemesterRegistrationController@showApprovedRequestsView');
+                Route::patch('approve', 'ChiefWardenStaff\SemesterRegistrationController@approveRequest');
+                Route::patch('hold', 'ChiefWardenStaff\SemesterRegistrationController@holdRequest');
+                Route::get('studentInfo/{rollNo}', 'ChiefWardenStaff\SemesterRegistrationController@getStudentInfo');
+            });
+        });
     });
 
 
