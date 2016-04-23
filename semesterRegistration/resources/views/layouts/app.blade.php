@@ -99,7 +99,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/{{$user}}s/home">Home</a></li>
 
-                        <!-- Tabs for department staff users -->
+                        <!-- Tabs for student users -->
                         @if($user == 'student')
                             <li><a href="/{{$user}}s/semesterRegistration/initialDetails">Semester Registration</a></li>
                         @endif
@@ -107,6 +107,15 @@
                         <!-- Tabs for department staff users -->
                         @if($user == 'departmentStaff')
                             <li><a href="/{{$user}}s/manage/courses">Courses</a></li>
+                        @endif
+
+                        <!-- Tabs for admin staff users -->
+                        @if($user == 'adminStaff')
+                            <li>
+                                <a href="/{{$user}}s/semesterRegistration/studentRequests/new">
+                                    Registration Requests
+                                </a>
+                            </li>
                         @endif
 
                         <!-- Tabs for faculty  users -->
