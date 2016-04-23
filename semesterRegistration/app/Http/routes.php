@@ -213,6 +213,19 @@ Route::group(['middleware' => 'web'], function ()
 
         // AdminStaff view routes
         Route::get('home', 'AdminStaff\HomeController@index');
+        Route::group(['prefix' => '/semesterRegistration'], function ()
+        {
+            // Routes for managing student requests
+            Route::group(['prefix' => '/studentRequests'], function ()
+            {
+                Route::get('new', 'AdminStaff\SemesterRegistrationController@showNewRequestsView');
+                Route::get('pending', 'AdminStaff\SemesterRegistrationController@showPendingRequestsView');
+                Route::get('approved', 'AdminStaff\SemesterRegistrationController@showApprovedRequestsView');
+                Route::patch('approve', 'AdminStaff\SemesterRegistrationController@approveRequest');
+                Route::patch('hold', 'AdminStaff\SemesterRegistrationController@holdRequest');
+                Route::get('studentInfo/{rollNo}', 'AdminStaff\SemesterRegistrationController@getStudentInfo');
+            });
+        });
     });
 
 
