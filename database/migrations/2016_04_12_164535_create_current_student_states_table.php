@@ -25,7 +25,7 @@ class CreateCurrentStudentStatesTable extends Migration
             $table->string('hostelId', '10')->nullable();
             $table->boolean('approved');
             $table->smallInteger('step');
-            $table->string('verificationCode', '5');
+            $table->string('verificationCode', '5')->nullable();
             $table->timestamps();
 
             // Key constraints
