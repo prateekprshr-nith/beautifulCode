@@ -99,7 +99,7 @@ class HomeController extends Controller
                 AdminStaffRequest::truncate();
                 ChiefWardenStaffRequest::truncate();
                 
-                Teacher::where('semNo', '!=', 'null')
+                Teacher::where('semNo', '>', '0')
                     ->update(['semNo' => null]);
             }
             else
