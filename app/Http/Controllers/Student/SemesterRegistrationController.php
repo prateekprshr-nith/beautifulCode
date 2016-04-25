@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Student;
 
 use App\Grade;
 use App\Hostel;
+use App\Course;
 use App\Http\Requests;
 use App\TeacherRequest;
-use App\AvailableCourse;
 use App\AdminStaffRequest;
 use App\HostelStaffRequest;
 use Illuminate\Http\Request;
@@ -342,7 +342,7 @@ class SemesterRegistrationController extends Controller
         }
 
         // Get the courses
-        $courses = AvailableCourse::where([
+        $courses = Course::where([
             'dCode' => Auth::guard('student')->user()->dCode,
             'semNo' => $this->getCurrentStudentState()->semNo,
         ])->get();
