@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\ElectiveCount;
+use App\Grade;
 use App\Hostel;
 use App\Teacher;
 use App\Student;
@@ -13,7 +15,6 @@ use App\LibraryStaff;
 use App\Http\Requests;
 use App\TeacherRequest;
 use App\DepartmentStaff;
-use App\AvailableCourse;
 use App\ChiefWardenStaff;
 use App\AdminStaffRequest;
 use App\HostelStaffRequest;
@@ -91,12 +92,13 @@ class HomeController extends Controller
                 unlink(storage_path() . '/app/activeForStaff');
 
                 // Clear the tables
-                AvailableCourse::truncate();
-                CurrentStudentState::truncate();
+                Grade::truncate();
                 TeacherRequest::truncate();
-                LibraryStaffRequest::truncate();
-                HostelStaffRequest::truncate();
+                ElectiveCount::truncate();
                 AdminStaffRequest::truncate();
+                HostelStaffRequest::truncate();
+                CurrentStudentState::truncate();
+                LibraryStaffRequest::truncate();
                 ChiefWardenStaffRequest::truncate();
                 
                 Teacher::where('semNo', '>', '0')
