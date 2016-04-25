@@ -19,7 +19,8 @@ class Course extends Model
     protected $fillable = [
         'courseCode', 'dCode', 'courseName',
         'semNo', 'lectures', 'tutorials',
-        'practicals', 'hours', 'credits',
+        'practicals', 'credits', 'openElective',
+        'departmentElective',
     ];
 
     /**

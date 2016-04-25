@@ -22,10 +22,11 @@ class CreateCoursesTable extends Migration
             $table->string('courseName', '50');
             $table->string('dCode', '10');
             $table->smallInteger('semNo');
+            $table->boolean('openElective');
+            $table->boolean('departmentElective');
             $table->smallInteger('lectures');
             $table->smallInteger('tutorials');
             $table->smallInteger('practicals');
-            $table->smallInteger('hours');
             $table->smallInteger('credits');
             $table->timestamps();
 
