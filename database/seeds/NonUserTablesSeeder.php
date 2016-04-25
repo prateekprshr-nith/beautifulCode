@@ -95,13 +95,13 @@ class NonUserTablesSeeder extends Seeder
 
         // Seed the courses table
         $courseArr = [
-            'CSS-121' => ['CSED','1','Engineering Mathematics-II',false,false,'3','1','0','4'],
-            'CSS-122' => ['CSED','1','Chemistry for Computer Engineers',false,false,'3','1','0','4'],
-            'CSH-123' => ['CSED','1','Communication Skills',false,false,'3','1','0','4'],
-            'CSD-124' => ['CSED','1','Basic Electrical Engineering',false,false,'3','1','0','4'],
-            'CSS-125' => ['CSED','1','Chemistry Lab',false,false,'0','0','3','1'],
-            'CSH-126' => ['CSED','1','Communication Skills Lab',false,false,'0','0','3','1'],
-            'CSD-127' => ['CSED','1','Engineering Graphics',false,false,'1','0','3','3'],
+            'CSS-121' => ['CSED','2','Engineering Mathematics-II',false,false,'3','1','0','4'],
+            'CSS-122' => ['CSED','2','Chemistry for Computer Engineers',false,false,'3','1','0','4'],
+            'CSH-123' => ['CSED','2','Communication Skills',false,false,'3','1','0','4'],
+            'CSD-124' => ['CSED','2','Basic Electrical Engineering',false,false,'3','1','0','4'],
+            'CSS-125' => ['CSED','2','Chemistry Lab',false,false,'0','0','3','1'],
+            'CSH-126' => ['CSED','2','Communication Skills Lab',false,false,'0','0','3','1'],
+            'CSD-127' => ['CSED','2','Engineering Graphics',false,false,'1','0','3','3'],
         ];
 
         foreach($courseArr as $courseCode => $details)
