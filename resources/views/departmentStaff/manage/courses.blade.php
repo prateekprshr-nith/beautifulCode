@@ -37,10 +37,10 @@
                                     <th>Course Code</th>
                                     <th>Course Name</th>
                                     <th>Semester</th>
+                                    <th>Elective</th>
                                     <th>L</th>
                                     <th>T</th>
                                     <th>P</th>
-                                    <th>Hours</th>
                                     <th>Credits</th>
                                     <th></th>
                                 </tr>
@@ -52,10 +52,18 @@
                                         <td>{{ $course->courseCode }}</td>
                                         <td>{{ $course->courseName }}</td>
                                         <td>{{ $course->semNo }}</td>
+                                        <td>
+                                            @if($course->openElective == true)
+                                                Open elective
+                                            @elseif($course->departmentElective == true)
+                                                Department Elective
+                                            @else
+                                                No
+                                            @endif
+                                        </td>
                                         <td>{{ $course->lectures }}</td>
                                         <td>{{ $course->tutorials }}</td>
                                         <td>{{ $course->practicals }}</td>
-                                        <td>{{ $course->hours }}</td>
                                         <td>{{ $course->credits }}</td>
                                         <td>
                                             <form action="/departmentStaffs/manage/courses" method="POST">
@@ -129,7 +137,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="lectures">Lectures</label>
                             <div class="col-md-6">
-                                <input required class="form-control" name="lectures" type="number" min="1" id="lectures">
+                                <input required class="form-control" name="lectures" type="number" min="0" id="lectures">
                             </div>
                         </div>
 
@@ -137,7 +145,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="tutorials">Tutorials</label>
                             <div class="col-md-6">
-                                <input required class="form-control" name="tutorials" type="number" min="1" id="tutorials">
+                                <input required class="form-control" name="tutorials" type="number" min="0" id="tutorials">
                             </div>
                         </div>
 
@@ -149,19 +157,31 @@
                             </div>
                         </div>
 
-                        <!-- FIfth row hours-->
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="hours">Hours</label>
-                            <div class="col-md-6">
-                                <input required class="form-control" name="hours" type="number" min="1" id="hours">
-                            </div>
-                        </div>
-
                         <!-- FIfth row credits-->
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="credits">Credits</label>
                             <div class="col-md-6">
                                 <input required class="form-control" name="credits" type="number" min="1" id="credits">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox col-md-offset-4">
+                                <label>
+                                    <input type="checkbox" name="openElective" id="openElective"
+                                           onclick="toggleDisable('departmentElective')">
+                                    This is an open elective
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox col-md-offset-4">
+                                <label>
+                                    <input type="checkbox" name="departmentElective" id="departmentElective"
+                                           onclick="toggleDisable('openElective')">
+                                    This is a department elective
+                                </label>
                             </div>
                         </div>
 
