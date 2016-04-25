@@ -28,17 +28,17 @@ function checkPassword(formId, buttonId)
 }
 
 /*
- * This function toggles the visibility of an element
+ * This function toggles an element
  */
-function toggleVisibility(elementId)
+function toggleDisable(elementId)
 {
-    if(document.getElementById(elementId).hasAttribute('hidden'))
+    if(document.getElementById(elementId).hasAttribute('disabled'))
     {
-        document.getElementById(elementId).removeAttribute('hidden')
+        document.getElementById(elementId).removeAttribute('disabled')
     }
     else
     {
-        document.getElementById(elementId).setAttribute('hidden', '');
+        document.getElementById(elementId).setAttribute('disabled', '');
     }
 }
 
