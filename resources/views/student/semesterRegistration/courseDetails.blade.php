@@ -39,10 +39,10 @@
                                     <th>#</th>
                                     <th>Course Code</th>
                                     <th>Course Name</th>
+                                    <th>Elective</th>
                                     <th>L</th>
                                     <th>T</th>
                                     <th>P</th>
-                                    <th>Hours</th>
                                     <th>Credits</th>
                                 </tr>
                             </thead>
@@ -51,12 +51,20 @@
                                     <tr>
                                         <td>{{ ++$count }}</td>
                                         <td>{{ $course->courseCode }}</td>
-                                        <td>{{ $course->courseDetail->courseName }}</td>
-                                        <td>{{ $course->courseDetail->lectures }}</td>
-                                        <td>{{ $course->courseDetail->tutorials }}</td>
-                                        <td>{{ $course->courseDetail->practicals }}</td>
-                                        <td>{{ $course->courseDetail->hours }}</td>
-                                        <td>{{ $course->courseDetail->credits }}</td>
+                                        <td>{{ $course->courseName }}</td>
+                                        <td>
+                                            @if($course->openElective == true)
+                                                Open elective
+                                            @elseif($course->departmentElective == true)
+                                                Department Elective
+                                            @else
+                                                No
+                                            @endif
+                                        </td>
+                                        <td>{{ $course->lectures }}</td>
+                                        <td>{{ $course->tutorials }}</td>
+                                        <td>{{ $course->practicals }}</td>
+                                        <td>{{ $course->credits }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
