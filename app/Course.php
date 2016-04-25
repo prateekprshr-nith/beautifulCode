@@ -32,14 +32,4 @@ class Course extends Model
     {
         return $this->belongsTo('App\Department', 'dCode', 'dCode');
     }
-
-    /**
-     * Get available courses
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function availableCourses ()
-    {
-        return $this->hasMany('App\AvailableCourse', 'dCode', 'dCode');
-    }
 }
