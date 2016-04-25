@@ -11,117 +11,124 @@
                     </div>
 
                     <div class="panel-body">
-                        <nav>
-                            <ul class="pager">
-                                <li>
-                                    <a href="/teachers/semesterRegistration/semester">
-                                        Choose semester
-                                        @if(Auth::guard('teacher')->user()->semNo != null)
+                        <ul class="nav nav-tabs nav-justified">
+                            <li role="presentation">
+                                <a href="/teachers/semesterRegistration/semester">
+                                    Choose semester
+                                    @if(Auth::guard('teacher')->user()->semNo != null)
+                                        <span class="glyphicon glyphicon-ok"></span>
+                                    @endif
+                                </a>
+                            </li>
+                            @if(Auth::guard('teacher')->user()->semNo == null)
+                                <li class="disabled" >
+                                    <a href="/teachers/semesterRegistration/courses">Choose courses</a>
+                                </li>
+                            @else
+                                <li class="active">
+                                    <a href="/teachers/semesterRegistration/courses">
+                                        Choose courses/electives
+                                        @if(count($electiveCount) > 0)
                                             <span class="glyphicon glyphicon-ok"></span>
                                         @endif
                                     </a>
                                 </li>
-                                @if(Auth::guard('teacher')->user()->semNo == null)
-                                    <li class="disabled">
-                                        <a href="/teachers/semesterRegistration/courses">
-                                            Choose courses
-                                        </a>
-                                    </li>
-                                @else
-                                    <li>
-                                        <a href="/teachers/semesterRegistration/courses">Choose courses</a>
-                                    </li>
-                                @endif
-                            </ul>
-                        </nav>
-
-                        <div class="panel-body">
-                            @if (count($availableCourses) > 0)
-                                @if (session('status'))
-                                    <div class="alert alert-success">
-                                        {{ session('status') }}
-                                    </div>
-                                @endif
-
-                                <!-- Display Validation Errors -->
-                                @include('common.errors')
-
-                                <!-- Current availableCourses list -->
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Course Code</th>
-                                            <th>Course Name</th>
-                                            <th>L</th>
-                                            <th>T</th>
-                                            <th>P</th>
-                                            <th>Hours</th>
-                                            <th>Credits</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($availableCourses as $availableCourse)
-                                            <tr>
-                                                <td>{{ ++$count }}</td>
-                                                <td>{{ $availableCourse->courseCode }}</td>
-                                                <td>{{ $availableCourse->courseDetail->courseName }}</td>
-                                                <td>{{ $availableCourse->courseDetail->lectures }}</td>
-                                                <td>{{ $availableCourse->courseDetail->tutorials }}</td>
-                                                <td>{{ $availableCourse->courseDetail->practicals }}</td>
-                                                <td>{{ $availableCourse->courseDetail->hours }}</td>
-                                                <td>{{ $availableCourse->courseDetail->credits }}</td>
-                                                <td>
-                                                    <form action="/teachers/semesterRegistration/courses" method="POST">
-                                                        {{ csrf_field() }}
-                                                        {{ method_field('DELETE') }}
-                                                        <input hidden name="courseCode" value="{{ $availableCourse->courseCode }}">
-
-                                                        <button type="submit" class="btn btn-sm btn-danger"
-                                                                onclick="return confirm('Are you sure?')">
-                                                            <span class="glyphicon glyphicon-remove"></span> Remove
-                                                        </button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            @else
-                                <div class="well well-sm text-center text-primary ">
-                                    No Course is currently selected. Please select courses.
-                                </div>
                             @endif
+                        </ul>
 
-                        </div>
+                        <br>
 
-                        <form class="form-horizontal" role="form" method="POST" action="/teachers/semesterRegistration/courses"
-                              accept-charset="UTF-8" id="semesterForm">
+                        <p class="text-left">
+                            <strong>
+                                Please update number of open electives and department electives for this semester.
+                                Enter 0 (zero) if there are no electives.
+                            </strong>
+                        </p>
+                        <br>
+                        <form class="form-inline" role="form" method="POST" action="/teachers/semesterRegistration/electives"
+                              accept-charset="UTF-8" id="electiveForm">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
 
+                            @if (session('status'))
+                                <div class="alert alert-success col-md-4 col-md-offset-4">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
+
                             @include('common.errors')
 
-                            <label class="col-md-2 control-label" for="courseCode">Course</label>
-
-                            <div class="col-md-8">
-                                <select required id="courseCode" name="courseCode" class="form-control">
-                                    <option value="">Select a Course...</option>
-                                    @foreach($courses as $course)
-                                        <option value="{{$course->courseCode}}">{{$course->courseCode}} : {{$course->courseName}}</option>
-                                    @endforeach
-                                </select>
+                            <div class="form-group">
+                                <label for="openElectives">Open electives</label>
+                                @if(count($electiveCount) > 0)
+                                    <input type="number" required min="0" class="form-control" id="openElectives" placeholder="0"
+                                           name="openElectives" value="{{$electiveCount[0]->openElectives}}">
+                                @else
+                                    <input type="number" required min="0" class="form-control" id="openElectives" placeholder="0"
+                                           name="openElectives">
+                                @endif
                             </div>
-
-                            <div class="col-md-2">
-                                <button class="btn btn-sm btn-primary" type="submit">
-                                    <span class="glyphicon glyphicon-plus"></span> Add
-                                </button>
+                            <div class="form-group">
+                                <label for="departmentElectives">Department electives</label>
+                                @if(count($electiveCount) > 0)
+                                    <input type="number" required min="0" class="form-control" id="departmentElectives" placeholder="0"
+                                           name="departmentElectives" value="{{$electiveCount[0]->departmentElectives}}">
+                                @else
+                                    <input type="number" required min="0" class="form-control" id="departmentElectives" placeholder="0"
+                                           name="departmentElectives">
+                                @endif
                             </div>
-
+                            <button type="submit" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-plus"></span> Update
+                            </button>
                         </form>
 
+                        <hr class="gradientHr col-md-11">
+
+                        @if (count($courses) > 0)
+                            <!-- Current courses list -->
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Course Code</th>
+                                        <th>Course Name</th>
+                                        <th>Elective</th>
+                                        <th>L</th>
+                                        <th>T</th>
+                                        <th>P</th>
+                                        <th>Credits</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($courses as $course)
+                                        <tr>
+                                            <td>{{ ++$count }}</td>
+                                            <td>{{ $course->courseCode }}</td>
+                                            <td>{{ $course->courseName }}</td>
+                                            <td>
+                                                @if($course->openElective == true)
+                                                    Open elective
+                                                @elseif($course->departmentElective == true)
+                                                    Department Elective
+                                                @else
+                                                    No
+                                                @endif
+                                            </td>
+                                            <td>{{ $course->lectures }}</td>
+                                            <td>{{ $course->tutorials }}</td>
+                                            <td>{{ $course->practicals }}</td>
+                                            <td>{{ $course->credits }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        @else
+                            <div class="well well-sm text-center text-primary col-md-12">
+                                No Course is currently present in the database.
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
