@@ -73,24 +73,42 @@ class HomeController extends Controller
             'courseCode' => 'required|unique:courses',
             'courseName' => 'required',
             'semNo' => 'required|numeric|min:1',
-            'lectures' => 'required|numeric|min:1',
-            'tutorials' => 'required|numeric|min:1',
+            'lectures' => 'required|numeric|min:0',
+            'tutorials' => 'required|numeric|min:0',
             'practicals' => 'required|numeric|min:0',
-            'hours' => 'required|numeric|min:1',
             'credits' => 'required|numeric|min:1',
         ], [
             'unique' => 'This course is already present in the database'
         ]);
+        
+        if($request->has('departmentElective') && $request->has('openElective'))
+        {
+            return redirect()->back()
+                ->with('errors', 'A course can not be an open and department elective at same time');
+        }
+        else
+        {
+            if($request->has('departmentElective'))
+                $departmentElective = true;
+            else
+                $departmentElective = false;
 
+            if($request->has('openElective'))
+                $openElective = true;
+            else
+                $openElective = false;
+        }
+        
         $course = [
             'courseCode' => $request['courseCode'],
             'dCode' => Auth::guard('departmentStaff')->user()->dCode,
             'courseName' => $request['courseName'],
+            'openElective' => $openElective,
+            'departmentElective' => $departmentElective,
             'semNo' => $request['semNo'],
             'lectures' => $request['lectures'],
             'tutorials' => $request['tutorials'],
             'practicals' => $request['practicals'],
-            'hours' => $request['hours'],
             'credits' => $request['credits'],
         ];
 
