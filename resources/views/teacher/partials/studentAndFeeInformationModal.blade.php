@@ -10,14 +10,14 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <h4 class="text-center"><span class="glyphicon glyphicon-picture"></span> Fee Receipt Image</h4>
-                <div class="text-center">
+                <h4 class="text-center" id="feeReceiptHeading"><span class="glyphicon glyphicon-picture"></span> Fee Receipt Image</h4>
+                <div class="text-center" id="feeReceiptImage">
                     <img src="" id="feeReceiptImage" class="img-thumbnail" height="400" width="400" alt="Error please refresh">
                 </div>
 
-                <hr class="gradientHr">
+                <hr class="gradientHr" id="horizontalRule">
 
-                <h4 class="text-center"><span class="glyphicon glyphicon-info-sign"></span> Other details</h4>
+                <h4 class="text-center"><span class="glyphicon glyphicon-info-sign"></span> Student details</h4>
 
                 <table class="table table-hover">
                     <tbody>
@@ -85,18 +85,25 @@
 
         modal.find('#id').text(recipient);
 
-        $.get(url, function(data)
+        $.get(url, function(student)
         {
-            modal.find('#name').text(data.name);
-            modal.find('#fatherName').text(data.fatherName);
-            modal.find('#motherName').text(data.motherName);
-            modal.find('#rollNo').text(data.rollNo);
-            modal.find('#sectionId').text(data.sectionId);
-            modal.find('#dob').text(data.dob);
-            modal.find('#email').text(data.email);
-            modal.find('#phoneNo').text(data.phoneNo);
-            modal.find('#currentAddress').text(data.currentAddress);
-            modal.find('#permanentAddress').text(data.permanentAddress);
+            modal.find('#name').text(student.name);
+            modal.find('#fatherName').text(student.fatherName);
+            modal.find('#motherName').text(student.motherName);
+            modal.find('#rollNo').text(student.rollNo);
+            modal.find('#sectionId').text(student.sectionId);
+            modal.find('#dob').text(student.dob);
+            modal.find('#email').text(student.email);
+            modal.find('#phoneNo').text(student.phoneNo);
+            modal.find('#currentAddress').text(student.currentAddress);
+            modal.find('#permanentAddress').text(student.permanentAddress);
+            console.log(student.current_student_state.feeReceipt);
+            if(student.current_student_state.feeReceipt == 0)
+            {
+                modal.find('#feeReceiptHeading').attr('hidden', '');
+                modal.find('#feeReceiptImage').attr('hidden', '');
+                modal.find('#horizontalRule').attr('hidden', '');
+            }
         });
     })
 </script>
