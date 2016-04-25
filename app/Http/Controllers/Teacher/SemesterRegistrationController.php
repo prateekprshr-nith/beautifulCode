@@ -6,8 +6,8 @@ use App\Course;
 use App\Student;
 use App\Teacher;
 use App\Http\Requests;
+use App\ElectiveCount;
 use App\TeacherRequest;
-use App\AvailableCourse;
 use Illuminate\Http\Request;
 use App\CurrentStudentState;
 use App\Http\Controllers\Controller;
@@ -56,7 +56,13 @@ class SemesterRegistrationController extends Controller
             return view($this->inactiveView);
         }
 
-        return view($this->semesterSelectionView);
+        // Get elective count
+        $electiveCount = ElectiveCount::where([
+            'dCode' => Auth::guard('teacher')->user()->dCode,
+            'semNo' => Auth::guard('teacher')->user()->semNo,
+        ])->get();
+
+        return view($this->semesterSelectionView, ['electiveCount' => $electiveCount]);
     }
 
     /**
@@ -82,32 +88,77 @@ class SemesterRegistrationController extends Controller
          */
         if($semNo === null)
         {
-            return view($this->semesterSelectionView);
+            return redirect('/teachers/semesterRegistration/semester');
         }
         else
         {
-            // Get the courses already entered
-            $availableCourses = AvailableCourse::where('semNo', $semNo)
-                ->where('dCode', Auth::guard('teacher')->user()->dCode)
-                ->get();
-
-            $availableCourseCodes = [];
-            foreach ($availableCourses as $availableCourse)
-            {
-                array_push($availableCourseCodes, $availableCourse->courseCode);
-            }
-
-            // Get the courses for the semester
-            $courses = Course::where('semNo', $semNo)
-                ->whereNotIn('courseCode', $availableCourseCodes)
-                ->get();
+            // Get the courses
+            $courses = Course::where([
+                'dCode' => Auth::guard('teacher')->user()->dCode,
+                'semNo' => $semNo,
+            ])->get();
+            
+            // Get elective count
+            $electiveCount = ElectiveCount::where([
+                'dCode' => Auth::guard('teacher')->user()->dCode,
+                'semNo' => $semNo,
+            ])->get();
 
             return view($this->courseSelectionView, [
                 'courses' => $courses,
-                'availableCourses' => $availableCourses,
+                'electiveCount' => $electiveCount,
                 'count' => 0,
             ]);
         }
+    }
+
+    /**
+     * Add elective counts
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function addElectiveCounts (Request $request)
+    {
+        if(!$this->isRegistrationActive('staff'))
+        {
+            return view($this->inactiveView);
+        }
+
+        $this->validate($request,[
+            'openElectives' => 'required|min:0',
+            'departmentElectives' => 'required|min:0',
+        ]);
+
+        $data = [
+            'dCode' => Auth::guard('teacher')->user()->dCode,
+            'semNo' => Auth::guard('teacher')->user()->semNo,
+            'openElectives' => $request['openElectives'],
+            'departmentElectives' => $request['departmentElectives'],
+        ];
+
+        // Insert into databse
+        $electiveCount = ElectiveCount::where([
+            'dCode' => Auth::guard('teacher')->user()->dCode,
+            'semNo' => Auth::guard('teacher')->user()->semNo,
+        ])->get();
+
+        if(count($electiveCount) > 0)
+        {
+            ElectiveCount::where([
+                'dCode' => Auth::guard('teacher')->user()->dCode,
+                'semNo' => Auth::guard('teacher')->user()->semNo,
+            ])->delete();
+
+            ElectiveCount::create($data);
+        }
+        else
+        {
+            ElectiveCount::create($data);
+        }
+
+        return redirect()->back()
+            ->with('status', 'Updated Successfully');
     }
 
     /**
@@ -134,55 +185,6 @@ class SemesterRegistrationController extends Controller
         $teacher = Teacher::find(Auth::guard('teacher')->user()->facultyId);
         $teacher->semNo = $semNo;
         $teacher->save();
-
-        return redirect()->back();
-    }
-
-    /**
-     * Add an availble course for the semester
-     * 
-     * @param Request $request
-     * @return mixed
-     */
-    public function addCourse (Request $request)
-    {
-        if(!$this->isRegistrationActive('staff'))
-        {
-            return view($this->inactiveView);
-        }
-
-        $availableCourse = [
-            'courseCode' => $request['courseCode'],
-            'dCode' => Auth::guard('teacher')->user()->dCode,
-            'semNo' => Auth::guard('teacher')->user()->semNo,
-        ];
-
-        AvailableCourse::create($availableCourse);
-
-        return redirect()->back();
-    }
-
-    /**
-     * Remove a course
-     *
-     * @param Request $request
-     * @return mixed
-     */
-    public function removeCourse (Request $request)
-    {
-        if(!$this->isRegistrationActive('staff'))
-        {
-            return view($this->inactiveView);
-        }
-
-        $course = [
-            'dCode' => Auth::guard('teacher')->user()->dCode,
-            'semNo' => Auth::guard('teacher')->user()->semNo,
-            'courseCode' => $request['courseCode'],
-        ];
-
-        // Remove the course
-        $course = AvailableCourse::where($course)->delete();
 
         return redirect()->back();
     }
@@ -342,6 +344,7 @@ class SemesterRegistrationController extends Controller
 
         // Get the student
         $student = Student::find($rollNo);
+        $student->currentStudentState;
 
         return $student;
     }
