@@ -11,36 +11,42 @@
                     </div>
 
                     <div class="panel-body">
-                        <nav>
-                            <ul class="pager">
+                        <ul class="nav nav-tabs nav-justified">
+                            <li role="presentation" class="active">
+                                <a href="/teachers/semesterRegistration/semester">
+                                    Choose semester
+                                    @if(Auth::guard('teacher')->user()->semNo != null)
+                                        <span class="glyphicon glyphicon-ok"></span>
+                                    @endif
+                                </a>
+                            </li>
+                            @if(Auth::guard('teacher')->user()->semNo == null)
+                                <li class="disabled" >
+                                    <a href="/teachers/semesterRegistration/courses">Choose courses</a>
+                                </li>
+                            @else
                                 <li>
-                                    <a href="/teachers/semesterRegistration/semester">
-                                        Choose semester
-                                        @if(Auth::guard('teacher')->user()->semNo != null)
+                                    <a href="/teachers/semesterRegistration/courses">
+                                        Choose courses/electives
+                                        @if(count($electiveCount) > 0)
                                             <span class="glyphicon glyphicon-ok"></span>
                                         @endif
                                     </a>
                                 </li>
-                                @if(Auth::guard('teacher')->user()->semNo == null)
-                                    <li class="disabled">
-                                        <a href="/teachers/semesterRegistration/courses">
-                                            Choose courses
-                                        </a>
-                                    </li>
-                                @else
-                                    <li>
-                                        <a href="/teachers/semesterRegistration/courses">Choose courses</a>
-                                    </li>
-                                @endif
-                            </ul>
-                        </nav>
-
-                        <div class="well well-sm text-center text-primary ">
-                            @if(Auth::guard('teacher')->user()->semNo == null)
-                                You have not chosen any semester. Please choose a semester.
-                            @else
-                                You are incharge of semester: {{Auth::guard('teacher')->user()->semNo}}
                             @endif
+                        </ul>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="well well-sm text-center text-primary col-md-6 col-md-offset-3">
+                                @if(Auth::guard('teacher')->user()->semNo == null)
+                                    You have not chosen any semester. Please choose a semester.
+                                @else
+                                    You are incharge of semester: {{Auth::guard('teacher')->user()->semNo}}
+                                @endif
+                            </div>
+
                         </div>
 
                         <form class="form-horizontal" role="form" method="POST" action="/teachers/semesterRegistration/semester"
