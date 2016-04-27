@@ -32,4 +32,14 @@ class Course extends Model
     {
         return $this->belongsTo('App\Department', 'dCode', 'dCode');
     }
+
+    /**
+     * Get the allocated electives with this course
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function allocatedElectives ()
+    {
+        return $this->hasMany('App\AllocatedElectives', 'courseCode', 'courseCode');
+    }
 }
