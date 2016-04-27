@@ -472,7 +472,12 @@ class SemesterRegistrationController extends Controller
         }
 
         $currentStudentState = $this->getCurrentStudentState();
+        $allocatedElectives = AllocatedElective::where('rollNo', Auth::guard('student')->user()->rollNo)->get();
 
-        return view($this->registrationStatusView, ['currentStudentState' => $currentStudentState]);
+        return view($this->registrationStatusView, [
+            'currentStudentState' => $currentStudentState,
+            'allocatedElectives' => $allocatedElectives,
+            'count' => 0
+        ]);
     }
 }
