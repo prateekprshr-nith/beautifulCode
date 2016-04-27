@@ -21,7 +21,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <span class="glyphicon glyphicon-pencil"></span>
-                        <strong> Step 3: Review the courses</strong>
+                        <strong> Step 3: Review the courses and choose open electives if any</strong>
                     </div>
 
                     <div class="panel-body">
@@ -31,6 +31,8 @@
                                 You will study the following courses in this semester
                             </strong>
                         </p>
+
+                        <br>
 
                         <!-- Current courses list -->
                         <table class="table table-hover">
@@ -71,12 +73,80 @@
                         </table>
 
                         <!-- Open elective and department elective selection form-->
-                        <form method="post" action="/students/semesterRegistration/courseDetails" id="courseDetailsForm"
+                        <form method="post" action="/students/semesterRegistration/courseDetails/electives" id="courseDetailsForm"
                               class="form-horizontal" accept-charset="UTF-8" enctype="multipart/form-data">
                             {{csrf_field()}}
                             {{method_field('PUT')}}
 
-                            <!-- #TODO add content for open elective and department elective selection -->
+                            <!-- Status for course in case student submits course without checking status-->
+                            @if (session('status'))
+                                <div class="alert alert-danger">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
+
+                            @if($electiveCount[0]->openElectives + $electiveCount[0]->departmentElectives > 0)
+                                <hr class="gradientHr col-md-11">
+
+                                <!-- Grade and supplimentary information -->
+                                <p class="text-left">
+                                    <strong>
+                                        Plese choose elective subjects. Make sure to check vacant seats before moving on
+                                        to next step.
+                                    </strong>
+                                </p>
+
+                                <br>
+
+                                <!-- Display open elective selection form -->
+                                @for($i = 0; $i < $electiveCount[0]->openElectives; $i++)
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="oelective{{$i}}">Open Elective #{{$i + 1}}</label>
+                                        <div class="col-md-4">
+                                            <select required id="oelective{{$i}}" name="courseCode[]" class="form-control"
+                                                    onchange="setBtnData(this, 'open', '{{$i}}')">
+
+                                                <option value="">Select a open elective...</option>
+
+                                                @foreach($openElectives as $openElective)
+                                                    <option value="{{$openElective->courseCode}}">{{$openElective->courseCode}}: {{$openElective->courseName}}</option>
+                                                @endforeach
+
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="button" disabled class="btn btn-sm btn-primary" id="ostatusBtn{{$i}}" data-course="" onclick="getElectiveInfo(this)">
+                                                <span class="glyphicon glyphicon-info-sign"></span> Check vacant seats
+                                            </button>
+                                        </div>
+                                    </div>
+                                @endfor
+
+                                <!-- Display department elective selection form -->
+                                @for($i = 0; $i < $electiveCount[0]->departmentElectives; $i++)
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="delective{{$i}}">Department Elective #{{$i + 1}}</label>
+                                        <div class="col-md-4">
+                                            <select required id="delective{{$i}}" name="courseCode[]" class="form-control"
+                                                    onchange="setBtnData(this, 'department', '{{$i}}')">
+
+                                                <option value="">Select a department elective...</option>
+
+                                                @foreach($departmentElectives as $departmentElective)
+                                                    <option value="{{$departmentElective->courseCode}}">{{$departmentElective->courseCode}}: {{$departmentElective->courseName}}</option>
+                                                @endforeach
+
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="button" disabled class="btn btn-sm btn-primary" id="dstatusBtn{{$i}}" data-course="" onclick="getElectiveInfo(this)">
+                                                <span class="glyphicon glyphicon-info-sign"></span> Check vacant seats
+                                            </button>
+                                        </div>
+                                    </div>
+                                @endfor
+                            @endif
+
                             <input type="submit" hidden id="submit">
                         </form>
 
@@ -100,4 +170,25 @@
         </div>
 
     </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                        <strong> Elective Information <span id="id"></span></strong>
+                    </h4>
+                </div>
+                <div class="modal-body text-center">
+                    <h4>The elective <span id="electiveName"></span> <span id="electiveStatus"></span></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+    </script>
 @endsection
