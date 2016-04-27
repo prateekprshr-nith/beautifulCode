@@ -26,6 +26,59 @@
 
                     <div class="panel-body">
 
+                        @if(count($allocatedElectives) > 0)
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-success">
+                                    <div class="panel-heading" role="tab" id="headingOne">
+                                            <a role="button"  class="text-success" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                <span class="glyphicon glyphicon-book"></span> Electives allocated to you
+                                                <span class="caret"></span>
+                                            </a>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                        <table class="table table-hover responsive">
+                                            <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Course Code</th>
+                                                <th>Course Name</th>
+                                                <th>Elective</th>
+                                                <th>L</th>
+                                                <th>T</th>
+                                                <th>P</th>
+                                                <th>Credits</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach ($allocatedElectives as $allocatedElective)
+                                                <tr>
+                                                    <td>{{ ++$count }}</td>
+                                                    <td>{{ $allocatedElective->courseCode }}</td>
+                                                    <td>{{ $allocatedElective->course->courseName }}</td>
+                                                    <td>
+                                                        @if($allocatedElective->course->openElective == true)
+                                                            Open elective
+                                                        @elseif($allocatedElective->course->departmentElective == true)
+                                                            Department Elective
+                                                        @else
+                                                            No
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ $allocatedElective->course->lectures }}</td>
+                                                    <td>{{ $allocatedElective->course->tutorials }}</td>
+                                                    <td>{{ $allocatedElective->course->practicals }}</td>
+                                                    <td>{{ $allocatedElective->course->credits }}</td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="gradientHr col-md-11">
+                        @endif
+
                         <!-- Display Validation Errors -->
                         @include('common.errors')
 
