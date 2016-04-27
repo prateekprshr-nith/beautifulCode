@@ -128,7 +128,7 @@
                                                 @if($request->student->chiefWardenStaffRequest->status === 'new')
                                                     Awaiting approval
                                                     {{-- */$hostelStatus = 'new';/* --}}
-                                                @elseif($request->student->chiefWardenRequest->status === 'pending')
+                                                @elseif($request->student->chiefWardenStaffRequest->status === 'pending')
                                                     Pending
                                                     {{-- */$hostelStatus = 'pending';/* --}}
                                                 @else
@@ -169,7 +169,7 @@
                                                 </button>
                                             @endif
                                         </td>
-                                        <td>{{$request->student->currentStudentState->verificationCode}}</td>
+                                        <td class="text-primary">{{$request->student->currentStudentState->verificationCode}}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
