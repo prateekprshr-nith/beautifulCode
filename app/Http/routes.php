@@ -46,7 +46,8 @@ Route::group(['middleware' => 'web'], function ()
             Route::get('feeAndHostelDetails', 'Student\SemesterRegistrationController@showFeeAndHostelDetailsView')->middleware('step:2');
             Route::put('feeAndHostelDetails', 'Student\SemesterRegistrationController@addFeeAndHostelDetails')->middleware('step:2');
             Route::get('courseDetails', 'Student\SemesterRegistrationController@showCourseDetailsView')->middleware('step:3');
-            Route::put('courseDetails', 'Student\SemesterRegistrationController@addCourseDetails')->middleware('step:3');
+            Route::put('courseDetails/electives', 'Student\SemesterRegistrationController@allocateElectives')->middleware('step:3');
+            Route::get('courseDetails/electiveInfo/{courseCode}', 'Student\SemesterRegistrationController@getElectiveInfo')->middleware('step:3');
             Route::get('status', 'Student\SemesterRegistrationController@showRegistrationStatusView')->middleware('step:4');
             Route::patch('reUploadFeeReceipt', 'Student\SemesterRegistrationController@reUploadFeeReceipt')->middleware('step:4');
         });
