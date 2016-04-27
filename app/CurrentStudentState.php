@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class CurrentStudentState, this model corresponds
@@ -39,15 +40,5 @@ class CurrentStudentState extends Model
     public function hostel ()
     {
         return $this->belongsTo('App\Hostel', 'hostelId', 'hostelId');
-    }
-
-    /**
-     * Get the allocated electives with this student request
-     * 
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function allocatedElectives ()
-    {
-        return $this->hasMany('App\AllocatedElectives', 'rollNo', 'rollNo');
     }
 }
