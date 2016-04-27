@@ -6,7 +6,9 @@ use App\Grade;
 use App\Hostel;
 use App\Course;
 use App\Http\Requests;
+use App\ElectiveCount;
 use App\TeacherRequest;
+use App\AllocatedElective;
 use App\AdminStaffRequest;
 use App\HostelStaffRequest;
 use Illuminate\Http\Request;
@@ -41,6 +43,36 @@ class SemesterRegistrationController extends Controller
         $this->middleware('auth:student');
         $this->middleware('verify:student');
         $this->middleware('noImage');
+    }
+
+    /**
+     * Get the current state of student
+     *
+     * @return CurrentStudentState
+     */
+    protected function getCurrentStudentState ()
+    {
+        $currentStudentState = CurrentStudentState::find(Auth::guard('student')->user()->rollNo);
+
+        return $currentStudentState;
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Functions for managing step one (initial details step) of registration
+
+    /**
+     * Show the initial details view to the student
+     *
+     * @return mixed
+     */
+    public function showInitialDetailsView ()
+    {
+        if(!$this->isRegistrationActive('student'))
+        {
+            return view($this->inactiveView);
+        }
+
+        return view($this->initialDetailsView);
     }
 
     /**
@@ -102,21 +134,6 @@ class SemesterRegistrationController extends Controller
     }
 
     /**
-     * Show the initial details view to the student
-     *
-     * @return mixed
-     */
-    public function showInitialDetailsView ()
-    {
-        if(!$this->isRegistrationActive('student'))
-        {
-            return view($this->inactiveView);
-        }
-
-        return view($this->initialDetailsView);
-    }
-
-    /**
      * Add initial details of student
      *
      * @param Request $request
@@ -151,17 +168,8 @@ class SemesterRegistrationController extends Controller
         return redirect('/students/semesterRegistration/feeAndHostelDetails');
     }
 
-    /**
-     * Get the current state of student
-     *
-     * @return CurrentStudentState
-     */
-    protected function getCurrentStudentState ()
-    {
-        $currentStudentState = CurrentStudentState::find(Auth::guard('student')->user()->rollNo);
-        
-        return $currentStudentState;
-    }
+    //------------------------------------------------------------------------------------------------------------------
+    // Functions for managing step two (fee and hostel details) of registration
 
     /**
      * Show hostel and feel details view to the student
@@ -329,6 +337,9 @@ class SemesterRegistrationController extends Controller
         }
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+    // Functions for managing step three (course review and elective allocation) of registration
+
     /**
      * Show course details view to the student
      *
@@ -341,26 +352,87 @@ class SemesterRegistrationController extends Controller
             return view($this->inactiveView);
         }
 
-        // Get the courses
+        // Get the regular courses
         $courses = Course::where([
+            'dCode' => Auth::guard('student')->user()->dCode,
+            'semNo' => $this->getCurrentStudentState()->semNo,
+            'openElective' => false,
+            'departmentElective' => false,
+        ])->get();
+
+        // Get the open electives
+        $openElectives = Course::where('dCode', '!=', Auth::guard('student')->user()->dCode)
+            ->where([
+                'semNo' => $this->getCurrentStudentState()->semNo,
+                'openElective' => true,
+            ])->get();
+
+        // Get the department electives
+        $departmentElectives = Course::where([
+            'dCode' => Auth::guard('student')->user()->dCode,
+            'semNo' => $this->getCurrentStudentState()->semNo,
+            'departmentElective' => true,
+        ])->get();
+
+        // Get the elective count
+        $electiveCount = ElectiveCount::where([
             'dCode' => Auth::guard('student')->user()->dCode,
             'semNo' => $this->getCurrentStudentState()->semNo,
         ])->get();
 
-        return view($this->courseDetailsView, ['courses' => $courses, 'count' => 0]);
+        return view($this->courseDetailsView, [
+            'courses' => $courses, 'count' => 0,
+            'electiveCount' => $electiveCount,
+            'openElectives' => $openElectives,
+            'departmentElectives' => $departmentElectives,
+        ]);
     }
 
     /**
-     * Add course details of the student
+     * Allocate department/open elective subjects to the students
      *
      * @param Request $request
      */
-    public function addCourseDetails (Request $request)
+    public function allocateElectives (Request $request)
     {
         $currentStudentState = $this->getCurrentStudentState();
 
-        // #TODO open elective allocation logic to go here
-        // #TODO department elective allocation logic to go here
+        if($request->has('courseCode'))
+        {
+            $this->validate($request, ['courseCode' => 'required']);
+
+            $courseCode = $request['courseCode'];
+
+            // Get the elective count
+            $electiveCount = ElectiveCount::where([
+                'dCode' => Auth::guard('student')->user()->dCode,
+                'semNo' => $this->getCurrentStudentState()->semNo,
+            ])->get();
+
+            // Check if seats are available in the chosen electives
+            $totalElectives = $electiveCount[0]->openElectives + $electiveCount[0]->departmentElectives;
+
+            for($no = 0; $no < $totalElectives; $no++)
+            {
+                $maxStrength = 90;
+                $currentStrength = AllocatedElective::where('courseCode', $courseCode[$no])->count();
+
+                if($currentStrength >= $maxStrength)
+                {
+                    return redirect()->back()
+                        ->with('status', 'Sorry, elective ' . $courseCode[$no] . ' is not having any vacant seats. Please choose another one.');
+                }
+            }
+
+            // Allocate the electives to student
+            for($no = 0; $no < $totalElectives; $no++)
+            {
+                AllocatedElective::create([
+                    'rollNo' => Auth::guard('student')->user()->rollNo,
+                    'courseCode' => $courseCode[$no],
+                ]);
+            }
+        }
 
         $currentStudentState->step = 3;
         $currentStudentState->save();
@@ -368,6 +440,24 @@ class SemesterRegistrationController extends Controller
         // Now redirect to the status view
         return redirect('/students/semesterRegistration/status');
     }
+
+    /**
+     * Get elective strength info
+     *
+     * @param $courseCode
+     * @return int
+     */
+    public function getElectiveInfo ($courseCode)
+    {
+        $maxStrength = 90;
+        $currentStrength = AllocatedElective::where('courseCode', $courseCode)->count();
+        $availableSeats = $maxStrength - $currentStrength;
+
+        return $availableSeats;
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Functions for showing registration status to student
 
     /**
      * Show registration status to the student
