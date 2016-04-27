@@ -40,4 +40,14 @@ class CurrentStudentState extends Model
     {
         return $this->belongsTo('App\Hostel', 'hostelId', 'hostelId');
     }
+
+    /**
+     * Get the allocated electives with this student request
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function allocatedElectives ()
+    {
+        return $this->hasMany('App\AllocatedElectives', 'rollNo', 'rollNo');
+    }
 }
