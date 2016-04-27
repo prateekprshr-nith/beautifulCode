@@ -35,7 +35,7 @@
                         <br>
 
                         <!-- Current courses list -->
-                        <table class="table table-hover">
+                        <table class="table table-hover responsive">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -85,66 +85,68 @@
                                 </div>
                             @endif
 
-                            @if($electiveCount[0]->openElectives + $electiveCount[0]->departmentElectives > 0)
-                                <hr class="gradientHr col-md-11">
+                            @if(count($electiveCount) > 0)
+                                @if($electiveCount[0]->openElectives + $electiveCount[0]->departmentElectives > 0)
+                                    <hr class="gradientHr col-md-11">
 
-                                <!-- Grade and supplimentary information -->
-                                <p class="text-left">
-                                    <strong>
-                                        Plese choose elective subjects. Make sure to check vacant seats before moving on
-                                        to next step.
-                                    </strong>
-                                </p>
+                                    <!-- Grade and supplimentary information -->
+                                    <p class="text-left">
+                                        <strong>
+                                            Plese choose elective subjects. Make sure to check vacant seats before moving on
+                                            to next step.
+                                        </strong>
+                                    </p>
 
-                                <br>
+                                    <br>
 
-                                <!-- Display open elective selection form -->
-                                @for($i = 0; $i < $electiveCount[0]->openElectives; $i++)
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" for="oelective{{$i}}">Open Elective #{{$i + 1}}</label>
-                                        <div class="col-md-4">
-                                            <select required id="oelective{{$i}}" name="courseCode[]" class="form-control"
-                                                    onchange="setBtnData(this, 'open', '{{$i}}')">
+                                    <!-- Display open elective selection form -->
+                                    @for($i = 0; $i < $electiveCount[0]->openElectives; $i++)
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="oelective{{$i}}">Open Elective #{{$i + 1}}</label>
+                                            <div class="col-md-4">
+                                                <select required id="oelective{{$i}}" name="courseCode[]" class="form-control"
+                                                        onchange="setBtnData(this, 'open', '{{$i}}')">
 
-                                                <option value="">Select a open elective...</option>
+                                                    <option value="">Select a open elective...</option>
 
-                                                @foreach($openElectives as $openElective)
-                                                    <option value="{{$openElective->courseCode}}">{{$openElective->courseCode}}: {{$openElective->courseName}}</option>
-                                                @endforeach
+                                                    @foreach($openElectives as $openElective)
+                                                        <option value="{{$openElective->courseCode}}">{{$openElective->courseCode}}: {{$openElective->courseName}}</option>
+                                                    @endforeach
 
-                                            </select>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button type="button" disabled class="btn btn-sm btn-primary" id="ostatusBtn{{$i}}" data-course="" onclick="getElectiveInfo(this)">
+                                                    <span class="glyphicon glyphicon-info-sign"></span> Check vacant seats
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div class="col-md-2">
-                                            <button type="button" disabled class="btn btn-sm btn-primary" id="ostatusBtn{{$i}}" data-course="" onclick="getElectiveInfo(this)">
-                                                <span class="glyphicon glyphicon-info-sign"></span> Check vacant seats
-                                            </button>
+                                    @endfor
+
+                                    <!-- Display department elective selection form -->
+                                    @for($i = 0; $i < $electiveCount[0]->departmentElectives; $i++)
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="delective{{$i}}">Department Elective #{{$i + 1}}</label>
+                                            <div class="col-md-4">
+                                                <select required id="delective{{$i}}" name="courseCode[]" class="form-control"
+                                                        onchange="setBtnData(this, 'department', '{{$i}}')">
+
+                                                    <option value="">Select a department elective...</option>
+
+                                                    @foreach($departmentElectives as $departmentElective)
+                                                        <option value="{{$departmentElective->courseCode}}">{{$departmentElective->courseCode}}: {{$departmentElective->courseName}}</option>
+                                                    @endforeach
+
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button type="button" disabled class="btn btn-sm btn-primary" id="dstatusBtn{{$i}}" data-course="" onclick="getElectiveInfo(this)">
+                                                    <span class="glyphicon glyphicon-info-sign"></span> Check vacant seats
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
-                                @endfor
-
-                                <!-- Display department elective selection form -->
-                                @for($i = 0; $i < $electiveCount[0]->departmentElectives; $i++)
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" for="delective{{$i}}">Department Elective #{{$i + 1}}</label>
-                                        <div class="col-md-4">
-                                            <select required id="delective{{$i}}" name="courseCode[]" class="form-control"
-                                                    onchange="setBtnData(this, 'department', '{{$i}}')">
-
-                                                <option value="">Select a department elective...</option>
-
-                                                @foreach($departmentElectives as $departmentElective)
-                                                    <option value="{{$departmentElective->courseCode}}">{{$departmentElective->courseCode}}: {{$departmentElective->courseName}}</option>
-                                                @endforeach
-
-                                            </select>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <button type="button" disabled class="btn btn-sm btn-primary" id="dstatusBtn{{$i}}" data-course="" onclick="getElectiveInfo(this)">
-                                                <span class="glyphicon glyphicon-info-sign"></span> Check vacant seats
-                                            </button>
-                                        </div>
-                                    </div>
-                                @endfor
+                                    @endfor
+                                @endif
                             @endif
 
                             <input type="submit" hidden id="submit">

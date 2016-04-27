@@ -121,7 +121,7 @@
                             <!-- Grade and supplimentary information -->
                             <p class="text-left"><strong>Plese enter grades and supplementaries</strong> <i>(if any; write course codes seprated
                                     with comma eg: CS-101,CS-102)</i><strong> of previous semesters in the form below: </strong></p>
-                            <table class="table table-hover">
+                            <table class="table table-hover responsive">
                                 <thead>
                                     <tr>
                                         <th>Semester</th>
