@@ -73,3 +73,71 @@ function setImageSrc(elementId, documentUrl, subUrl)
 {
     document.getElementById(elementId).src = documentUrl + subUrl;
 }
+
+/*
+ * This function sets the data-* attribute of elective status buttons
+ */
+function setBtnData(element, electiveType, no)
+{
+    var statusBtn;
+
+    if(electiveType === 'open')
+    {
+        statusBtn = $('#ostatusBtn'+no);
+    }
+    else
+    {
+        statusBtn = $('#dstatusBtn'+no);
+    }
+
+    if(element.value != '')
+    {
+        statusBtn.prop('disabled', false);
+        statusBtn.attr('data-course', element.value);
+    }
+    else
+    {
+        statusBtn.prop('disabled', true);
+    }
+
+}
+
+/*
+ * This function sends an ajax request and displays the status of elective
+ */
+function getElectiveInfo(button)
+{
+    var courseCode = button.getAttribute('data-course');
+    var modal = $('#myModal');
+
+    modal.on('hidden.bs.modal', function ()
+    {
+        $('.modal-body').html('<h4>The elective <span id="electiveName"></span> <span id="electiveStatus"></span></h4>');
+    });
+
+    if(courseCode === '')
+    {
+        modal.modal('show');
+        $('.modal-body').html('<h4>Please choose an elective to check the status</h4>');
+    }
+    else
+    {
+        var url = '/students/semesterRegistration/courseDetails/electiveInfo/' + courseCode;
+
+        $.get(url, function(availableSeats)
+        {
+            modal.modal('show');
+            $('#electiveName').text(courseCode);
+
+            if(availableSeats == 0)
+            {
+                $('#electiveStatus').text(' is not having any vacant seats. Please choose another one.');
+                
+            }
+            else
+            {
+                $('#electiveStatus').text(' is having ' + availableSeats + ' vacant seats.');
+            }
+        });
+    }
+}
