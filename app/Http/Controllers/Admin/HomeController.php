@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\ElectiveCount;
 use App\Grade;
 use App\Hostel;
 use App\Teacher;
@@ -12,10 +11,12 @@ use App\Department;
 use App\AdminStaff;
 use App\HostelStaff;
 use App\LibraryStaff;
+use App\ElectiveCount;
 use App\Http\Requests;
 use App\TeacherRequest;
 use App\DepartmentStaff;
 use App\ChiefWardenStaff;
+use App\AllocatedElective;
 use App\AdminStaffRequest;
 use App\HostelStaffRequest;
 use App\CurrentStudentState;
@@ -93,8 +94,9 @@ class HomeController extends Controller
 
                 // Clear the tables
                 Grade::truncate();
-                TeacherRequest::truncate();
                 ElectiveCount::truncate();
+                TeacherRequest::truncate();
+                AllocatedElective::truncate();
                 AdminStaffRequest::truncate();
                 HostelStaffRequest::truncate();
                 CurrentStudentState::truncate();
