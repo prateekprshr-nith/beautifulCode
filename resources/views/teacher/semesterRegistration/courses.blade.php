@@ -51,8 +51,10 @@
                             {{ method_field('PUT') }}
 
                             @if (session('status'))
-                                <div class="alert alert-success col-md-4 col-md-offset-4">
-                                    {{ session('status') }}
+                                <div class="row">
+                                    <div class="alert alert-success col-md-4 col-md-offset-4">
+                                        {{ session('status') }}
+                                    </div>
                                 </div>
                             @endif
 
