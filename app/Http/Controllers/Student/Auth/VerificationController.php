@@ -102,8 +102,8 @@ class VerificationController extends Controller
     {
         $timeStamp = time();
         $hashString = $rollNo . $timeStamp;
-        $verificationCode = md5($hashString);
+        $verificationCode = bcrypt($hashString);
 
-        return $verificationCode;
+        return substr($verificationCode, 7, 5);
     }
 }
