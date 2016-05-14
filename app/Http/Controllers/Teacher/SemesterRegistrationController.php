@@ -209,16 +209,20 @@ class SemesterRegistrationController extends Controller
             'semNo' => Auth::guard('teacher')->user()->semNo,
             'status' => 'new',
         ])->get());
+        
         $countArr['pendingCount'] = count(TeacherRequest::where([
             'semNo' => Auth::guard('teacher')->user()->semNo,
             'status' => 'pending',
         ])->get());
+        
         $countArr['approvedCount'] = count(TeacherRequest::where([
             'semNo' => Auth::guard('teacher')->user()->semNo,
             'status' => 'approved',
         ])->get());
-        $countArr['totalCount'] = count(CurrentStudentState::where(['semNo' => Auth::guard('teacher')->user()->semNo])
-            ->get());
+        
+        $countArr['totalCount'] = count(CurrentStudentState::where([
+            'semNo' => Auth::guard('teacher')->user()->semNo,
+        ])->where('step', '!=', 1)->get());
 
         return $countArr;
     }
