@@ -100,9 +100,9 @@
             console.log(student.current_student_state.feeReceipt);
             if(student.current_student_state.feeReceipt == 0)
             {
-                modal.find('#feeReceiptHeading').attr('hidden', '');
-                modal.find('#feeReceiptImage').attr('hidden', '');
-                modal.find('#horizontalRule').attr('hidden', '');
+                modal.find('#feeReceiptHeading').hide();
+                modal.find('#feeReceiptImage').hide();
+                modal.find('#horizontalRule').hide();
             }
         });
     })
