@@ -43,9 +43,22 @@ class SemesterRegistrationController extends Controller
      */
     protected function getRequestCounts ()
     {
-        $countArr['newCount'] = count(HostelStaffRequest::where(['status' => 'new'])->get());
-        $countArr['pendingCount'] = count(HostelStaffRequest::where(['status' => 'pending'])->get());
-        $countArr['approvedCount'] = count(HostelStaffRequest::where(['status' => 'approved'])->get());
+        $hostelId = Auth::guard('hostelStaff')->user()->hostelId;
+
+        $countArr['newCount'] = count(HostelStaffRequest::where([
+            'status' => 'new',
+            'hostelId' => $hostelId,
+        ])->get());
+
+        $countArr['pendingCount'] = count(HostelStaffRequest::where([
+            'status' => 'pending',
+            'hostelId' => $hostelId,
+        ])->get());
+
+        $countArr['approvedCount'] = count(HostelStaffRequest::where([
+            'status' => 'approved',
+            'hostelId' => $hostelId,
+        ])->get());
 
         return $countArr;
     }
@@ -63,7 +76,10 @@ class SemesterRegistrationController extends Controller
         }
 
         // Get the requests
-        $requests = HostelStaffRequest::where(['status' => 'new'])->get();
+        $requests = HostelStaffRequest::where([
+            'status' => 'new',
+            'hostelId' => Auth::guard('hostelStaff')->user()->hostelId,
+        ])->simplePaginate('8');
 
         $requestCount = $this->getRequestCounts();
 
@@ -83,7 +99,10 @@ class SemesterRegistrationController extends Controller
         }
 
         // Get the requests
-        $requests = HostelStaffRequest::where(['status' => 'pending'])->get();
+        $requests = HostelStaffRequest::where([
+            'status' => 'pending',
+            'hostelId' => Auth::guard('hostelStaff')->user()->hostelId,
+        ])->simplePaginate('8');
 
         $requestCount = $this->getRequestCounts();
 
@@ -103,7 +122,10 @@ class SemesterRegistrationController extends Controller
         }
 
         // Get the requests
-        $requests = HostelStaffRequest::where(['status' => 'approved'])->get();
+        $requests = HostelStaffRequest::where([
+            'status' => 'approved',
+            'hostelId' => Auth::guard('hostelStaff')->user()->hostelId,
+        ])->simplePaginate('8');
 
         $requestCount = $this->getRequestCounts();
 
@@ -152,7 +174,7 @@ class SemesterRegistrationController extends Controller
             'remarks' => null,
         ]);
 
-        return redirect()->back();
+        return redirect('/hostelStaffs/semesterRegistration/studentRequests/new');
     }
 
     /**
@@ -178,6 +200,6 @@ class SemesterRegistrationController extends Controller
             'remarks' => $remarks,
         ]);
 
-        return redirect()->back();
+        return redirect('/hostelStaffs/semesterRegistration/studentRequests/new');
     }
 }
