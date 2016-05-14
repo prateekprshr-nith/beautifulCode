@@ -99,6 +99,7 @@ Route::group(['middleware' => 'web'], function ()
                 Route::get('all', 'Teacher\SemesterRegistrationController@showAllRequestsView');
                 Route::patch('approve', 'Teacher\SemesterRegistrationController@approveRequest');
                 Route::patch('hold', 'Teacher\SemesterRegistrationController@holdRequest');
+                Route::delete('delete', 'Teacher\SemesterRegistrationController@deleteRequest');
                 Route::patch('register', 'Teacher\SemesterRegistrationController@registerStudent');
                 Route::get('feeReceipts/{rollNo}', 'Teacher\SemesterRegistrationController@getFeeReceiptImage');
                 Route::get('studentInfo/{rollNo}', 'Teacher\SemesterRegistrationController@getStudentInfo');
