@@ -156,8 +156,9 @@
 
                         <p class="well well-sm col-md-12">
                             <span class="glyphicon glyphicon-alert"></span>
-                            <strong>Tip:</strong> Please check all your details before clicking next. You won't be able
-                            to come back to this step later on.
+                            <strong>Tip:</strong> Please check all your details before clicking next. You won't be able to come back to this
+                            step later on. You should fill this information carefully/legibly and correctly. In case any discrepancy is found
+                            later on, you will be held solely responsible for the same.
                         </p>
                     </div>
 
