@@ -216,7 +216,7 @@
                                     <p class="col-md-12 text-center">
                                         <strong>
                                             You have been successfully registered. Your registration code is </strong>
-                                            <span class="text-info">{{Auth::guard('student')->user()->currentStudentState->verificationCode}}</span>
+                                            "<span class="text-info">{{Auth::guard('student')->user()->currentStudentState->verificationCode}}</span>"
 
                                     </p>
                                 </div>
