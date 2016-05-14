@@ -86,6 +86,7 @@
                             No Course is currently entered in the database.
                         @endif
 
+                        <div class="text-center">{!! $courses->links() !!}</div>
                     </div>
                 </div>
             </div>
