@@ -2,7 +2,7 @@
 
 @section('content')
     @if(Auth::guard('teacher')->user()->semNo != null)
-        <div class="container">
+        <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 col-md-offset-0">
                 <div class="panel panel-default">
@@ -66,15 +66,20 @@
                                         <td>{{$request->rollNo}}</td>
                                         <td>
                                             @if($request->feeReceipt == true)
-                                                @if($request->student->teacherRequest->status === 'new')
+                                                @if($request->student->teacherRequest != null)
+                                                    @if($request->student->teacherRequest->status === 'new')
+                                                        Awaiting approval
+                                                        {{-- */$feeStatus = 'new';/* --}}
+                                                    @elseif($request->student->teacherRequest->status === 'pending')
+                                                        Pending
+                                                        {{-- */$feeStatus = 'pending';/* --}}
+                                                    @else
+                                                        Approved
+                                                        {{-- */$feeStatus = 'approved';/* --}}
+                                                    @endif
+                                                @else
                                                     Awaiting approval
                                                     {{-- */$feeStatus = 'new';/* --}}
-                                                @elseif($request->student->teacherRequest->status === 'pending')
-                                                    Pending
-                                                    {{-- */$feeStatus = 'pending';/* --}}
-                                                @else
-                                                    Approved
-                                                    {{-- */$feeStatus = 'approved';/* --}}
                                                 @endif
                                             @else
                                                 <p class="text-info">Not applicable</p>
@@ -82,43 +87,58 @@
                                         </td>
                                         <td>
                                             @if($request->feeReceipt == false)
-                                                @if($request->student->adminStaffRequest->status === 'new')
+                                                @if($request->student->adminStaffRequest != null)
+                                                    @if($request->student->adminStaffRequest->status === 'new')
+                                                        Awaiting approval
+                                                        {{-- */$feeStatus = 'new';/* --}}
+                                                    @elseif($request->student->adminStaffRequest->status === 'pending')
+                                                        Pending
+                                                        {{-- */$feeStatus = 'pending';/* --}}
+                                                    @else
+                                                        Approved
+                                                        {{-- */$feeStatus = 'approved';/* --}}
+                                                    @endif
+                                                @else
                                                     Awaiting approval
                                                     {{-- */$feeStatus = 'new';/* --}}
-                                                @elseif($request->student->adminStaffRequest->status === 'pending')
-                                                    Pending
-                                                    {{-- */$feeStatus = 'pending';/* --}}
-                                                @else
-                                                    Approved
-                                                    {{-- */$feeStatus = 'approved';/* --}}
                                                 @endif
                                             @else
                                                 <p class="text-info">Not applicable</p>
                                             @endif
                                         </td>
                                         <td>
-                                            @if($request->student->libraryStaffRequest->status === 'new')
-                                                Awaiting approval
-                                                {{-- */$libraryStatus = 'new';/* --}}
-                                            @elseif($request->student->libraryStaffRequest->status === 'pending')
-                                                Pending
-                                                {{-- */$libraryStatus = 'pending';/* --}}
+                                            @if($request->student->libraryStaffRequest != null)
+                                                @if($request->student->libraryStaffRequest->status === 'new')
+                                                    Awaiting approval
+                                                    {{-- */$feeStatus = 'new';/* --}}
+                                                @elseif($request->student->libraryStaffRequest->status === 'pending')
+                                                    Pending
+                                                    {{-- */$libraryStatus = 'pending';/* --}}
+                                                @else
+                                                    Approved
+                                                    {{-- */$libraryStatus = 'approved';/* --}}
+                                                @endif
                                             @else
-                                                Approved
-                                                {{-- */$libraryStatus = 'approved';/* --}}
+                                                Awaiting approval
+                                                {{-- */$feeStatus = 'new';/* --}}
                                             @endif
                                         </td>
                                         <td>
                                             @if($request->hostler == true)
-                                                @if($request->student->hostelStaffRequest->status === 'new')
+                                                @if($request->student->hostelStaffRequest)
+                                                    @if($request->student->hostelStaffRequest->status === 'new')
+                                                        Awaiting approval
+                                                        {{-- */$hostelStatus = 'new';/* --}}
+                                                    @elseif($request->student->hostelStaffRequest->status === 'pending')
+                                                        Pending
+                                                        {{-- */$hostelStatus = 'pending';/* --}}
+                                                    @else
+                                                        Approved
+                                                        {{-- */$hostelStatus = 'approved';/* --}}
+                                                    @endif
+                                                @else
                                                     Awaiting approval
                                                     {{-- */$hostelStatus = 'new';/* --}}
-                                                @elseif($request->student->hostelStaffRequest->status === 'pending')
-                                                    Pending
-                                                    {{-- */$hostelStatus = 'pending';/* --}}
-                                                @else
-                                                    Approved
-                                                    {{-- */$hostelStatus = 'approved';/* --}}
                                                 @endif
                                             @else
                                                 <p class="text-info">Not applicable</p>
@@ -126,15 +146,20 @@
                                         </td>
                                         <td>
                                             @if($request->hostler == false)
-                                                @if($request->student->chiefWardenStaffRequest->status === 'new')
+                                                @if($request->student->chiefWardenStaffRequest)
+                                                    @if($request->student->chiefWardenStaffRequest->status === 'new')
+                                                        Awaiting approval
+                                                        {{-- */$hostelStatus = 'new';/* --}}
+                                                    @elseif($request->student->chiefWardenStaffRequest->status === 'pending')
+                                                        Pending
+                                                        {{-- */$hostelStatus = 'pending';/* --}}
+                                                    @else
+                                                        Approved
+                                                        {{-- */$hostelStatus = 'approved';/* --}}
+                                                    @endif
+                                                @else
                                                     Awaiting approval
                                                     {{-- */$hostelStatus = 'new';/* --}}
-                                                @elseif($request->student->chiefWardenStaffRequest->status === 'pending')
-                                                    Pending
-                                                    {{-- */$hostelStatus = 'pending';/* --}}
-                                                @else
-                                                    Approved
-                                                    {{-- */$hostelStatus = 'approved';/* --}}
                                                 @endif
                                             @else
                                                 <p class="text-info">Not applicable</p>
@@ -188,6 +213,8 @@
                             </tbody>
                         @endif
                     </table>
+
+                    <div class="text-center">{!! $requests->links() !!}</div>
                 </div>
             </div>
         </div>

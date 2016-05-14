@@ -239,7 +239,7 @@ class SemesterRegistrationController extends Controller
         $requests = TeacherRequest::where([
             'semNo' => Auth::guard('teacher')->user()->semNo,
             'status' => 'new',
-        ])->get();
+        ])->simplePaginate('8');
 
         $requestCount = $this->getRequestCounts();
 
@@ -262,7 +262,7 @@ class SemesterRegistrationController extends Controller
         $requests = TeacherRequest::where([
             'semNo' => Auth::guard('teacher')->user()->semNo,
             'status' => 'pending',
-        ])->get();
+        ])->simplePaginate('8');
 
         $requestCount = $this->getRequestCounts();
 
@@ -285,7 +285,7 @@ class SemesterRegistrationController extends Controller
         $requests = TeacherRequest::where([
             'semNo' => Auth::guard('teacher')->user()->semNo,
             'status' => 'approved',
-        ])->get();
+        ])->simplePaginate('8');
 
         $requestCount = $this->getRequestCounts();
 
@@ -307,7 +307,7 @@ class SemesterRegistrationController extends Controller
         // Get the student list
         $requests = CurrentStudentState::where([
             'semNo' => Auth::guard('teacher')->user()->semNo,
-        ])->get();
+        ])->simplePaginate('8');
 
         $requestCount = $this->getRequestCounts();
 
@@ -373,7 +373,7 @@ class SemesterRegistrationController extends Controller
         // Update the status of the student request as approved
         TeacherRequest::find($rollNo)->update(['status' => 'approved']);
 
-        return redirect()->back();
+        return redirect('/teachers/semesterRegistration/studentRequests/new');
     }
 
     /**
@@ -399,7 +399,7 @@ class SemesterRegistrationController extends Controller
             'remarks' => $remarks,
         ]);
 
-        return redirect()->back();
+        return redirect('/teachers/semesterRegistration/studentRequests/new');
     }
 
     /**
@@ -431,7 +431,7 @@ class SemesterRegistrationController extends Controller
         
         CurrentStudentState::destroy($rollNo);
 
-        return redirect()->back();
+        return redirect('/teachers/semesterRegistration/studentRequests/all');
     }
 
     /**

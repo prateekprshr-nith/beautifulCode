@@ -3,7 +3,7 @@
 @section('content')
 
     @if(Auth::guard('teacher')->user()->semNo != null)
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 col-md-offset-0">
                     <div class="panel panel-default">
@@ -70,6 +70,8 @@
                                 </tbody>
                             @endif
                         </table>
+
+                        <div class="text-center">{!! $requests->links() !!}</div>
                     </div>
                 </div>
             </div>
