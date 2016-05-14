@@ -63,7 +63,7 @@ class SemesterRegistrationController extends Controller
         }
 
         // Get the requests
-        $requests = ChiefWardenStaffRequest::where(['status' => 'new'])->get();
+        $requests = ChiefWardenStaffRequest::where(['status' => 'new'])->simplePaginate('8');
 
         $requestCount = $this->getRequestCounts();
 
@@ -83,7 +83,7 @@ class SemesterRegistrationController extends Controller
         }
 
         // Get the requests
-        $requests = ChiefWardenStaffRequest::where(['status' => 'pending'])->get();
+        $requests = ChiefWardenStaffRequest::where(['status' => 'pending'])->simplePaginate('8');
 
         $requestCount = $this->getRequestCounts();
 
@@ -103,7 +103,7 @@ class SemesterRegistrationController extends Controller
         }
 
         // Get the requests
-        $requests = ChiefWardenStaffRequest::where(['status' => 'approved'])->get();
+        $requests = ChiefWardenStaffRequest::where(['status' => 'approved'])->simplePaginate('8');
 
         $requestCount = $this->getRequestCounts();
 
@@ -152,7 +152,7 @@ class SemesterRegistrationController extends Controller
             'remarks' => null,
         ]);
 
-        return redirect()->back();
+        return redirect('/chiefWardenStaffs/semesterRegistration/studentRequests/new');
     }
 
     /**
@@ -178,6 +178,6 @@ class SemesterRegistrationController extends Controller
             'remarks' => $remarks,
         ]);
 
-        return redirect()->back();
+        return redirect('/chiefWardenStaffs/semesterRegistration/studentRequests/new');
     }
 }
