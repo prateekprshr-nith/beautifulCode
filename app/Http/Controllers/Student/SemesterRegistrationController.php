@@ -412,9 +412,22 @@ class SemesterRegistrationController extends Controller
                 'semNo' => $this->getCurrentStudentState()->semNo,
             ])->get();
 
-            // Check if seats are available in the chosen electives
             $totalElectives = $electiveCount[0]->openElectives + $electiveCount[0]->departmentElectives;
 
+            // Validate that no two electives are same
+            $courseCount = array_count_values($courseCode);
+            
+            for($no = 0; $no < $totalElectives; $no++)
+            {
+                if($courseCount[$courseCode[$no]] > 1)
+                {
+                    return redirect()->back()
+                        ->with('status', 'Please don not choose identical electives');
+                }
+            }
+
+
+            // Check if seats are available in the chosen electives
             for($no = 0; $no < $totalElectives; $no++)
             {
                 $maxStrength = 90;
