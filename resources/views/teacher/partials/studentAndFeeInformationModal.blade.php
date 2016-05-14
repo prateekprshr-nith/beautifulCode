@@ -98,7 +98,7 @@
             modal.find('#currentAddress').text(student.currentAddress);
             modal.find('#permanentAddress').text(student.permanentAddress);
             console.log(student.current_student_state.feeReceipt);
-            if(student.current_student_state.feeReceipt == 0)
+            if(student.current_student_state.feeReceipt == 0 || student.current_student_state.step == 1)
             {
                 modal.find('#feeReceiptHeading').hide();
                 modal.find('#feeReceiptImage').hide();
