@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers\Teacher;
 
+use App\Grade;
 use App\Course;
 use App\Student;
 use App\Teacher;
 use App\Http\Requests;
 use App\ElectiveCount;
 use App\TeacherRequest;
+use App\AdminStaffRequest;
+use App\AllocatedElective;
+use App\HostelStaffRequest;
+use App\LibraryStaffRequest;
 use Illuminate\Http\Request;
 use App\CurrentStudentState;
+use App\ChiefWardenStaffRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
@@ -392,6 +398,38 @@ class SemesterRegistrationController extends Controller
             'status' => 'pending',
             'remarks' => $remarks,
         ]);
+
+        return redirect()->back();
+    }
+
+    /**
+     * Delete a student registration request
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteRequest (Request $request)
+    {
+        $rollNo = $request['rollNo'];
+
+        // Delete the request from all associated tables
+        AllocatedElective::where('rollNo', $rollNo)->delete();
+        Grade::where('rollNo', $rollNo)->delete();
+        HostelStaffRequest::destroy($rollNo);
+        TeacherRequest::destroy($rollNo);
+        AdminStaffRequest::destroy($rollNo);
+        LibraryStaffRequest::destroy($rollNo);
+        ChiefWardenStaffRequest::destroy($rollNo);
+
+        // If the student has been verified, then decrement his/her semester
+        if(CurrentStudentState::find($rollNo)->approved == true)
+        {
+            $student = Student::find($rollNo);
+            $student->semNo = $student->semNo - 1;
+            $student->save();
+        }
+        
+        CurrentStudentState::destroy($rollNo);
 
         return redirect()->back();
     }
