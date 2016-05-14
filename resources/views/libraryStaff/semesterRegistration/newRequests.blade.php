@@ -92,6 +92,8 @@
                             </tbody>
                         @endif
                     </table>
+
+                    <div class="text-center">{!! $requests->links() !!}</div>
                 </div>
             </div>
         </div>

@@ -7,7 +7,6 @@ use App\Http\Requests;
 use App\LibraryStaffRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * Class SemesterRegistrationController, this class contains
@@ -63,7 +62,7 @@ class SemesterRegistrationController extends Controller
         }
 
         // Get the requests
-        $requests = LibraryStaffRequest::where(['status' => 'new'])->get();
+        $requests = LibraryStaffRequest::where(['status' => 'new'])->simplePaginate('8');
 
         $requestCount = $this->getRequestCounts();
 
@@ -83,7 +82,7 @@ class SemesterRegistrationController extends Controller
         }
 
         // Get the requests
-        $requests = LibraryStaffRequest::where(['status' => 'pending'])->get();
+        $requests = LibraryStaffRequest::where(['status' => 'pending'])->simplePaginate('8');
 
         $requestCount = $this->getRequestCounts();
 
@@ -103,7 +102,7 @@ class SemesterRegistrationController extends Controller
         }
 
         // Get the requests
-        $requests = LibraryStaffRequest::where(['status' => 'approved'])->get();
+        $requests = LibraryStaffRequest::where(['status' => 'approved'])->simplePaginate('8');
 
         $requestCount = $this->getRequestCounts();
 
@@ -152,7 +151,7 @@ class SemesterRegistrationController extends Controller
             'remarks' => null,
         ]);
 
-        return redirect()->back();
+        return redirect('/libraryStaffs/semesterRegistration/studentRequests/new');
     }
 
     /**
@@ -178,6 +177,6 @@ class SemesterRegistrationController extends Controller
             'remarks' => $remarks,
         ]);
 
-        return redirect()->back();
+        return redirect('/libraryStaffs/semesterRegistration/studentRequests/new');
     }
 }
