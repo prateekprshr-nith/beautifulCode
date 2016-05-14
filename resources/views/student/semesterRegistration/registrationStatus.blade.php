@@ -213,6 +213,15 @@
 
                             @if($currentStudentState->approved == true)
                                 <div class="row">
+                                    <p class="col-md-12 text-center">
+                                        <strong>
+                                            You have been successfully registered. Your registration code is </strong>
+                                            <span class="text-info">{{Auth::guard('student')->user()->currentStudentState->verificationCode}}</span>
+
+                                    </p>
+                                </div>
+
+                                <div class="row">
                                     <div class="col-md-4 col-md-offset-4 text-center">
                                         <!-- #TODO Add form download link here -->
                                         <a href="#" class="btn btn-primary">
