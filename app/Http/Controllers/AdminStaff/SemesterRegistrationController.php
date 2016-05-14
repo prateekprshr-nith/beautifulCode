@@ -63,7 +63,7 @@ class SemesterRegistrationController extends Controller
         }
 
         // Get the requests
-        $requests = AdminStaffRequest::where(['status' => 'new'])->get();
+        $requests = AdminStaffRequest::where(['status' => 'new'])->simplePaginate('8');
 
         $requestCount = $this->getRequestCounts();
 
@@ -152,7 +152,7 @@ class SemesterRegistrationController extends Controller
             'remarks' => null,
         ]);
 
-        return redirect()->back();
+        return redirect('/adminStaffs/semesterRegistration/studentRequests/new');
     }
 
     /**
@@ -178,6 +178,6 @@ class SemesterRegistrationController extends Controller
             'remarks' => $remarks,
         ]);
 
-        return redirect()->back();
+        return redirect('/adminStaffs/semesterRegistration/studentRequests/new');
     }
 }
