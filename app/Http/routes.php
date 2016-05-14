@@ -50,6 +50,7 @@ Route::group(['middleware' => 'web'], function ()
             Route::get('courseDetails/electiveInfo/{courseCode}', 'Student\SemesterRegistrationController@getElectiveInfo')->middleware('step:3');
             Route::get('status', 'Student\SemesterRegistrationController@showRegistrationStatusView')->middleware('step:4');
             Route::patch('reUploadFeeReceipt', 'Student\SemesterRegistrationController@reUploadFeeReceipt')->middleware('step:4');
+            Route::get('downloadRegistrationForm', 'Student\SemesterRegistrationController@getRegistrationForm')->middleware('step:4');
         });
 
         // Student image route, fetches the image of student
