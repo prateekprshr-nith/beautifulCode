@@ -55,7 +55,7 @@ class HomeController extends Controller
         // Get the list of courses
         $courses = Course::where('dCode', Auth::guard('departmentStaff')->user()->dCode)
             ->orderBy('semNo', 'asc')
-            ->paginate(10);
+            ->paginate(8);
 
         // Department code
         $dCode = Auth::guard('departmentStaff')->user()->dCode;
