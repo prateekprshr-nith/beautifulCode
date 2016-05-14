@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Student;
 
+use App;
 use App\Grade;
 use App\Hostel;
 use App\Course;
@@ -18,6 +19,7 @@ use App\ChiefWardenStaffRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
+use Barryvdh\Snappy\Facades\SnappyPdf;
 
 /**
  * Class SemesterRegistrationController, this class contains
@@ -32,6 +34,7 @@ class SemesterRegistrationController extends Controller
     protected $courseDetailsView = 'student.semesterRegistration.courseDetails';
     protected $registrationStatusView = 'student.semesterRegistration.registrationStatus';
     protected $feeAndHostelDetailsView = 'student.semesterRegistration.feeAndHostelDetails';
+    protected $registrationFormView = 'student.semesterRegistration.registrationForm';
 
     /**
      * Create a new controller instance.
@@ -457,7 +460,7 @@ class SemesterRegistrationController extends Controller
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    // Functions for showing registration status to student
+    // Functions for showing registration status to student and downloading of registration form
 
     /**
      * Show registration status to the student
@@ -479,5 +482,23 @@ class SemesterRegistrationController extends Controller
             'allocatedElectives' => $allocatedElectives,
             'count' => 0
         ]);
+    }
+
+    /**
+     * Get the registration form in PDF document
+     *
+     * @return string
+     */
+    public function getRegistrationForm ()
+    {
+        if (Auth::guard('student')->user()->currentStudentState->approved == false)
+        {
+            return redirect()->back();
+        }
+
+        $registrationForm = App::make('snappy.pdf.wrapper');
+        $registrationForm->loadView($this->registrationFormView);
+        
+        return $registrationForm->download('form.pdf');
     }
 }
