@@ -54,8 +54,9 @@
                                     <th>Hostel</th>
                                     <th>Chief warden's office</th>
                                     <th>Student Information</th>
-                                    <th>Action</th>
+                                    <th>Register</th>
                                     <th>Code</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -170,6 +171,18 @@
                                             @endif
                                         </td>
                                         <td class="text-primary">{{$request->student->currentStudentState->verificationCode}}</td>
+                                        <td>
+                                            <form method="post" action="/teachers/semesterRegistration/studentRequests/delete">
+                                                {{csrf_field()}}
+                                                {{method_field('DELETE')}}
+
+                                                <input hidden name="rollNo" value="{{$request->rollNo}}">
+
+                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">
+                                                    <span class="glyphicon glyphicon-remove"></span> Delete
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
