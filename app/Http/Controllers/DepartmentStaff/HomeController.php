@@ -53,12 +53,9 @@ class HomeController extends Controller
     public function manageCourses ()
     {
         // Get the list of courses
-        $courses = Course::where('dCode', Auth::guard('departmentStaff')->user()->dCode)->get();
-
-        // Sort on the basis of semester
-        $courses = array_values(array_sort($courses, function ($value) {
-            return $value['semester'];
-        }));
+        $courses = Course::where('dCode', Auth::guard('departmentStaff')->user()->dCode)
+            ->orderBy('semNo', 'asc')
+            ->paginate(10);
 
         // Department code
         $dCode = Auth::guard('departmentStaff')->user()->dCode;
