@@ -6,6 +6,7 @@
 
     <title>Online Semester Registration</title>
 
+    <link rel="icon" href="/images/nitLogo.png">
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/bootstrap/css/fileinput.min.css" media="all" rel="stylesheet">
     <link href="/bootstrap/css/responsive-tables.css" media="all" rel="stylesheet">
@@ -52,6 +53,9 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
+                <a class="navbar-brand" href="/">
+                    <img alt="NITH" height="20" width="20" src="/images/nitLogo.png">
+                </a>
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mynavbar-content">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
