@@ -225,7 +225,7 @@
                                     <div class="col-md-4 col-md-offset-4 text-center">
                                         <!-- #TODO Add form download link here -->
                                         <a href="/students/semesterRegistration/downloadRegistrationForm" class="btn btn-primary">
-                                            <span class="glyphicon glyphicon-download"></span> Download regisrtaion form
+                                            <span class="glyphicon glyphicon-download"></span> Download registration form
                                         </a>
                                     </div>
                                 </div>
