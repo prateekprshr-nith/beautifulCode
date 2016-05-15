@@ -125,6 +125,8 @@
                             </li>
                         @endif
 
+                        <li><a href="/{{$user}}s/help">Help</a></li>
+
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 @if($user == 'admin')
