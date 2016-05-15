@@ -44,6 +44,7 @@
                                     <th>#</th>
                                     <th>Roll No.</th>
                                     <th>Student Information</th>
+                                    <th>Loan case</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,6 +57,13 @@
                                                data-target="#myModal" data-rollno="{{$request->rollNo}}">
                                                 <span class="glyphicon glyphicon-info-sign"></span> View student info
                                             </a>
+                                        </td>
+                                        <td>
+                                            @if($request->loanCase == true)
+                                                Yes
+                                            @else
+                                                No
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

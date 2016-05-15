@@ -44,6 +44,7 @@
                                     <th>#</th>
                                     <th>Roll No.</th>
                                     <th>Student Information</th>
+                                    <th>Loan case</th>
                                     <th>Approve</th>
                                     <th>Remarks</th>
                                 </tr>
@@ -58,6 +59,13 @@
                                                data-target="#myModal" data-rollno="{{$request->rollNo}}">
                                                 <span class="glyphicon glyphicon-info-sign"></span> View student info
                                             </a>
+                                        </td>
+                                        <td>
+                                            @if($request->loanCase == true)
+                                                Yes
+                                            @else
+                                                No
+                                            @endif
                                         </td>
                                         <td>
                                             <form method="post" action="/adminStaffs/semesterRegistration/studentRequests/approve">
