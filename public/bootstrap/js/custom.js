@@ -141,3 +141,22 @@ function getElectiveInfo(button)
         });
     }
 }
+
+
+/*
+ * This function sets the href field of a link
+ */
+function setLinkUrl(elementId, documentUrl, subUrl)
+{
+    console.log('Sub Url = ' + subUrl);
+    if(subUrl === "")
+    {
+        console.log('IN null');
+        document.getElementById(elementId).href = "";
+    }
+    else
+    {
+        console.log('IN !null');
+        document.getElementById(elementId).href = documentUrl + subUrl;
+    }
+}
