@@ -18,7 +18,7 @@ class AdminStaffRequest extends Model
 
     // Fillable and hidden arrtibutes
     protected $fillable = [
-        'rollNo', 'status', 'remarks',
+        'rollNo', 'status', 'loanCase', 'remarks',
     ];
 
     /**

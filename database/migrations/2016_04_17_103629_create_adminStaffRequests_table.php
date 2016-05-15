@@ -20,6 +20,7 @@ class CreateAdminStaffRequestsTable extends Migration
         {
             $table->string('rollNo', '20');
             $table->string('status', '20');
+            $table->boolean('loanCase');
             $table->string('remarks', '200') ->nullable();
             $table->timestamps();
 
