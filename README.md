@@ -16,4 +16,8 @@ $ php artisan migrate:refresh
 $ php artisan db:seed
 ```
 
+Also install following external libraries
+```bash
+$ sudo apt-get install wkhtmltopdf
+```
 Happy Programming :)
