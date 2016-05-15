@@ -85,6 +85,8 @@ Route::group(['middleware' => 'web'], function ()
         // Teacher view routes
         Route::get('home', 'Teacher\HomeController@index');
         Route::get('help', 'Teacher\HomeController@showHelpView');
+        Route::get('electives', 'Teacher\HomeController@showElectiveSelectionView');
+        Route::get('electives/{courseCode}', 'Teacher\HomeController@getElectiveList');
         Route::group(['prefix' => '/semesterRegistration'], function ()
         {
             // Routes for semester and course selection
