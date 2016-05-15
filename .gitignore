@@ -1,2 +1,9 @@
+/vendor
+/node_modules
+Homestead.yaml
+Homestead.json
+todo.txt
+.env
 .idea*
 *~
+creationScript.sh
