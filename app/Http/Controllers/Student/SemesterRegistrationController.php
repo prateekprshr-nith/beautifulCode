@@ -509,9 +509,28 @@ class SemesterRegistrationController extends Controller
             return redirect()->back();
         }
 
-        $registrationForm = App::make('snappy.pdf.wrapper');
-        $registrationForm->loadView($this->registrationFormView);
+        //return view($this->registrationFormView);
+
+        // Get the regular courses
+        $courses = Course::where([
+            'dCode' => Auth::guard('student')->user()->dCode,
+            'semNo' => $this->getCurrentStudentState()->semNo,
+            'openElective' => false,
+            'departmentElective' => false,
+        ])->get();
+
+        // Get electives if any
+        $allocatedElectives = AllocatedElective::where('rollNo', Auth::guard('student')->user()->rollNo)->get();
         
-        return $registrationForm->download('form.pdf');
+        $count = 0;
+        
+        $registrationForm = App::make('snappy.pdf.wrapper');
+        $registrationForm->loadView($this->registrationFormView, [
+            'courses' => $courses,
+            'allocatedElectives' => $allocatedElectives,
+            'count' => $count
+        ]);
+        
+        return $registrationForm->download(Auth::guard('student')->user()->rollNo . 'form.pdf');
     }
 }
