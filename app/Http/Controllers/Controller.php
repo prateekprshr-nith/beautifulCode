@@ -13,6 +13,7 @@ class Controller extends BaseController
 
     // Common views for all users
     protected $inactiveView = 'common.inactive';
+    protected $helpView;
 
     /**
      * This function checks if the registration
@@ -40,5 +41,16 @@ class Controller extends BaseController
         {
             return false;
         }
+    }
+
+
+    /**
+     * This function returns help view for users
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showHelpView ()
+    {
+        return view($this->helpView);
     }
 }
