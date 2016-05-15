@@ -19,7 +19,6 @@ use App\ChiefWardenStaffRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
-use Barryvdh\Snappy\Facades\SnappyPdf;
 
 /**
  * Class SemesterRegistrationController, this class contains
@@ -509,8 +508,6 @@ class SemesterRegistrationController extends Controller
             return redirect()->back();
         }
 
-        //return view($this->registrationFormView);
-
         // Get the regular courses
         $courses = Course::where([
             'dCode' => Auth::guard('student')->user()->dCode,
@@ -529,7 +526,7 @@ class SemesterRegistrationController extends Controller
             'courses' => $courses,
             'allocatedElectives' => $allocatedElectives,
             'count' => $count
-        ]);
+        ])->setOption('margin-bottom', 10)->setOption('margin-top', 10);
         
         return $registrationForm->download(Auth::guard('student')->user()->rollNo . 'form.pdf');
     }
