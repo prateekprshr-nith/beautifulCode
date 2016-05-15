@@ -152,6 +152,7 @@ class SemesterRegistrationController extends Controller
         $data = [
             'rollNo' => Auth::guard('student')->user()->rollNo,
             'semNo' => $request['semNo'],
+            'loanCase' => ($request['loanCase'] == 'yes') ? true : false,
             'feeReceipt' => ($request['feeReceipt'] == 'yes') ? true : false,
             'hostler' => ($request['hostler'] == 'yes') ? true : false,
         ];
@@ -160,6 +161,7 @@ class SemesterRegistrationController extends Controller
         $this->addGrades($request);
         $currentStudentState = CurrentStudentState::firstOrNew(['rollNo' => $data['rollNo']]);
         $currentStudentState->feeReceipt = $data['feeReceipt'];
+        $currentStudentState->loanCase = $data['loanCase'];
         $currentStudentState->hostler = $data['hostler'];
         $currentStudentState->semNo = $data['semNo'];
         $currentStudentState->approved = false;
@@ -250,10 +252,13 @@ class SemesterRegistrationController extends Controller
         }
         else
         {
+            $loanCase = $currentStudentState->loanCase;
+
             // Send the request to accounts branch
             AdminStaffRequest::create([
                 'rollNo' => Auth::guard('student')->user()->rollNo,
                 'status' => 'new',
+                'loanCase' => $loanCase,
             ]);
         }
 
