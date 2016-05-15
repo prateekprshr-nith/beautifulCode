@@ -162,10 +162,24 @@
                                 </label>
                                 <div class="col-md-6">
                                     <label class="radio-inline">
-                                        <input required type="radio" name="feeReceipt" id="feeReceipt" value="yes">yes
+                                        <input required type="radio" name="feeReceipt" id="feeReceipt" value="yes" onclick="toggleLoanCaseInput('yes')">yes
                                     </label>
                                     <label class="radio-inline">
-                                        <input required type="radio" name="feeReceipt" id="feeReceipt" value="no">no
+                                        <input required type="radio" name="feeReceipt" id="feeReceipt" value="no" onclick="toggleLoanCaseInput('no')">no
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="loanCase">
+                                    Do you pay your fee via education loan?
+                                </label>
+                                <div class="col-md-6">
+                                    <label class="radio-inline">
+                                        <input  required type="radio" name="loanCase" id="loanCasey" value="yes">yes
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input  required type="radio" name="loanCase" id="loanCasen" value="no">no
                                     </label>
                                 </div>
                             </div>
@@ -209,4 +223,27 @@
         </div>
 
     </div>
+    <script>
+        function toggleLoanCaseInput(input)
+        {
+            if(input === 'yes')
+            {
+                $('#loanCasey').removeAttr('checked');
+                $('#loanCasen').removeAttr('checked');
+                $('#loanCasey').prop('disabled', true);
+                $('#loanCasen').prop('disabled', true);
+                $('#loanCase').val(false);
+                $('#loanCase').val(false);
+                $('#loanCasey').removeAttr('checked');
+                $('#loanCasen').removeAttr('checked');
+            }
+            else
+            {
+                $('#loanCasey').removeAttr('checked');
+                $('#loanCasen').removeAttr('checked');
+                $('#loanCasey').prop('disabled', false);
+                $('#loanCasen').prop('disabled', false);
+            }
+        }
+    </script>
 @endsection
