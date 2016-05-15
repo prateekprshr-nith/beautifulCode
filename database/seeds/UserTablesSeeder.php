@@ -17,17 +17,6 @@ class UserTablesSeeder extends Seeder
         // Default password for users
         $password = bcrypt('password');
 
-        // Seed the admins table
-        $adminId = 'admin';
-
-        if(DB::table('admins')->where('adminId', $adminId)->value('adminId') == null)
-        {
-            DB::table('admins')->insert([
-                'adminId' => $adminId,
-                'password' => $password,
-            ]);
-        }
-
         // Seed the students table
         $studentArr = [
           '12510' => [

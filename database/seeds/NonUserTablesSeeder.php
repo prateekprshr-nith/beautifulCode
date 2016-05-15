@@ -15,6 +15,20 @@ class NonUserTablesSeeder extends Seeder
      */
     public function run()
     {
+        // Default password for users
+        $password = bcrypt('password');
+
+        // Seed the admins table
+        $adminId = 'admin';
+
+        if(DB::table('admins')->where('adminId', $adminId)->value('adminId') == null)
+        {
+            DB::table('admins')->insert([
+                'adminId' => $adminId,
+                'password' => $password,
+            ]);
+        }
+
         // Seed the departments table
         $deptArr = [
             'CSED' => 'Department of Computer Science & Engineering',
