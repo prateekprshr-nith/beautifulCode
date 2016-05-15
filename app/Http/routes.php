@@ -39,6 +39,7 @@ Route::group(['middleware' => 'web'], function ()
 
         // Student view routes
         Route::get('home', 'Student\HomeController@index');
+        Route::get('help', 'Student\HomeController@showHelpView');
         Route::group(['prefix' => '/semesterRegistration'], function ()
         {
             Route::get('initialDetails', 'Student\SemesterRegistrationController@showInitialDetailsView')->middleware('step:1');
@@ -83,6 +84,7 @@ Route::group(['middleware' => 'web'], function ()
 
         // Teacher view routes
         Route::get('home', 'Teacher\HomeController@index');
+        Route::get('help', 'Teacher\HomeController@showHelpView');
         Route::group(['prefix' => '/semesterRegistration'], function ()
         {
             // Routes for semester and course selection
@@ -134,6 +136,7 @@ Route::group(['middleware' => 'web'], function ()
 
         // LibraryStaff view routes
         Route::get('home', 'LibraryStaff\HomeController@index');
+        Route::get('help', 'LibraryStaff\HomeController@showHelpView');
         Route::group(['prefix' => '/semesterRegistration'], function ()
         {
             // Routes for managing student requests
@@ -174,6 +177,7 @@ Route::group(['middleware' => 'web'], function ()
 
         // HostelStaff view routes
         Route::get('home', 'HostelStaff\HomeController@index');
+        Route::get('help', 'HostelStaff\HomeController@showHelpView');
         Route::group(['prefix' => '/semesterRegistration'], function ()
         {
             // Routes for managing student requests
@@ -214,6 +218,7 @@ Route::group(['middleware' => 'web'], function ()
 
         // ChiefWardenStaff view routes
         Route::get('home', 'ChiefWardenStaff\HomeController@index');
+        Route::get('help', 'ChiefWardenStaff\HomeController@showHelpView');
         Route::group(['prefix' => '/semesterRegistration'], function ()
         {
             // Routes for managing student requests
@@ -254,6 +259,7 @@ Route::group(['middleware' => 'web'], function ()
 
         // AdminStaff view routes
         Route::get('home', 'AdminStaff\HomeController@index');
+        Route::get('help', 'AdminStaff\HomeController@showHelpView');
         Route::group(['prefix' => '/semesterRegistration'], function ()
         {
             // Routes for managing student requests
@@ -294,7 +300,7 @@ Route::group(['middleware' => 'web'], function ()
 
         // DepartmentStaff view routes
         Route::get('home', 'DepartmentStaff\HomeController@index');
-
+        Route::get('help', 'DepartmentStaff\HomeController@showHelpView');
         Route::group(['prefix' => 'manage'], function ()
         {
             // Course management routes
@@ -325,6 +331,7 @@ Route::group(['middleware' => 'web'], function ()
 
         // Admin view routes
         Route::get('home', 'Admin\HomeController@index');
+        Route::get('help', 'Admin\HomeController@showHelpView');
         Route::group(['prefix' => 'manage'], function ()
         {
             // User account creation and deletion routes
