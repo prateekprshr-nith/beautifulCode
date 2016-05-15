@@ -16,6 +16,8 @@ use App\Http\Controllers\Controller;
  */
 class HomeController extends Controller
 {
+    protected $helpView = 'libraryStaff.help';
+    
     /**
      * Create a new controller instance.
      *

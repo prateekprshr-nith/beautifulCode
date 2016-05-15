@@ -18,6 +18,8 @@ use Intervention\Image\Facades\Image;
  */
 class HomeController extends Controller
 {
+    protected $helpView = 'student.help';
+
     /**
      * Create a new controller instance.
      *

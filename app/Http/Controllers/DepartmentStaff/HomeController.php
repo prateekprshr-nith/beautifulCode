@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Auth;
  */
 class HomeController extends Controller
 {
+    protected $helpView = 'departmentStaff.help';
+    
     // Course management views
     protected $courseManagementView = 'departmentStaff.manage.courses';
     
