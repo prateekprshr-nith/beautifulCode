@@ -83,7 +83,7 @@ class SemesterRegistrationController extends Controller
         }
 
         // Get the requests
-        $requests = AdminStaffRequest::where(['status' => 'pending'])->get();
+        $requests = AdminStaffRequest::where(['status' => 'pending'])->simplePaginate('8');
 
         $requestCount = $this->getRequestCounts();
 
@@ -103,7 +103,7 @@ class SemesterRegistrationController extends Controller
         }
 
         // Get the requests
-        $requests = AdminStaffRequest::where(['status' => 'approved'])->get();
+        $requests = AdminStaffRequest::where(['status' => 'approved'])->simplePaginate('8');
 
         $requestCount = $this->getRequestCounts();
 
