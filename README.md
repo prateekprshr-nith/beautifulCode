@@ -1,5 +1,5 @@
 # beautifulCode
-##### This repo contains the major project-2 code base, the semester registration portal using php's _laravel framework_
+##### This repo contains the code base for my B.Tech. major project, the semester registration portal using php's _laravel framework_
 
 Steps to fork and getting this to work along with laravel:
 
