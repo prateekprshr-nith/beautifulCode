@@ -177,10 +177,10 @@
                         <td class="text-center"><strong>{{ ++$count }}</strong></td>
                         <td class="text-center">{{ $course->courseCode }}</td>
                         <td class="text-center">{{ $course->course->courseName }}</td>
-                        <td class="text-center">{{ $course->course->lectures }} {{-- */ $l += $course->lectures; /* --}}</td>
-                        <td class="text-center">{{ $course->course->tutorials }} {{-- */ $t += $course->tutorials; /* --}}</td>
-                        <td class="text-center">{{ $course->course->practicals }} {{-- */ $p += $course->practicals; /* --}}</td>
-                        <td class="text-center">{{ $course->course->credits }} {{-- */ $c += $course->credits; /* --}}</td>
+                        <td class="text-center">{{ $course->course->lectures }} {{-- */ $l += $course->course->lectures; /* --}}</td>
+                        <td class="text-center">{{ $course->course->tutorials }} {{-- */ $t += $course->course->tutorials; /* --}}</td>
+                        <td class="text-center">{{ $course->course->practicals }} {{-- */ $p += $course->course->practicals; /* --}}</td>
+                        <td class="text-center">{{ $course->course->credits }} {{-- */ $c += $course->course->credits; /* --}}</td>
                     </tr>
                 @endforeach
                 <tr>

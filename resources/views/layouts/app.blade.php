@@ -120,9 +120,14 @@
                         @if($user != 'admin' && $user != 'student' && $user != 'departmentStaff')
                             <li>
                                 <a href="/{{$user}}s/semesterRegistration/studentRequests/new">
-                                    Registration Requests
+                                    Registration requests
                                 </a>
                             </li>
+                        @endif
+
+                        <!-- Tabs for faculty  users -->
+                        @if($user == 'teacher')
+                            <li><a href="/{{$user}}s/electives">Elective students list</a></li>
                         @endif
 
                         <li><a href="/{{$user}}s/help">Help</a></li>

@@ -40,6 +40,6 @@ class Course extends Model
      */
     public function allocatedElectives ()
     {
-        return $this->hasMany('App\AllocatedElectives', 'courseCode', 'courseCode');
+        return $this->hasMany('App\AllocatedElective', 'courseCode', 'courseCode');
     }
 }
